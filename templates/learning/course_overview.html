@@ -1,0 +1,68 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate course.title %} · Cereqo{% endblock %}
+{% block content %}
+<section class="course-hero">
+  <div class="course-hero-copy">
+    <div class="course-kicker"><span>{% translate "Active course" %}</span><span>{% translate "Official SAT domains" %}</span></div>
+    <h1>{% translate course.title %}</h1>
+    <p>{% translate course.description %}</p>
+    <div class="course-meta">
+      <span><i class="bi bi-calendar3"></i>{{ course.start_date|date:'M j' }} — {{ course.end_date|date:'M j, Y' }}</span>
+      <span><i class="bi bi-bullseye"></i>{% translate "Target" %}: {{ course.target_score }}+</span>
+      <span><i class="bi bi-layers"></i>{% blocktranslate with total=section_cards|length %}{{ total }} domain sections{% endblocktranslate %}</span>
+    </div>
+  </div>
+  <div class="course-score-card">
+    <div class="course-progress-ring" style="--progress: {{ course_progress }}"><strong>{{ course_progress }}%</strong><span>{% translate "course complete" %}</span></div>
+    {% if next_lesson %}<a class="btn btn-primary app-btn" href="{% url 'learning:lesson_detail' next_lesson.id %}">{% translate "Continue course" %}<i class="bi bi-arrow-right"></i></a>{% endif %}
+  </div>
+</section>
+
+<section class="sat-blueprint" aria-label="{% translate 'Digital SAT blueprint' %}">
+  <div class="blueprint-title"><span class="sat-mark">SAT</span><div><p class="eyebrow">{% translate "Exam blueprint" %}</p><h2>{% translate "Train for the test you will actually take" %}</h2></div></div>
+  <div class="blueprint-stat"><strong>54</strong><span>{% translate "Reading & Writing questions" %}</span><small>64 {% translate "minutes" %} · 2 {% translate "modules" %}</small></div>
+  <div class="blueprint-divider"><i class="bi bi-cup-hot"></i><span>10 {% translate "min break" %}</span></div>
+  <div class="blueprint-stat math"><strong>44</strong><span>{% translate "Math questions" %}</span><small>70 {% translate "minutes" %} · 2 {% translate "modules" %}</small></div>
+  <div class="adaptive-note"><i class="bi bi-diagram-3"></i><span><strong>{% translate "Adaptive by module" %}</strong>{% translate "Module 2 difficulty responds to Module 1 performance." %}</span></div>
+</section>
+
+<section class="lesson-rhythm surface-card">
+  <div><p class="eyebrow">{% translate "Every class" %}</p><h2>{% translate "A 75-minute mastery rhythm" %}</h2><p>{% translate "Each lesson turns one SAT skill into a repeatable test-day decision." %}</p></div>
+  <ol>
+    <li><span>01</span><strong>{% translate "Concept" %}</strong><small>15 {% translate "min" %}</small></li>
+    <li><span>02</span><strong>{% translate "Guided practice" %}</strong><small>20 {% translate "min" %}</small></li>
+    <li><span>03</span><strong>{% translate "Timed set" %}</strong><small>25 {% translate "min" %}</small></li>
+    <li><span>04</span><strong>{% translate "Error review" %}</strong><small>15 {% translate "min" %}</small></li>
+  </ol>
+</section>
+
+<section class="course-path-heading">
+  <div><p class="eyebrow">{% translate "Course sequence" %}</p><h2>{% translate "Your domain roadmap" %}</h2><p>{% translate "Finish the lessons in order, then clear the checkpoint at the end of each section." %}</p></div>
+  <div class="path-legend"><span><i class="complete"></i>{% translate "Complete" %}</span><span><i class="current"></i>{% translate "Current" %}</span><span><i class="upcoming"></i>{% translate "Upcoming" %}</span></div>
+</section>
+
+<section class="course-path">
+  {% for card in section_cards %}
+  <article class="course-section-card section-state-{{ card.status }}">
+    <div class="section-order"><span>{{ card.section.order|stringformat:'02d' }}</span><i></i></div>
+    <div class="section-card-body">
+      <div class="section-card-top">
+        <div><span class="subject-chip subject-{{ card.section.subject }}">{% translate card.section.get_subject_display %}</span><span class="section-domain">{% translate card.section.domain %}</span></div>
+        <span class="section-status status-{{ card.status }}">{% if card.status == 'completed' %}{% translate "Completed" %}{% elif card.status == 'current' %}{% translate "In focus" %}{% elif card.status == 'needs_attention' %}{% translate "Needs review" %}{% else %}{% translate "Upcoming" %}{% endif %}</span>
+      </div>
+      <h3>{% translate card.section.title %}</h3>
+      <p>{% translate card.section.description %}</p>
+      <div class="section-date-line"><span><i class="bi bi-calendar-range"></i>{{ card.section.start_date|date:'M j' }} — {{ card.section.end_date|date:'M j' }}</span><span>{% blocktranslate with weight=card.section.exam_weight_percent %}≈{{ weight }}% of section{% endblocktranslate %}</span></div>
+      <div class="section-lessons">
+        {% for lesson in card.lessons %}<a href="{% url 'learning:lesson_detail' lesson.id %}"><i class="bi {% if lesson.progress_percent == 100 %}bi-check-circle-fill{% elif lesson.progress_percent > 0 %}bi-play-circle-fill{% else %}bi-circle{% endif %}"></i><span><strong>{{ lesson.sequence }}. {% translate lesson.title %}</strong><small>{{ lesson.scheduled_date|date:'D, M j' }} · {{ lesson.session_minutes }} {% translate "min class" %}</small></span></a>{% endfor %}
+      </div>
+      <div class="section-checkpoint">
+        <span><i class="bi bi-flag-fill"></i><span><small>{% translate "Section checkpoint" %}</small><strong>{% translate card.checkpoint.title %}</strong></span></span>
+        <a href="{% url 'learning:section_detail' card.section.id %}">{% translate "Open section" %}<i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="section-progress"><i style="width:{{ card.progress }}%"></i></div>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% endblock %}

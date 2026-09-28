@@ -1,6 +1,5 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models, transaction
-from django.db.models import Sum
 from django.utils import timezone
 
 
@@ -31,12 +30,77 @@ class Student(models.Model):
         return Student.objects.filter(points__gt=self.points).count() + 1
 
 
+class Course(models.Model):
+    title = models.CharField(max_length=160)
+    code = models.SlugField(max_length=60, unique=True)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    target_score = models.PositiveSmallIntegerField(default=1400)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["-is_active", "start_date", "id"]
+
+    def __str__(self):
+        return self.title
+
+    @property
+    def progress_percent(self):
+        lessons = Lesson.objects.filter(section__course=self)
+        total = lessons.count()
+        return round(sum(lessons.values_list("progress_percent", flat=True)) / total) if total else 0
+
+
+class CourseSection(models.Model):
+    SUBJECT_CHOICES = [("math", "Math"), ("rw", "Reading & Writing")]
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="sections")
+    title = models.CharField(max_length=160)
+    domain = models.CharField(max_length=120)
+    subject = models.CharField(max_length=10, choices=SUBJECT_CHOICES)
+    description = models.TextField()
+    start_date = models.DateField()
+    end_date = models.DateField()
+    order = models.PositiveSmallIntegerField(default=1)
+    exam_weight_percent = models.PositiveSmallIntegerField(default=25)
+
+    class Meta:
+        ordering = ["course", "order", "id"]
+        constraints = [
+            models.UniqueConstraint(fields=["course", "order"], name="unique_course_section_order")
+        ]
+
+    def __str__(self):
+        return f"{self.course.title} · {self.order}. {self.title}"
+
+    @property
+    def progress_percent(self):
+        lessons = self.lessons.all()
+        total = lessons.count()
+        return round(sum(lessons.values_list("progress_percent", flat=True)) / total) if total else 0
+
+    def status_for(self, student):
+        checkpoint = getattr(self, "checkpoint", None)
+        if checkpoint and checkpoint.status_for(student) == "completed":
+            return "completed"
+        today = timezone.localdate()
+        if self.start_date > today:
+            return "upcoming"
+        if self.end_date < today:
+            return "needs_attention"
+        return "current"
+
+
 class Lesson(models.Model):
     SUBJECT_CHOICES = [("math", "Math"), ("rw", "Reading & Writing")]
     title = models.CharField(max_length=160)
+    section = models.ForeignKey(
+        CourseSection, on_delete=models.CASCADE, related_name="lessons", null=True, blank=True
+    )
     subject = models.CharField(max_length=10, choices=SUBJECT_CHOICES)
     topic = models.CharField(max_length=120)
     duration_minutes = models.PositiveSmallIntegerField(default=8)
+    session_minutes = models.PositiveSmallIntegerField(default=75)
     summary = models.TextField()
     material = models.TextField()
     video_file = models.CharField(max_length=255, default="cereqo/video/demo-lesson-video.mp4")
@@ -44,6 +108,8 @@ class Lesson(models.Model):
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
     is_today = models.BooleanField(default=False)
+    scheduled_date = models.DateField(null=True, blank=True)
+    sequence = models.PositiveSmallIntegerField(default=1)
     sort_order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
@@ -55,6 +121,9 @@ class Lesson(models.Model):
 
 class Homework(models.Model):
     lesson = models.OneToOneField(Lesson, on_delete=models.CASCADE, related_name="homework")
+    section = models.OneToOneField(
+        CourseSection, on_delete=models.CASCADE, related_name="checkpoint", null=True, blank=True
+    )
     title = models.CharField(max_length=160)
     description = models.TextField()
     deadline = models.DateTimeField()
@@ -165,6 +234,9 @@ class AttendanceSession(models.Model):
         ("scheduled", "Scheduled"),
     ]
     date = models.DateField(unique=True)
+    lesson = models.OneToOneField(
+        Lesson, on_delete=models.CASCADE, related_name="attendance_session", null=True, blank=True
+    )
     title = models.CharField(max_length=140)
     subject = models.CharField(max_length=40)
     start_time = models.TimeField()

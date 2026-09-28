@@ -10,7 +10,18 @@ from django.utils import timezone
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
-from .models import Answer, AttendanceSession, DemoConfig, Homework, Lesson, Question, Student, Submission
+from .models import (
+    Answer,
+    AttendanceSession,
+    Course,
+    CourseSection,
+    DemoConfig,
+    Homework,
+    Lesson,
+    Question,
+    Student,
+    Submission,
+)
 
 
 def _student():
@@ -19,7 +30,9 @@ def _student():
 
 def _homework_cards(student):
     cards = []
-    for homework in Homework.objects.select_related("lesson").prefetch_related("submissions__answers"):
+    for homework in Homework.objects.select_related(
+        "lesson", "section", "section__course"
+    ).prefetch_related("submissions__answers", "questions"):
         submission = homework.submission_for(student)
         cards.append(
             {
@@ -35,14 +48,23 @@ def _homework_cards(student):
 
 def dashboard(request):
     student = _student()
-    today_lesson = Lesson.objects.filter(is_today=True).first() or Lesson.objects.first()
+    course = Course.objects.filter(is_active=True).first()
+    today = timezone.localdate()
+    course_lessons = Lesson.objects.filter(section__course=course) if course else Lesson.objects.all()
+    today_lesson = (
+        course_lessons.filter(scheduled_date=today).first()
+        or course_lessons.filter(is_today=True).first()
+        or course_lessons.filter(scheduled_date__gte=today).first()
+        or course_lessons.last()
+    )
     cards = _homework_cards(student)
     pending = [card for card in cards if card["status"] != "completed"]
     priority = next((card for card in pending if card["status"] == "in_progress"), pending[0] if pending else None)
     config = DemoConfig.objects.first()
     countdown = max((config.exam_date - timezone.localdate()).days, 0) if config else 0
-    lessons = Lesson.objects.all()
+    lessons = course_lessons
     learning_progress = round(sum(item.progress_percent for item in lessons) / lessons.count()) if lessons else 0
+    lessons_explored = lessons.filter(progress_percent__gt=0).count()
     return render(
         request,
         "learning/dashboard.html",
@@ -54,6 +76,9 @@ def dashboard(request):
             "countdown": countdown,
             "exam_date": config.exam_date if config else None,
             "learning_progress": learning_progress,
+            "lessons_explored": lessons_explored,
+            "lesson_count": lessons.count(),
+            "course": course,
             "rank": student.rank,
             "student_count": Student.objects.count(),
         },
@@ -61,19 +86,85 @@ def dashboard(request):
 
 
 def learn(request):
-    lesson = Lesson.objects.filter(is_today=True).first() or Lesson.objects.first()
-    if not lesson:
+    student = _student()
+    course = Course.objects.filter(is_active=True).first()
+    if not course:
         return render(request, "learning/empty.html", {"active_nav": "learn"})
-    return lesson_detail(request, lesson.pk)
+    sections = course.sections.prefetch_related("lessons", "checkpoint__submissions__answers", "checkpoint__questions")
+    section_cards = []
+    for section in sections:
+        checkpoint = getattr(section, "checkpoint", None)
+        section_cards.append(
+            {
+                "section": section,
+                "lessons": list(section.lessons.all()),
+                "status": section.status_for(student),
+                "progress": section.progress_percent,
+                "checkpoint": checkpoint,
+                "checkpoint_status": checkpoint.status_for(student) if checkpoint else None,
+            }
+        )
+    next_lesson = (
+        Lesson.objects.filter(section__course=course, scheduled_date__gte=timezone.localdate())
+        .order_by("scheduled_date", "sort_order")
+        .first()
+        or Lesson.objects.filter(section__course=course).last()
+    )
+    return render(
+        request,
+        "learning/course_overview.html",
+        {
+            "active_nav": "learn",
+            "course": course,
+            "section_cards": section_cards,
+            "next_lesson": next_lesson,
+            "course_progress": course.progress_percent,
+        },
+    )
+
+
+def section_detail(request, section_id):
+    student = _student()
+    section = get_object_or_404(
+        CourseSection.objects.select_related("course").prefetch_related("lessons", "checkpoint__questions"),
+        pk=section_id,
+    )
+    checkpoint = getattr(section, "checkpoint", None)
+    previous_section = section.course.sections.filter(order__lt=section.order).order_by("-order").first()
+    next_section = section.course.sections.filter(order__gt=section.order).order_by("order").first()
+    return render(
+        request,
+        "learning/section_detail.html",
+        {
+            "active_nav": "learn",
+            "section": section,
+            "lessons": section.lessons.all(),
+            "checkpoint": checkpoint,
+            "checkpoint_status": checkpoint.status_for(student) if checkpoint else None,
+            "section_status": section.status_for(student),
+            "previous_section": previous_section,
+            "next_section": next_section,
+        },
+    )
 
 
 def lesson_detail(request, lesson_id):
-    lesson = get_object_or_404(Lesson.objects.select_related("homework"), pk=lesson_id)
-    other_lessons = Lesson.objects.exclude(pk=lesson.pk)[:3]
+    lesson = get_object_or_404(Lesson.objects.select_related("section__course"), pk=lesson_id)
+    homework = getattr(lesson, "homework", None)
+    other_lessons = (
+        Lesson.objects.filter(section=lesson.section).exclude(pk=lesson.pk)
+        if lesson.section_id
+        else Lesson.objects.exclude(pk=lesson.pk)[:3]
+    )
     return render(
         request,
         "learning/lesson_detail.html",
-        {"active_nav": "learn", "lesson": lesson, "other_lessons": other_lessons},
+        {
+            "active_nav": "learn",
+            "lesson": lesson,
+            "homework": homework,
+            "other_lessons": other_lessons,
+        },
     )
 
 
@@ -90,7 +181,7 @@ def homework_list(request):
 
 def homework_detail(request, homework_id):
     student = _student()
-    homework = get_object_or_404(Homework.objects.select_related("lesson"), pk=homework_id)
+    homework = get_object_or_404(Homework.objects.select_related("lesson", "section", "section__course"), pk=homework_id)
     submission, created = Submission.objects.get_or_create(student=student, homework=homework)
     questions = list(homework.questions.all())
 
@@ -184,7 +275,10 @@ def attendance(request):
 
     month_start = date(year, month, 1)
     month_end = date(year, month, calendar.monthrange(year, month)[1])
-    sessions = {item.date: item for item in AttendanceSession.objects.filter(date__range=(month_start, month_end))}
+    session_query = AttendanceSession.objects.select_related("lesson__section").filter(
+        date__range=(month_start, month_end)
+    )
+    sessions = {item.date: item for item in session_query}
     cal = calendar.Calendar(firstweekday=0)
     weeks = []
     for week in cal.monthdatescalendar(year, month):
@@ -208,6 +302,10 @@ def attendance(request):
     )
     previous = month_start - timedelta(days=1)
     next_month = month_end + timedelta(days=1)
+    course = Course.objects.filter(is_active=True).first()
+    course_sections = (
+        course.sections.filter(start_date__lte=month_end, end_date__gte=month_start) if course else []
+    )
     return render(
         request,
         "learning/attendance.html",
@@ -221,6 +319,8 @@ def attendance(request):
             "next_month": next_month,
             "selected": selected,
             "status_counts": status_counts,
+            "course": course,
+            "course_sections": course_sections,
             "weekday_labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
     )

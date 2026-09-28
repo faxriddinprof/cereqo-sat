@@ -12,11 +12,17 @@ msgstr "%(answered)s/%(total)s javob berildi"
 msgid "%(days)s days"
 msgstr "%(days)s kun"
 
+msgid "%(explored)s of %(total)s lessons explored"
+msgstr "%(total)s darsdan %(explored)s tasi ko‘rildi"
+
 msgid "%(streak)s day streak"
 msgstr "%(streak)s kunlik seriya"
 
 msgid "%(streak)s days"
 msgstr "%(streak)s kun"
+
+msgid "%(total)s domain sections"
+msgstr "%(total)s ta yo‘nalish bo‘limi"
 
 msgid "%(total)s questions"
 msgstr "%(total)s ta savol"
@@ -42,11 +48,17 @@ msgstr "30 soniyalik demo video"
 msgid "<strong data-answered-count>%(answered)s</strong>/%(total)s answered"
 msgstr "<strong data-answered-count>%(answered)s</strong>/%(total)s javob berildi"
 
+msgid "A 75-minute mastery rhythm"
+msgstr "75 daqiqalik o‘zlashtirish tartibi"
+
 msgid "A car travels 156 miles on 6 gallons. What is the unit rate?"
 msgstr "Avtomobil 6 gallon yoqilg‘ida 156 mil yuradi. Bir gallon uchun masofa qancha?"
 
 msgid "A comparison group helps rule out broader factors such as weather."
 msgstr "Taqqoslash guruhi ob-havo kabi umumiy omillarni chiqarib tashlashga yordam beradi."
+
+msgid "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints."
+msgstr "Rasmiy raqamli SAT tuzilmasi, vaqtli mashqlar, tahlil va bo‘lim nazoratlari asosidagi yo‘nalishma-yo‘nalish o‘quv yo‘li."
 
 msgid "A focused session today keeps your progress moving."
 msgstr "Bugungi diqqatli mashg‘ulot natijangizni oldinga siljitadi."
@@ -60,17 +72,41 @@ msgstr "To‘g‘ri chiziq (2, 7) va (6, 19) nuqtalardan o‘tadi. Uning qiyalig
 msgid "A recipe uses 2.5 cups of flour for 20 cookies. How many cups are needed for 32 cookies?"
 msgstr "20 ta pechenye uchun 2.5 piyola un kerak. 32 ta uchun necha piyola kerak?"
 
+msgid "A section-ending grammar set covering boundaries, form, structure, and sense."
+msgstr "Gap chegaralari, shakl, tuzilma va mazmunni qamrab oluvchi bo‘lim yakuniy grammatika to‘plami."
+
 msgid "A short review of unit rates and equivalent ratios."
 msgstr "Birlik tezligi va teng nisbatlar bo‘yicha qisqa takrorlash."
 
 msgid "A study found that seedlings under blue light grew taller than those under red light. Which claim is best supported?"
 msgstr "Tadqiqotda ko‘k yorug‘likdagi nihollar qizil yorug‘likdagilardan balandroq o‘sdi. Qaysi fikr eng yaxshi qo‘llab-quvvatlanadi?"
 
+msgid "A timed review of equivalent expressions and nonlinear functions."
+msgstr "Teng kuchli ifodalar va chiziqsiz funksiyalar bo‘yicha vaqtli takrorlash."
+
+msgid "A timed section review of vocabulary, purpose, structure, and paired-text reasoning."
+msgstr "Lug‘at, maqsad, tuzilma va juft matnlar tahlili bo‘yicha vaqtli bo‘lim nazorati."
+
 msgid "A town added protected bike lanes; bicycle trips rose 18% the next year. Which inference is most reasonable?"
 msgstr "Shaharda himoyalangan veloyo‘laklar qurildi; keyingi yili velosiped safarlari 18% oshdi. Qaysi xulosa eng asosli?"
 
 msgid "Accurate evidence selection across both passages."
 msgstr "Har ikki matnda dalillar aniq tanlangan."
+
+msgid "Active course"
+msgstr "Faol kurs"
+
+msgid "Adaptive by module"
+msgstr "Modul bo‘yicha adaptiv"
+
+msgid "Advanced Math"
+msgstr "Murakkab matematika"
+
+msgid "Advanced Math checkpoint"
+msgstr "Murakkab matematika nazorati"
+
+msgid "Advanced Math · Core skill"
+msgstr "Murakkab matematika · Asosiy ko‘nikma"
 
 msgid "Advanced math clinic"
 msgstr "Murakkab matematika praktikumi"
@@ -83,6 +119,9 @@ msgstr "Algebra"
 
 msgid "Algebra Ace"
 msgstr "Algebra bilimdoni"
+
+msgid "Algebra · Core skill"
+msgstr "Algebra · Asosiy ko‘nikma"
 
 msgid "Algebra · Linear equations"
 msgstr "Algebra · Chiziqli tenglamalar"
@@ -132,8 +171,35 @@ msgstr "Ko‘k yorug‘lik har doim o‘simlik sog‘lig‘ini yaxshilaydi."
 msgid "Bring your checkpoint questions."
 msgstr "Nazorat savollaringizni olib keling."
 
+msgid "Build the core Advanced Math skills, then prove mastery in a timed checkpoint."
+msgstr "Murakkab matematika bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Algebra skills, then prove mastery in a timed checkpoint."
+msgstr "Algebra bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Craft and Structure skills, then prove mastery in a timed checkpoint."
+msgstr "Uslub va tuzilma bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Expression of Ideas skills, then prove mastery in a timed checkpoint."
+msgstr "Fikr ifodasi bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Geometry and Trigonometry skills, then prove mastery in a timed checkpoint."
+msgstr "Geometriya va trigonometriya bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Information and Ideas skills, then prove mastery in a timed checkpoint."
+msgstr "Ma’lumot va g‘oyalar bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Problem-Solving and Data Analysis skills, then prove mastery in a timed checkpoint."
+msgstr "Masala yechish va ma’lumotlar tahlili bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
+msgid "Build the core Standard English Conventions skills, then prove mastery in a timed checkpoint."
+msgstr "Ingliz tili me’yorlari bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
+
 msgid "Car travel ended in the town."
 msgstr "Shaharda avtomobil qatnovi tugadi."
+
+msgid "Central ideas and quantitative evidence"
+msgstr "Asosiy g‘oyalar va sonli dalillar"
 
 msgid "Cereqo demo"
 msgstr "Cereqo demo"
@@ -147,6 +213,9 @@ msgstr "Mashg‘ulotni ko‘rish uchun belgilangan sanani tanlang."
 msgid "Choose transitions by naming the logical relationship before looking at the options."
 msgstr "Variantlarni ko‘rishdan oldin mantiqiy bog‘lanishni aniqlab, bog‘lovchini tanlang."
 
+msgid "Circles, area, and volume"
+msgstr "Aylana, yuza va hajm"
+
 msgid "Class standings"
 msgstr "Guruh natijalari"
 
@@ -156,17 +225,35 @@ msgstr "Qisqa matnlarda dalillar bilan ishlash"
 msgid "Compare progress while learning at your own pace."
 msgstr "O‘z tezligingizda o‘qib, natijalarni taqqoslang."
 
+msgid "Complete"
+msgstr "Yakunlangan"
+
+msgid "Complete in this order"
+msgstr "Shu tartibda bajaring"
+
 msgid "Completed"
 msgstr "Bajarilgan"
 
 msgid "Completed the source-matching challenge."
 msgstr "Manbalarni moslash topshirig‘i bajarildi."
 
+msgid "Concept"
+msgstr "Tushuncha"
+
+msgid "Concept model, guided practice, timed set, and error-log review."
+msgstr "Tushuncha modeli, yo‘naltirilgan mashq, vaqtli to‘plam va xatolar jurnalini tahlil qilish."
+
 msgid "Consequently"
 msgstr "Natijada"
 
 msgid "Consistency King"
 msgstr "Izchillik ustasi"
+
+msgid "Continue course"
+msgstr "Kursni davom ettirish"
+
+msgid "Continue in sequence"
+msgstr "Ketma-ket davom eting"
 
 msgid "Continue learning"
 msgstr "Darsni davom ettirish"
@@ -176,6 +263,33 @@ msgstr "Asosiy algebra mashg‘uloti"
 
 msgid "Correlation alone does not establish causation."
 msgstr "Faqat bog‘liqlik sababiyatni isbotlamaydi."
+
+msgid "Course"
+msgstr "Kurs"
+
+msgid "Course calendar"
+msgstr "Kurs taqvimi"
+
+msgid "Course path"
+msgstr "Kurs yo‘li"
+
+msgid "Course sequence"
+msgstr "Kurs ketma-ketligi"
+
+msgid "Course tasks"
+msgstr "Kurs vazifalari"
+
+msgid "Craft and Structure"
+msgstr "Uslub va tuzilma"
+
+msgid "Craft and Structure checkpoint"
+msgstr "Uslub va tuzilma nazorati"
+
+msgid "Craft and Structure · Core skill"
+msgstr "Uslub va tuzilma · Asosiy ko‘nikma"
+
+msgid "Current"
+msgstr "Joriy"
 
 msgid "Cycling increased exactly 18% in every neighborhood."
 msgstr "Har bir mahallada velosiped haydash aynan 18% oshdi."
@@ -195,14 +309,44 @@ msgstr "Demo natijalar"
 msgid "Demo test countdown"
 msgstr "Demo testgacha"
 
+msgid "Digital SAT Mastery · 8-Week Path"
+msgstr "Digital SAT Mastery · 8 haftalik yo‘l"
+
+msgid "Digital SAT blueprint"
+msgstr "Raqamli SAT tuzilmasi"
+
 msgid "Divide 156 miles by 6 gallons to get 26 miles per gallon."
 msgstr "156 milni 6 gallonga bo‘lsak, bir gallonga 26 mil chiqadi."
 
 msgid "Due"
 msgstr "Muddat"
 
+msgid "Each lesson turns one SAT skill into a repeatable test-day decision."
+msgstr "Har dars bitta SAT ko‘nikmasini test kunida takrorlanadigan qarorga aylantiradi."
+
 msgid "Each notebook costs $2.75, and 10 cost $27.50."
 msgstr "Har bir daftar $2.75, o‘ntasi esa $27.50 turadi."
+
+msgid "Each task closes a course section and measures mastery of its SAT domain."
+msgstr "Har vazifa kurs bo‘limini yakunlaydi va shu SAT yo‘nalishi o‘zlashtirilishini o‘lchaydi."
+
+msgid "End of section"
+msgstr "Bo‘lim yakuni"
+
+msgid "English Conventions checkpoint"
+msgstr "Ingliz tili me’yorlari nazorati"
+
+msgid "Equivalent expressions and nonlinear models"
+msgstr "Teng kuchli ifodalar va chiziqsiz modellar"
+
+msgid "Equivalent expressions and quadratics"
+msgstr "Teng kuchli ifodalar va kvadrat tenglamalar"
+
+msgid "Error review"
+msgstr "Xatolar tahlili"
+
+msgid "Every class"
+msgstr "Har bir dars"
 
 msgid "Every resident now owns a bicycle."
 msgstr "Endi har bir aholida velosiped bor."
@@ -213,17 +357,32 @@ msgstr "Dalillar eksperti"
 msgid "Evidence and inference set"
 msgstr "Dalil va xulosa mashqlari"
 
+msgid "Exam blueprint"
+msgstr "Imtihon tuzilmasi"
+
 msgid "Expand to 3x − 12 = 2x + 7, then subtract 2x and add 12 to get x = 19."
 msgstr "3x − 12 = 2x + 7 ko‘rinishga oching, 2x ni ayirib 12 ni qo‘shing: x = 19."
 
+msgid "Expression of Ideas"
+msgstr "Fikr ifodasi"
+
+msgid "Expression of Ideas · Core skill"
+msgstr "Fikr ifodasi · Asosiy ko‘nikma"
+
 msgid "Expression of Ideas · Transitions"
 msgstr "Fikr ifodasi · Bog‘lovchilar"
+
+msgid "Finish the lessons in order, then clear the checkpoint at the end of each section."
+msgstr "Darslarni tartib bilan yakunlang, keyin har bo‘lim oxiridagi nazoratdan o‘ting."
 
 msgid "Finish two more focused sessions to reach this week’s goal."
 msgstr "Haftalik maqsad uchun yana ikki mashg‘ulotni yakunlang."
 
 msgid "Focused practice sets connected to each lesson."
 msgstr "Har bir darsga bog‘langan aniq va qisqa mashqlar."
+
+msgid "Follow the course sequence and complete each domain checkpoint before the full simulation."
+msgstr "Kurs ketma-ketligiga amal qiling va to‘liq simulyatsiyadan oldin har bir yo‘nalish nazoratini yakunlang."
 
 msgid "For 3(x − 4) = 2x + 7, what is the value of x?"
 msgstr "3(x − 4) = 2x + 7 tenglamada x ning qiymati nechaga teng?"
@@ -237,14 +396,32 @@ msgstr "Masalan"
 msgid "For instance"
 msgstr "Masalan"
 
+msgid "Form, structure, and sense"
+msgstr "Shakl, tuzilma va mazmun"
+
 msgid "Four notebooks cost $11. At the same rate, what do 10 notebooks cost?"
 msgstr "To‘rtta daftar $11 turadi. Shu narxda 10 ta daftar qancha turadi?"
 
 msgid "Fri"
 msgstr "Ju"
 
+msgid "Geometry and Trigonometry"
+msgstr "Geometriya va trigonometriya"
+
+msgid "Geometry and Trigonometry checkpoint"
+msgstr "Geometriya va trigonometriya nazorati"
+
+msgid "Geometry and Trigonometry · Core skill"
+msgstr "Geometriya va trigonometriya · Asosiy ko‘nikma"
+
 msgid "Good start—review and grow."
 msgstr "Yaxshi boshlanish — tahlil qilib, davom eting."
+
+msgid "Grammar and sentence boundaries"
+msgstr "Grammatika va gap chegaralari"
+
+msgid "Guided practice"
+msgstr "Yo‘naltirilgan mashq"
 
 msgid "Home"
 msgstr "Bosh sahifa"
@@ -270,8 +447,17 @@ msgstr "Bundan tashqari"
 msgid "In contrast"
 msgstr "Aksincha"
 
+msgid "In focus"
+msgstr "Hozirgi bosqich"
+
 msgid "In progress"
 msgstr "Jarayonda"
+
+msgid "Information and Ideas"
+msgstr "Ma’lumot va g‘oyalar"
+
+msgid "Information and Ideas · Core skill"
+msgstr "Ma’lumot va g‘oyalar · Asosiy ko‘nikma"
 
 msgid "Information and Ideas · Evidence"
 msgstr "Ma’lumot va g‘oyalar · Dalillar"
@@ -297,11 +483,44 @@ msgstr "Reyting jadvali"
 msgid "Learn"
 msgstr "Darslar"
 
+msgid "Learn the essential patterns and decision process for Advanced Math questions."
+msgstr "Murakkab matematika savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Algebra questions."
+msgstr "Algebra savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Craft and Structure questions."
+msgstr "Uslub va tuzilma savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Expression of Ideas questions."
+msgstr "Fikr ifodasi savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Geometry and Trigonometry questions."
+msgstr "Geometriya va trigonometriya savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Information and Ideas questions."
+msgstr "Ma’lumot va g‘oyalar savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Problem-Solving and Data Analysis questions."
+msgstr "Masala yechish va ma’lumotlar tahlili savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
+msgid "Learn the essential patterns and decision process for Standard English Conventions questions."
+msgstr "Ingliz tili me’yorlari savollari uchun asosiy andozalar va qaror jarayonini o‘rganing."
+
 msgid "Learning path"
 msgstr "O‘quv yo‘li"
 
+msgid "Lesson"
+msgstr "Dars"
+
+msgid "Lesson %(current)s of %(total)s"
+msgstr "%(total)s darsdan %(current)s-dars"
+
 msgid "Lesson notes"
 msgstr "Dars qaydlari"
+
+msgid "Lesson plan"
+msgstr "Darslar rejasi"
 
 msgid "Light color can affect seedling height."
 msgstr "Yorug‘lik rangi nihol balandligiga ta’sir qilishi mumkin."
@@ -318,6 +537,12 @@ msgstr "Chiziqli tenglamalarni takrorlash"
 msgid "Linear equations: see the structure"
 msgstr "Chiziqli tenglamalar: tuzilmani ko‘ring"
 
+msgid "Linear functions and systems"
+msgstr "Chiziqli funksiyalar va sistemalar"
+
+msgid "Linear relationships and systems"
+msgstr "Chiziqli bog‘lanishlar va sistemalar"
+
 msgid "Live guided practice and Q&A."
 msgstr "Jonli yo‘naltirilgan mashq va savol-javob."
 
@@ -327,17 +552,26 @@ msgstr "Jonli mashg‘ulotlar"
 msgid "Many desert plants store water in thick stems. ___, the saguaro expands after rainfall."
 msgstr "Ko‘plab cho‘l o‘simliklari suvni qalin poyasida saqlaydi. ___, saguaro yomg‘irdan keyin kengayadi."
 
+msgid "Mastery rule"
+msgstr "O‘zlashtirish mezoni"
+
 msgid "Match claims to evidence by testing exactly what each choice proves."
 msgstr "Har bir variant nimani isbotlashini tekshirib, fikrni dalil bilan moslang."
 
 msgid "Math"
 msgstr "Matematika"
 
+msgid "Math questions"
+msgstr "Matematika savollari"
+
 msgid "Meanwhile"
 msgstr "Shu orada"
 
 msgid "Missed"
 msgstr "Qoldirilgan"
+
+msgid "Module 2 difficulty responds to Module 1 performance."
+msgstr "2-modul qiyinligi 1-modul natijasiga moslashadi."
 
 msgid "Momentum Maker"
 msgstr "Barqaror rivoj"
@@ -351,6 +585,9 @@ msgstr "Boshqa darslar"
 msgid "Name the unknown first. Translate one relationship at a time, then simplify both sides before isolating the variable. On the digital SAT, a quick substitution check often catches sign errors faster than reworking the algebra."
 msgstr "Avval noma’lumni belgilang. Har bir bog‘lanishni alohida tenglamaga o‘tkazing, so‘ng o‘zgaruvchini ajratishdan oldin ikki tomonni soddalashtiring. Raqamli SAT’da o‘rniga qo‘yib tekshirish ishora xatolarini tez topadi."
 
+msgid "Needs review"
+msgstr "Qayta ko‘rish kerak"
+
 msgid "Nevertheless"
 msgstr "Shunga qaramay"
 
@@ -359,6 +596,9 @@ msgstr "Keyingi"
 
 msgid "Next month"
 msgstr "Keyingi oy"
+
+msgid "Next section"
+msgstr "Keyingi bo‘lim"
 
 msgid "No homework yet"
 msgstr "Hozircha uy vazifasi yo‘q"
@@ -369,11 +609,26 @@ msgstr "Hozircha darslar yo‘q"
 msgid "No session selected"
 msgstr "Mashg‘ulot tanlanmagan"
 
+msgid "Nonlinear functions and equations"
+msgstr "Chiziqsiz funksiyalar va tenglamalar"
+
 msgid "Not started"
 msgstr "Boshlanmagan"
 
+msgid "Official SAT domains"
+msgstr "Rasmiy SAT yo‘nalishlari"
+
+msgid "Open checkpoint"
+msgstr "Nazoratni ochish"
+
+msgid "Open lesson"
+msgstr "Darsni ochish"
+
 msgid "Open related homework"
 msgstr "Bog‘liq vazifani ochish"
+
+msgid "Open section"
+msgstr "Bo‘limni ochish"
 
 msgid "Original practice content"
 msgstr "Original mashq materiallari"
@@ -393,6 +648,12 @@ msgstr "Hisoblashdan oldin o‘zgaruvchi nimani anglatishini aniqlang. Bu odat k
 msgid "Pending tasks"
 msgstr "Kutilayotgan vazifalar"
 
+msgid "Percentages, distributions, and probability"
+msgstr "Foizlar, taqsimotlar va ehtimollik"
+
+msgid "Practice"
+msgstr "Mashq"
+
 msgid "Practice next"
 msgstr "Keyingi mashq"
 
@@ -402,8 +663,14 @@ msgstr "Mashqlar navbati"
 msgid "Practice selecting evidence that directly supports a claim."
 msgstr "Fikrni bevosita qo‘llab-quvvatlovchi dalilni tanlashni mashq qiling."
 
+msgid "Preview"
+msgstr "Ko‘rib chiqish"
+
 msgid "Previous month"
 msgstr "Oldingi oy"
+
+msgid "Previous section"
+msgstr "Oldingi bo‘lim"
 
 msgid "Previously"
 msgstr "Avval"
@@ -411,8 +678,14 @@ msgstr "Avval"
 msgid "Problem-Solving and Data Analysis"
 msgstr "Masala yechish va ma’lumotlar tahlili"
 
+msgid "Problem-Solving and Data Analysis · Core skill"
+msgstr "Masala yechish va ma’lumotlar tahlili · Asosiy ko‘nikma"
+
 msgid "Progress saved. You can safely come back later."
 msgstr "Jarayon saqlandi. Keyinroq davom ettirishingiz mumkin."
+
+msgid "Prove"
+msgstr "Tasdiqlash"
 
 msgid "Question %(current)s of %(total)s"
 msgstr "%(total)s savoldan %(current)s-savol"
@@ -426,6 +699,9 @@ msgstr "Reyting"
 msgid "Rates and ratios review"
 msgstr "Tezlik va nisbatlar takrori"
 
+msgid "Rates, percentages, and data"
+msgstr "Tezliklar, foizlar va ma’lumotlar"
+
 msgid "Ratios, rates, and proportional reasoning"
 msgstr "Nisbatlar, tezliklar va proporsiyalar"
 
@@ -434,6 +710,12 @@ msgstr "Gaplarni bo‘sh joysiz o‘qing va ularning bog‘lanishini aniqlang: q
 
 msgid "Reading & Writing"
 msgstr "O‘qish va yozish"
+
+msgid "Reading & Writing questions"
+msgstr "O‘qish va yozish savollari"
+
+msgid "Reading evidence and inference"
+msgstr "Matndagi dalil va xulosalar"
 
 msgid "Reading inference studio"
 msgstr "Matndan xulosa chiqarish mashg‘uloti"
@@ -453,6 +735,9 @@ msgstr "Qayta sozlash bir xil bo‘lmagan ko‘rsatkichlarning oqibatidir."
 msgid "Red light prevents photosynthesis."
 msgstr "Qizil yorug‘lik fotosintezni to‘xtatadi."
 
+msgid "Related lessons"
+msgstr "Bog‘liq darslar"
+
 msgid "Restate the claim in precise terms. For each option, ask whether the evidence directly supports every important part of that claim—not merely the passage’s general topic."
 msgstr "Fikrni aniq so‘zlar bilan qayta ayting. Har bir variantda dalil matnning umumiy mavzusini emas, fikrning barcha muhim qismlarini bevosita qo‘llashini tekshiring."
 
@@ -465,14 +750,26 @@ msgstr "Davom ettirish"
 msgid "Review completed classes and upcoming sessions."
 msgstr "O‘tilgan va kelgusi mashg‘ulotlarni ko‘ring."
 
+msgid "Review every error by skill, cause, and correction before moving on."
+msgstr "Keyingi bosqichdan oldin har bir xatoni ko‘nikma, sabab va tuzatish bo‘yicha tahlil qiling."
+
 msgid "Review result"
 msgstr "Natijani ko‘rish"
+
+msgid "Review the recording and complete the section checkpoint."
+msgstr "Dars yozuvini ko‘ring va bo‘lim nazoratini bajaring."
 
 msgid "Review your answers before submitting. This attempt is final."
 msgstr "Topshirishdan oldin javoblarni tekshiring. Urinish yakuniy hisoblanadi."
 
 msgid "Revisit lesson"
 msgstr "Darsga qaytish"
+
+msgid "Rhetorical synthesis and transitions"
+msgstr "Ritorik sintez va bog‘lovchilar"
+
+msgid "Rhetorical synthesis from source notes"
+msgstr "Manba qaydlaridan ritorik sintez"
 
 msgid "Rhetorical synthesis lab"
 msgstr "Ritorik sintez laboratoriyasi"
@@ -501,20 +798,44 @@ msgstr "Saqlanmoqda…"
 msgid "Scale by 32/20 = 1.6; 2.5 × 1.6 = 4 cups."
 msgstr "32/20 = 1.6 marta oshiramiz; 2.5 × 1.6 = 4 piyola."
 
+msgid "Schedule & attendance"
+msgstr "Jadval va davomat"
+
 msgid "Scheduled"
 msgstr "Rejalashtirilgan"
 
 msgid "Score"
 msgstr "Natija"
 
+msgid "Section"
+msgstr "Bo‘lim"
+
+msgid "Section %(number)s"
+msgstr "%(number)s-bo‘lim"
+
+msgid "Section checkpoint"
+msgstr "Bo‘lim nazorati"
+
+msgid "Section checkpoints"
+msgstr "Bo‘lim nazoratlari"
+
+msgid "See every lesson day, topic, section range, and attendance state in one place."
+msgstr "Har bir dars kuni, mavzu, bo‘lim oralig‘i va davomat holatini bir joyda ko‘ring."
+
 msgid "See updated rank"
 msgstr "Yangilangan reytingni ko‘rish"
+
+msgid "Sentence boundaries and agreement"
+msgstr "Gap chegaralari va moslashuv"
 
 msgid "Session details"
 msgstr "Mashg‘ulot tafsilotlari"
 
 msgid "Session recording and recap are available."
 msgstr "Mashg‘ulot yozuvi va qisqa xulosasi mavjud."
+
+msgid "Shapes, circles, and trigonometry"
+msgstr "Shakllar, aylanalar va trigonometriya"
 
 msgid "Similar nearby buildings without new insulation showed no decrease."
 msgstr "Yangi izolyatsiyasiz yaqin binolarda kamayish kuzatilmagan."
@@ -531,11 +852,20 @@ msgstr "Asosiy kontentga o‘tish"
 msgid "Slope is the change in y divided by the change in x: (19 − 7)/(6 − 2) = 12/4 = 3."
 msgstr "Qiyalik y o‘zgarishini x o‘zgarishiga bo‘lish orqali topiladi: (19 − 7)/(6 − 2) = 12/4 = 3."
 
+msgid "Standard English Conventions"
+msgstr "Ingliz tili me’yorlari"
+
+msgid "Standard English Conventions · Core skill"
+msgstr "Ingliz tili me’yorlari · Asosiy ko‘nikma"
+
 msgid "Start"
 msgstr "Boshlash"
 
 msgid "Start task"
 msgstr "Vazifani boshlash"
+
+msgid "Start with a short concept model, work through a guided example, then solve a timed mini-set. Finish by logging the error type and the fastest reliable correction."
+msgstr "Qisqa tushuncha modelidan boshlang, yo‘naltirilgan misolni ishlang, keyin vaqtli mini-to‘plamni yeching. Oxirida xato turi va eng tez ishonchli tuzatishni jurnalga yozing."
 
 msgid "Strong work translating constraints into equations."
 msgstr "Shartlarni tenglamaga o‘tkazish bo‘yicha yaxshi natija."
@@ -585,6 +915,9 @@ msgstr "Vazifalar"
 msgid "Test-day move"
 msgstr "Test kunidagi usul"
 
+msgid "Text structure and cross-text connections"
+msgstr "Matn tuzilishi va matnlararo bog‘lanish"
+
 msgid "That winter was warmer than average."
 msgstr "O‘sha qish odatdagidan iliqroq bo‘lgan."
 
@@ -594,8 +927,17 @@ msgstr "Arxiv noyob xaritalarini raqamlashtirdi. ___, endi butun dunyodagi tadqi
 msgid "The building is 20 years old."
 msgstr "Bino 20 yoshda."
 
+msgid "The calendar is generated from the course sequence. Checkpoints remain in Tasks and do not change attendance."
+msgstr "Taqvim kurs ketma-ketligidan avtomatik tuziladi. Nazoratlar Vazifalarda qoladi va davomatni o‘zgartirmaydi."
+
+msgid "The checkpoint unlocks at the end of this section’s lesson sequence."
+msgstr "Nazorat ushbu bo‘lim darslari yakunida ochiladi."
+
 msgid "The data supports an effect on height, not broader claims about health or necessity."
 msgstr "Ma’lumot balandlikka ta’sirni ko‘rsatadi, sog‘liq yoki zarurat haqidagi kengroq fikrlarni emas."
+
+msgid "The final domain checkpoint before the full adaptive simulation."
+msgstr "To‘liq adaptiv simulyatsiyadan oldingi so‘nggi yo‘nalish nazorati."
 
 msgid "The first trial produced inconsistent readings. ___, the team recalibrated the sensor before continuing."
 msgstr "Birinchi sinovda ko‘rsatkichlar bir xil chiqmadi. ___, jamoa davom etishdan oldin sensorni qayta sozladi."
@@ -639,17 +981,26 @@ msgstr "Bu uy vazifasi allaqachon topshirilgan."
 msgid "This season"
 msgstr "Joriy davr"
 
+msgid "This section"
+msgstr "Ushbu bo‘lim"
+
 msgid "Thu"
 msgstr "Pa"
 
 msgid "Time"
 msgstr "Vaqt"
 
+msgid "Timed set"
+msgstr "Vaqtli to‘plam"
+
 msgid "Today"
 msgstr "Bugun"
 
 msgid "Today's plan"
 msgstr "Bugungi reja"
+
+msgid "Train for the test you will actually take"
+msgstr "Aynan topshiradigan testingizga tayyorlaning"
 
 msgid "Transition logic practice"
 msgstr "Bog‘lovchilar mantig‘i mashqi"
@@ -659,6 +1010,9 @@ msgstr "Bog‘lovchilar va matn yaxlitligi"
 
 msgid "Transitions that reveal logic"
 msgstr "Mantiqni ko‘rsatuvchi bog‘lovchilar"
+
+msgid "Triangles and trigonometric ratios"
+msgstr "Uchburchaklar va trigonometrik nisbatlar"
 
 msgid "Tue"
 msgstr "Se"
@@ -672,6 +1026,9 @@ msgstr "Keyingi darslar"
 msgid "Up to %(points)s XP"
 msgstr "%(points)s XP gacha"
 
+msgid "Upcoming"
+msgstr "Kelgusi"
+
 msgid "Use units to organize multistep rate and proportion questions."
 msgstr "Ko‘p bosqichli nisbat masalalarini birliklar yordamida tartibga soling."
 
@@ -680,6 +1037,12 @@ msgstr "Video dars"
 
 msgid "View all"
 msgstr "Barchasini ko‘rish"
+
+msgid "View course"
+msgstr "Kursni ko‘rish"
+
+msgid "View section plan"
+msgstr "Bo‘lim rejasini ko‘rish"
 
 msgid "Vocabulary cannot be measured."
 msgstr "Lug‘at boyligini o‘lchab bo‘lmaydi."
@@ -699,6 +1062,12 @@ msgstr "Izoh"
 msgid "Word Wizard"
 msgstr "So‘z ustasi"
 
+msgid "Words in context and author purpose"
+msgstr "Kontekstdagi so‘zlar va muallif maqsadi"
+
+msgid "Words, purpose, and text connections"
+msgstr "So‘zlar, maqsad va matnlar bog‘lanishi"
+
 msgid "Worldwide access is a result of digitization."
 msgstr "Butun dunyo bo‘ylab foydalanish raqamlashtirishning natijasidir."
 
@@ -713,6 +1082,9 @@ msgstr "Siz"
 
 msgid "Your browser does not support HTML video. The written lesson is available below."
 msgstr "Brauzeringiz videoni qo‘llamaydi. Dars matni quyida mavjud."
+
+msgid "Your domain roadmap"
+msgstr "Yo‘nalishlar xaritasi"
 
 msgid "Your next practice set will appear here."
 msgstr "Keyingi mashqlar shu yerda ko‘rinadi."
@@ -732,6 +1104,12 @@ msgstr "O‘quv maydoningiz"
 msgid "You’re all caught up."
 msgstr "Barcha vazifalar bajarilgan."
 
+msgid "classes"
+msgstr "ta dars"
+
+msgid "course complete"
+msgstr "kurs yakunlandi"
+
 msgid "day streak"
 msgstr "kunlik seriya"
 
@@ -744,12 +1122,30 @@ msgstr "o‘quvchi"
 msgid "min"
 msgstr "daq"
 
+msgid "min break"
+msgstr "daq tanaffus"
+
+msgid "min class"
+msgstr "daq dars"
+
 msgid "min lesson outline"
 msgstr "daqiqalik dars rejasi"
+
+msgid "minutes"
+msgstr "daqiqa"
+
+msgid "modules"
+msgstr "modul"
 
 msgid "of %(total)s learners"
 msgstr "%(total)s o‘quvchi ichida"
 
+msgid "section progress"
+msgstr "bo‘lim natijasi"
+
 msgid "viewed"
 msgstr "ko‘rildi"
+
+msgid "≈%(weight)s%% of section"
+msgstr "bo‘limning ≈%(weight)s%% qismi"
 

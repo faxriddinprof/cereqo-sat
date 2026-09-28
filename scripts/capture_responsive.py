@@ -12,6 +12,7 @@ from urllib.request import urlopen
 
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 PORT = 9223
+BASE_URL = os.environ.get("CEREQO_BASE_URL", "http://127.0.0.1:8000")
 
 
 class DevTools:
@@ -99,13 +100,18 @@ def main():
     )
     try:
         tools = DevTools(wait_for_target())
-        tasks_html = urlopen("http://127.0.0.1:8000/tasks/", timeout=3).read().decode()
+        tasks_html = urlopen(f"{BASE_URL}/tasks/", timeout=3).read().decode()
+        learn_html = urlopen(f"{BASE_URL}/learn/", timeout=3).read().decode()
         homework_match = re.search(r'href="/tasks/(\d+)/"', tasks_html)
+        section_match = re.search(r'href="/learn/sections/(\d+)/"', learn_html)
         homework_path = f"/tasks/{homework_match.group(1)}/" if homework_match else "/tasks/"
+        section_path = f"/learn/sections/{section_match.group(1)}/" if section_match else "/learn/"
         matrix = [
             ("home-uz-light", 390, 900, "/", "uz", "light"),
             ("home-en-dark", 1440, 900, "/", "en", "dark"),
             ("learn-uz-dark", 390, 900, "/learn/", "uz", "dark"),
+            ("learn-en-light", 1440, 1000, "/learn/", "en", "light"),
+            ("section-uz-light", 390, 900, section_path, "uz", "light"),
             ("tasks-en-light", 375, 900, "/tasks/", "en", "light"),
             ("homework-uz-light", 390, 900, homework_path, "uz", "light"),
             ("attendance-uz-dark", 768, 900, "/attendance/", "uz", "dark"),
@@ -118,7 +124,7 @@ def main():
             )
             tools.command("Emulation.setEmulatedMedia", {"features": [{"name": "prefers-color-scheme", "value": theme}]})
             tools.command("Network.setCookie", {"name": "django_language", "value": language, "domain": "127.0.0.1", "path": "/"})
-            tools.command("Page.navigate", {"url": f"http://127.0.0.1:8000{path}"})
+            tools.command("Page.navigate", {"url": f"{BASE_URL}{path}"})
             time.sleep(0.7)
             tools.command("Runtime.evaluate", {"expression": "window.scrollTo(0, 0)"})
             state = tools.command("Runtime.evaluate", {"expression": "document.documentElement.dataset.theme + ':' + document.documentElement.lang", "returnByValue": True})

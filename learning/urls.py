@@ -7,6 +7,7 @@ app_name = "learning"
 urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     path("learn/", views.learn, name="learn"),
+    path("learn/sections/<int:section_id>/", views.section_detail, name="section_detail"),
     path("lessons/<int:lesson_id>/", views.lesson_detail, name="lesson_detail"),
     path("tasks/", views.homework_list, name="homework_list"),
     path("tasks/<int:homework_id>/", views.homework_detail, name="homework_detail"),

@@ -4,7 +4,18 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
 
-from learning.models import Answer, AttendanceSession, DemoConfig, Homework, Lesson, Question, Student, Submission
+from learning.models import (
+    Answer,
+    AttendanceSession,
+    Course,
+    CourseSection,
+    DemoConfig,
+    Homework,
+    Lesson,
+    Question,
+    Student,
+    Submission,
+)
 
 
 LESSONS = [
@@ -95,6 +106,90 @@ LESSONS = [
 ]
 
 
+EXTRA_CHECKPOINTS = [
+    {
+        "key": "craft",
+        "title": "Text structure and cross-text connections",
+        "subject": "rw",
+        "topic": "Craft and Structure",
+        "duration_minutes": 9,
+        "summary": "Read like a writer: track purpose, structure, and relationships across short texts.",
+        "material": "Name the job of each sentence and paragraph. For paired texts, state each author’s position independently before comparing where they agree, differ, or qualify one another.",
+        "progress_percent": 100,
+        "homework_title": "Craft and Structure checkpoint",
+        "homework_description": "A timed section review of vocabulary, purpose, structure, and paired-text reasoning.",
+        "questions": [
+            ("In context, the word ‘qualified’ most nearly means", "trained", "limited", "praised", "employed", "B", "A qualified claim is limited or made less absolute."),
+            ("An author describes an old theory before presenting new evidence mainly to", "introduce a contrast", "define a technical term", "repeat the conclusion", "avoid a claim", "A", "The old theory establishes the position that the new evidence challenges."),
+            ("Text 1 calls the policy effective; Text 2 says its effect is promising but not yet proven. Text 2 would most likely", "fully reject Text 1", "qualify Text 1’s conclusion", "discuss an unrelated issue", "provide the same certainty", "B", "Text 2 accepts the possibility but reduces the certainty of Text 1’s claim."),
+        ],
+    },
+    {
+        "key": "conventions",
+        "title": "Form, structure, and sense",
+        "subject": "rw",
+        "topic": "Standard English Conventions",
+        "duration_minutes": 8,
+        "summary": "Edit sentence boundaries, agreement, and modifiers with repeatable grammar checks.",
+        "material": "First identify complete clauses. Then choose punctuation based on the boundary between them. Finally, verify subject–verb agreement and place modifiers beside the words they describe.",
+        "progress_percent": 76,
+        "homework_title": "English Conventions checkpoint",
+        "homework_description": "A section-ending grammar set covering boundaries, form, structure, and sense.",
+        "questions": [
+            ("The samples were stored at low temperature ___ the team analyzed them the next morning.", ",", ";", ": and", "because,", "B", "A semicolon correctly joins two closely related independent clauses."),
+            ("The collection of maps ___ housed in a climate-controlled room.", "are", "were", "is", "have been", "C", "The subject is the singular noun ‘collection,’ so ‘is’ agrees."),
+            ("Walking through the gallery, ___", "the sculptures impressed Mina", "Mina studied the sculptures", "the lights were bright", "there were many sculptures", "B", "Mina is the person walking, so she must immediately follow the modifier."),
+        ],
+    },
+    {
+        "key": "advanced",
+        "title": "Nonlinear functions and equations",
+        "subject": "math",
+        "topic": "Advanced Math",
+        "duration_minutes": 10,
+        "summary": "Connect equivalent expressions, nonlinear equations, and their graphs.",
+        "material": "Look for structure before expanding. Factoring reveals zeros, vertex form reveals a minimum or maximum, and exponential form reveals a constant percent change.",
+        "progress_percent": 0,
+        "homework_title": "Advanced Math checkpoint",
+        "homework_description": "A timed review of equivalent expressions and nonlinear functions.",
+        "questions": [
+            ("Which expression is equivalent to x² − 9?", "(x − 9)(x + 1)", "(x − 3)(x + 3)", "(x − 3)²", "x(x − 9)", "B", "This is a difference of squares: x² − 3² = (x − 3)(x + 3)."),
+            ("If 2ˣ = 32, what is x?", "4", "5", "8", "16", "B", "Since 32 = 2⁵, x = 5."),
+            ("The graph of y = (x − 4)² + 2 has its minimum at", "(−4, 2)", "(2, 4)", "(4, 2)", "(4, −2)", "C", "Vertex form y = (x − h)² + k has vertex (h, k)."),
+        ],
+    },
+    {
+        "key": "geometry",
+        "title": "Circles, area, and volume",
+        "subject": "math",
+        "topic": "Geometry and Trigonometry",
+        "duration_minutes": 9,
+        "summary": "Translate diagrams into relationships using geometry and trigonometry.",
+        "material": "Mark known lengths and angles directly on the diagram. Choose a relationship only after naming the target: similarity, Pythagorean theorem, trigonometric ratio, circle property, area, or volume.",
+        "progress_percent": 0,
+        "homework_title": "Geometry and Trigonometry checkpoint",
+        "homework_description": "The final domain checkpoint before the full adaptive simulation.",
+        "questions": [
+            ("A circle has radius 6. What is its area?", "6π", "12π", "24π", "36π", "D", "Area is πr² = π(6²) = 36π."),
+            ("A right triangle has legs 5 and 12. Its hypotenuse is", "13", "15", "17", "25", "A", "By the Pythagorean theorem, √(5² + 12²) = √169 = 13."),
+            ("A cylinder has radius 3 and height 4. What is its volume?", "12π", "24π", "36π", "48π", "C", "Volume is πr²h = π(3²)(4) = 36π."),
+        ],
+    },
+]
+
+
+SECTION_SPECS = [
+    ("Information and Ideas", "Reading evidence and inference", "rw", -35, -29, 26, "evidence", "Central ideas and quantitative evidence"),
+    ("Craft and Structure", "Words, purpose, and text connections", "rw", -28, -22, 28, "craft", "Words in context and author purpose"),
+    ("Standard English Conventions", "Grammar and sentence boundaries", "rw", -21, -15, 26, "conventions", "Sentence boundaries and agreement"),
+    ("Expression of Ideas", "Rhetorical synthesis and transitions", "rw", -14, -8, 20, "transitions", "Rhetorical synthesis from source notes"),
+    ("Algebra", "Linear relationships and systems", "math", -7, 1, 34, "linear", "Linear functions and systems"),
+    ("Advanced Math", "Equivalent expressions and nonlinear models", "math", 2, 6, 34, "advanced", "Equivalent expressions and quadratics"),
+    ("Problem-Solving and Data Analysis", "Rates, percentages, and data", "math", 7, 13, 16, "ratios", "Percentages, distributions, and probability"),
+    ("Geometry and Trigonometry", "Shapes, circles, and trigonometry", "math", 14, 20, 16, "geometry", "Triangles and trigonometric ratios"),
+]
+
+
 class Command(BaseCommand):
     help = "Create or refresh the idempotent Cereqo demo dataset."
 
@@ -107,6 +202,7 @@ class Command(BaseCommand):
             AttendanceSession.objects.all().delete()
             DemoConfig.objects.all().delete()
             Student.objects.all().delete()
+            Course.objects.all().delete()
             Lesson.objects.all().delete()
 
         today = timezone.localdate()
@@ -132,34 +228,100 @@ class Command(BaseCommand):
         Student.objects.filter(name="Alex Morgan").update(is_demo=True)
         Student.objects.exclude(name="Alex Morgan").update(is_demo=False)
 
+        course, _ = Course.objects.update_or_create(
+            code="digital-sat-mastery",
+            defaults={
+                "title": "Digital SAT Mastery · 8-Week Path",
+                "description": "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints.",
+                "start_date": today - timedelta(days=35),
+                "end_date": today + timedelta(days=20),
+                "target_score": 1400,
+                "is_active": True,
+            },
+        )
+        Course.objects.exclude(pk=course.pk).update(is_active=False)
+
+        checkpoint_specs = {item["key"]: item for item in [*LESSONS, *EXTRA_CHECKPOINTS]}
         homeworks = {}
-        for item in LESSONS:
-            lesson, _ = Lesson.objects.update_or_create(
-                title=item["title"],
+        course_lessons = []
+        sections = []
+        for order, section_spec in enumerate(SECTION_SPECS, start=1):
+            domain, title, subject, start_offset, end_offset, weight, checkpoint_key, intro_title = section_spec
+            section, _ = CourseSection.objects.update_or_create(
+                course=course,
+                order=order,
                 defaults={
-                    "subject": item["subject"],
-                    "topic": item["topic"],
-                    "duration_minutes": item["duration_minutes"],
-                    "summary": item["summary"],
-                    "material": item["material"],
-                    "progress_percent": item["progress_percent"],
-                    "is_today": item["is_today"],
-                    "sort_order": item["sort_order"],
+                    "title": title,
+                    "domain": domain,
+                    "subject": subject,
+                    "description": f"Build the core {domain} skills, then prove mastery in a timed checkpoint.",
+                    "start_date": today + timedelta(days=start_offset),
+                    "end_date": today + timedelta(days=end_offset),
+                    "exam_weight_percent": weight,
+                },
+            )
+            sections.append(section)
+
+            intro_progress = 100 if start_offset <= 0 else 0
+            intro_lesson, _ = Lesson.objects.update_or_create(
+                title=intro_title,
+                defaults={
+                    "section": section,
+                    "subject": subject,
+                    "topic": f"{domain} · Core skill",
+                    "duration_minutes": 8,
+                    "session_minutes": 75,
+                    "summary": f"Learn the essential patterns and decision process for {domain} questions.",
+                    "material": "Start with a short concept model, work through a guided example, then solve a timed mini-set. Finish by logging the error type and the fastest reliable correction.",
+                    "progress_percent": intro_progress,
+                    "is_today": False,
+                    "scheduled_date": today + timedelta(days=start_offset),
+                    "sequence": 1,
+                    "sort_order": order * 10 + 1,
                     "video_file": "cereqo/video/demo-lesson-video.mp4",
                 },
             )
-            deadline_date = today + timedelta(days=item["deadline_days"])
+            course_lessons.append(intro_lesson)
+
+            item = checkpoint_specs[checkpoint_key]
+            checkpoint_date = today + timedelta(days=end_offset - 1)
+            lesson, _ = Lesson.objects.update_or_create(
+                title=item["title"],
+                defaults={
+                    "section": section,
+                    "subject": item["subject"],
+                    "topic": item["topic"],
+                    "duration_minutes": item["duration_minutes"],
+                    "session_minutes": 75,
+                    "summary": item["summary"],
+                    "material": item["material"],
+                    "progress_percent": item["progress_percent"],
+                    "is_today": checkpoint_date == today,
+                    "scheduled_date": checkpoint_date,
+                    "sequence": 2,
+                    "sort_order": order * 10 + 2,
+                    "video_file": "cereqo/video/demo-lesson-video.mp4",
+                },
+            )
+            course_lessons.append(lesson)
+
+            deadline_date = today + timedelta(days=end_offset + 1)
             deadline = timezone.make_aware(datetime.combine(deadline_date, time(20, 0)))
-            homework, _ = Homework.objects.update_or_create(
+            homework, _ = Homework.objects.get_or_create(
                 lesson=lesson,
                 defaults={
                     "title": item["homework_title"],
                     "description": item["homework_description"],
                     "deadline": deadline,
-                    "max_points": 100,
-                    "sort_order": item["sort_order"],
                 },
             )
+            homework.section = section
+            homework.title = item["homework_title"]
+            homework.description = item["homework_description"]
+            homework.deadline = deadline
+            homework.max_points = 100
+            homework.sort_order = order
+            homework.save()
             homeworks[item["key"]] = homework
             positions = []
             for position, values in enumerate(item["questions"], start=1):
@@ -180,6 +342,8 @@ class Command(BaseCommand):
                 positions.append(position)
             homework.questions.exclude(position__in=positions).delete()
 
+        CourseSection.objects.filter(course=course).exclude(pk__in=[item.pk for item in sections]).delete()
+
         demo_student = students["Alex Morgan"]
         in_progress, created = Submission.objects.get_or_create(student=demo_student, homework=homeworks["transitions"])
         if created:
@@ -199,21 +363,38 @@ class Command(BaseCommand):
                 points_awarded=75,
             )
 
-        attendance_specs = [
-            (-16, "Core algebra workshop", "Math", "attended", "Strong work translating constraints into equations."),
-            (-11, "Rhetorical synthesis lab", "Reading & Writing", "attended", "Completed the source-matching challenge."),
-            (-7, "Advanced math clinic", "Math", "missed", "Session recording and recap are available."),
-            (-3, "Reading inference studio", "Reading & Writing", "attended", "Accurate evidence selection across both passages."),
-            (2, "Linear equations review", "Math", "scheduled", "Bring your checkpoint questions."),
-            (7, "Transitions and cohesion", "Reading & Writing", "scheduled", "Live guided practice and Q&A."),
+        old_demo_titles = [
+            "Core algebra workshop",
+            "Rhetorical synthesis lab",
+            "Advanced math clinic",
+            "Reading inference studio",
+            "Linear equations review",
+            "Transitions and cohesion",
         ]
-        expected_attendance_dates = [today + timedelta(days=item[0]) for item in attendance_specs]
-        AttendanceSession.objects.exclude(date__in=expected_attendance_dates).delete()
-        for offset, title, subject, status, notes in attendance_specs:
-            session_date = today + timedelta(days=offset)
+        AttendanceSession.objects.filter(lesson__section__course=course).delete()
+        AttendanceSession.objects.filter(title__in=old_demo_titles).delete()
+        for lesson in course_lessons:
+            session_date = lesson.scheduled_date
+            if session_date < today:
+                status = "missed" if lesson.section.order == 3 and lesson.sequence == 2 else "attended"
+            else:
+                status = "scheduled"
+            subject_label = "Math" if lesson.subject == "math" else "Reading & Writing"
+            notes = (
+                "Review the recording and complete the section checkpoint."
+                if status == "missed"
+                else "Concept model, guided practice, timed set, and error-log review."
+            )
             AttendanceSession.objects.update_or_create(
                 date=session_date,
-                defaults={"title": title, "subject": subject, "start_time": time(17, 30), "status": status, "notes": notes},
+                defaults={
+                    "lesson": lesson,
+                    "title": lesson.title,
+                    "subject": subject_label,
+                    "start_time": time(17, 30),
+                    "status": status,
+                    "notes": notes,
+                },
             )
 
         self.stdout.write(self.style.SUCCESS("Cereqo demo data is ready."))

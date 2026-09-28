@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate section.title %} · Cereqo{% endblock %}
+{% block content %}
+<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:dashboard' %}">{% translate "Home" %}</a><i class="bi bi-chevron-right"></i><a href="{% url 'learning:learn' %}">{% translate "Course" %}</a><i class="bi bi-chevron-right"></i><span>{% translate section.domain %}</span></nav>
+<section class="section-detail-hero subject-panel-{{ section.subject }}">
+  <div><span class="section-number">{% blocktranslate with number=section.order %}Section {{ number }}{% endblocktranslate %}</span><p class="eyebrow">{% translate section.domain %}</p><h1>{% translate section.title %}</h1><p>{% translate section.description %}</p></div>
+  <div class="section-detail-meta"><strong>{{ section.progress_percent }}%</strong><span>{% translate "section progress" %}</span><small>{{ section.start_date|date:'M j' }} — {{ section.end_date|date:'M j' }}</small></div>
+</section>
+
+<div class="section-detail-grid">
+  <section class="section-agenda">
+    <div class="section-title-row"><div><p class="eyebrow">{% translate "Lesson plan" %}</p><h2>{% translate "Complete in this order" %}</h2></div><span>{{ lessons|length }} {% translate "classes" %}</span></div>
+    {% for lesson in lessons %}
+    <article class="agenda-lesson {% if lesson.is_today %}today-lesson{% endif %}">
+      <div class="agenda-date"><strong>{{ lesson.scheduled_date|date:'d' }}</strong><span>{{ lesson.scheduled_date|date:'M' }}</span></div>
+      <div class="agenda-line"><i></i></div>
+      <div class="agenda-copy"><div><span>{% translate "Lesson" %} {{ lesson.sequence }}</span>{% if lesson.is_today %}<b>{% translate "Today" %}</b>{% endif %}</div><h3>{% translate lesson.title %}</h3><p>{% translate lesson.summary %}</p><small><i class="bi bi-clock"></i>{{ lesson.start_time|default:'17:30' }} · {{ lesson.session_minutes }} {% translate "min class" %}</small></div>
+      <div class="agenda-action"><span class="lesson-percent">{{ lesson.progress_percent }}%</span><a class="btn btn-outline-primary app-btn" href="{% url 'learning:lesson_detail' lesson.id %}">{% if lesson.progress_percent > 0 %}{% translate "Open lesson" %}{% else %}{% translate "Preview" %}{% endif %}<i class="bi bi-arrow-right"></i></a></div>
+    </article>
+    {% endfor %}
+  </section>
+  <aside class="section-side-stack">
+    <article class="surface-card checkpoint-card">
+      <span class="checkpoint-icon"><i class="bi bi-flag-fill"></i></span><p class="eyebrow">{% translate "End of section" %}</p><h2>{% translate checkpoint.title %}</h2><p>{% translate checkpoint.description %}</p>
+      <ul><li><i class="bi bi-list-check"></i>{% blocktranslate with total=checkpoint.questions.count %}{{ total }} questions{% endblocktranslate %}</li><li><i class="bi bi-clock-history"></i>{% translate "Due" %} {{ checkpoint.deadline|date:'M j · g:i A' }}</li><li><i class="bi bi-stars"></i>{% blocktranslate with points=checkpoint.max_points %}Up to {{ points }} XP{% endblocktranslate %}</li></ul>
+      <span class="status-badge status-{{ checkpoint_status }}">{% if checkpoint_status == 'completed' %}{% translate "Completed" %}{% elif checkpoint_status == 'in_progress' %}{% translate "In progress" %}{% elif checkpoint_status == 'overdue' %}{% translate "Overdue" %}{% else %}{% translate "Not started" %}{% endif %}</span>
+      <a class="btn btn-primary app-btn w-100" href="{% url 'learning:homework_detail' checkpoint.id %}">{% translate "Open checkpoint" %}<i class="bi bi-arrow-right"></i></a>
+    </article>
+    <article class="surface-card section-method"><p class="eyebrow">{% translate "Mastery rule" %}</p><h2>80%+</h2><p>{% translate "Review every error by skill, cause, and correction before moving on." %}</p><div><span>{% translate "Learn" %}</span><i></i><span>{% translate "Practice" %}</span><i></i><span>{% translate "Prove" %}</span></div></article>
+  </aside>
+</div>
+<nav class="section-pagination">{% if previous_section %}<a href="{% url 'learning:section_detail' previous_section.id %}"><i class="bi bi-arrow-left"></i><span><small>{% translate "Previous section" %}</small><strong>{% translate previous_section.domain %}</strong></span></a>{% else %}<span></span>{% endif %}{% if next_section %}<a href="{% url 'learning:section_detail' next_section.id %}"><span><small>{% translate "Next section" %}</small><strong>{% translate next_section.domain %}</strong></span><i class="bi bi-arrow-right"></i></a>{% endif %}</nav>
+{% endblock %}

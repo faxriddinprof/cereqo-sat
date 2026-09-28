@@ -1,9 +1,9 @@
 {% extends 'base.html' %}{% load static i18n %}
 {% block title %}{% translate lesson.title %} · Cereqo{% endblock %}
 {% block content %}
-<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:dashboard' %}">{% translate "Home" %}</a><i class="bi bi-chevron-right"></i><span>{% translate "Learn" %}</span></nav>
+<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:dashboard' %}">{% translate "Home" %}</a><i class="bi bi-chevron-right"></i><a href="{% url 'learning:learn' %}">{% translate "Course" %}</a>{% if lesson.section %}<i class="bi bi-chevron-right"></i><a href="{% url 'learning:section_detail' lesson.section.id %}">{% translate lesson.section.domain %}</a>{% endif %}<i class="bi bi-chevron-right"></i><span>{% translate lesson.title %}</span></nav>
 <section class="page-heading compact-heading">
-  <div><span class="subject-chip subject-{{ lesson.subject }}">{% translate lesson.get_subject_display %}</span><h1>{% translate lesson.title %}</h1><p>{% translate lesson.topic %}</p></div>
+  <div><span class="subject-chip subject-{{ lesson.subject }}">{% translate lesson.get_subject_display %}</span>{% if lesson.section %}<span class="lesson-sequence-chip">{% blocktranslate with current=lesson.sequence total=lesson.section.lessons.count %}Lesson {{ current }} of {{ total }}{% endblocktranslate %}</span>{% endif %}<h1>{% translate lesson.title %}</h1><p>{% translate lesson.topic %} · {{ lesson.scheduled_date|date:'D, M j' }} · {{ lesson.session_minutes }} {% translate "min class" %}</p></div>
   <div class="lesson-progress-ring" style="--progress: {{ lesson.progress_percent }}"><span>{{ lesson.progress_percent }}%</span><small>{% translate "viewed" %}</small></div>
 </section>
 
@@ -22,12 +22,12 @@
     </article>
   </div>
   <aside class="lesson-side">
-    <article class="surface-card homework-cta">
+    {% if homework %}<article class="surface-card homework-cta">
       <span class="cta-icon"><i class="bi bi-pencil-square"></i></span><p class="eyebrow">{% translate "Practice next" %}</p><h2>{% translate lesson.homework.title %}</h2><p>{% translate lesson.homework.description %}</p>
       <div class="cta-details"><span><i class="bi bi-list-check"></i> {% blocktranslate with total=lesson.homework.questions.count %}{{ total }} questions{% endblocktranslate %}</span><span><i class="bi bi-calendar2"></i> {% translate "Due" %} {{ lesson.homework.deadline|date:'M j' }}</span></div>
       <a class="btn btn-primary app-btn w-100" href="{% url 'learning:homework_detail' lesson.homework.id %}">{% translate "Open related homework" %} <i class="bi bi-arrow-right"></i></a>
-    </article>
-    {% if other_lessons %}<article class="surface-card more-lessons"><p class="eyebrow">{% translate "Up next" %}</p><h2>{% translate "More lessons" %}</h2>{% for item in other_lessons %}<a href="{% url 'learning:lesson_detail' item.id %}"><span class="subject-dot subject-{{ item.subject }}"></span><span><strong>{% translate item.title %}</strong><small>{% translate item.get_subject_display %} · {{ item.duration_minutes }} {% translate "min" %}</small></span><i class="bi bi-chevron-right"></i></a>{% endfor %}</article>{% endif %}
+    </article>{% elif lesson.section %}<article class="surface-card homework-cta lesson-path-cta"><span class="cta-icon"><i class="bi bi-signpost-split"></i></span><p class="eyebrow">{% translate "Course path" %}</p><h2>{% translate "Continue in sequence" %}</h2><p>{% translate "The checkpoint unlocks at the end of this section’s lesson sequence." %}</p><a class="btn btn-outline-primary app-btn w-100" href="{% url 'learning:section_detail' lesson.section.id %}">{% translate "View section plan" %}<i class="bi bi-arrow-right"></i></a></article>{% endif %}
+    {% if other_lessons %}<article class="surface-card more-lessons"><p class="eyebrow">{% translate "This section" %}</p><h2>{% translate "Related lessons" %}</h2>{% for item in other_lessons %}<a href="{% url 'learning:lesson_detail' item.id %}"><span class="subject-dot subject-{{ item.subject }}"></span><span><strong>{% translate item.title %}</strong><small>{{ item.scheduled_date|date:'M j' }} · {{ item.session_minutes }} {% translate "min class" %}</small></span><i class="bi bi-chevron-right"></i></a>{% endfor %}</article>{% endif %}
   </aside>
 </div>
 {% endblock %}

@@ -3,8 +3,9 @@ import json
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import translation
 
-from .models import Answer, AttendanceSession, Homework, Lesson, Student, Submission
+from .models import Answer, AttendanceSession, Course, CourseSection, Homework, Lesson, Student, Submission
 
 
 class DemoFlowTests(TestCase):
@@ -21,12 +22,60 @@ class DemoFlowTests(TestCase):
             "lessons": Lesson.objects.count(),
             "homework": Homework.objects.count(),
             "attendance": AttendanceSession.objects.count(),
+            "courses": Course.objects.count(),
+            "sections": CourseSection.objects.count(),
         }
         call_command("seed_demo", verbosity=0)
         self.assertEqual(before["students"], Student.objects.count())
         self.assertEqual(before["lessons"], Lesson.objects.count())
         self.assertEqual(before["homework"], Homework.objects.count())
         self.assertEqual(before["attendance"], AttendanceSession.objects.count())
+        self.assertEqual(before["courses"], Course.objects.count())
+        self.assertEqual(before["sections"], CourseSection.objects.count())
+
+    def test_course_uses_all_official_domains_in_order(self):
+        course = Course.objects.get(is_active=True)
+        self.assertEqual(course.sections.count(), 8)
+        self.assertEqual(Lesson.objects.filter(section__course=course).count(), 16)
+        self.assertEqual(
+            list(course.sections.values_list("domain", flat=True)),
+            [
+                "Information and Ideas",
+                "Craft and Structure",
+                "Standard English Conventions",
+                "Expression of Ideas",
+                "Algebra",
+                "Advanced Math",
+                "Problem-Solving and Data Analysis",
+                "Geometry and Trigonometry",
+            ],
+        )
+
+    def test_each_section_ends_with_its_checkpoint(self):
+        for section in CourseSection.objects.prefetch_related("lessons"):
+            self.assertEqual(section.lessons.count(), 2)
+            self.assertEqual(section.checkpoint.lesson, section.lessons.order_by("sequence").last())
+            self.assertGreater(section.checkpoint.questions.count(), 0)
+            self.assertGreater(section.checkpoint.deadline.date(), section.end_date)
+
+    def test_calendar_sessions_are_generated_from_course_lessons(self):
+        course = Course.objects.get(is_active=True)
+        lessons = Lesson.objects.filter(section__course=course)
+        self.assertEqual(AttendanceSession.objects.filter(lesson__in=lessons).count(), lessons.count())
+        for session in AttendanceSession.objects.select_related("lesson"):
+            self.assertEqual(session.date, session.lesson.scheduled_date)
+
+    def test_course_section_and_calendar_pages_render(self):
+        self.client.post(reverse("set_language"), {"language": "en", "next": "/learn/"})
+        with translation.override("en"):
+            course_page = self.client.get(reverse("learning:learn"))
+            self.assertContains(course_page, "Digital SAT Mastery")
+            self.assertContains(course_page, "54")
+            section = CourseSection.objects.first()
+            section_page = self.client.get(reverse("learning:section_detail", args=[section.pk]))
+            self.assertContains(section_page, section.title)
+            calendar_page = self.client.get(reverse("learning:attendance"))
+            self.assertContains(calendar_page, "Course calendar")
 
     def test_initial_data_exposes_all_four_computed_states(self):
         states = {homework.status_for(self.student) for homework in Homework.objects.all()}

@@ -41,8 +41,8 @@
   <article class="surface-card progress-card">
     <div class="section-title-row"><div><p class="eyebrow">{% translate "Learning path" %}</p><h2>{% translate "Weekly progress" %}</h2></div><span class="progress-number">{{ learning_progress }}%</span></div>
     <div class="progress app-progress" role="progressbar" aria-label="{% translate 'Weekly learning progress' %}" aria-valuenow="{{ learning_progress }}" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: {{ learning_progress }}%"></div></div>
-    <div class="progress-detail"><span><i class="bi bi-check-circle-fill"></i> {% translate "3 lessons explored" %}</span><span>{% translate "Target" %}: 5</span></div>
-    <p class="progress-note"><i class="bi bi-info-circle"></i> {% translate "Finish two more focused sessions to reach this week’s goal." %}</p>
+    <div class="progress-detail"><span><i class="bi bi-check-circle-fill"></i> {% blocktranslate with explored=lessons_explored total=lesson_count %}{{ explored }} of {{ total }} lessons explored{% endblocktranslate %}</span><span>{% translate "Target" %}: {{ course.target_score }}+</span></div>
+    <p class="progress-note"><i class="bi bi-info-circle"></i> {% translate "Follow the course sequence and complete each domain checkpoint before the full simulation." %}</p>
   </article>
 </section>
 {% endblock %}
