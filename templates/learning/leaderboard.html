@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate "Leaderboard" %} · Cereqo{% endblock %}
+{% block content %}
+<section class="page-heading"><div><p class="eyebrow">{% translate "Class standings" %}</p><h1>{% translate "Leaderboard" %}</h1><p>{% translate "Compare progress while learning at your own pace." %}</p></div><div class="your-rank-callout"><span>{% translate "Your rank" %}</span><strong>#{{ current_student.rank }}</strong><small>{{ current_student.points }} XP</small></div></section>
+
+<section class="podium" aria-label="Top three learners">
+  {% for student in students|slice:':3' %}
+  <article class="podium-place place-{{ forloop.counter }} {% if student.pk == current_student.pk %}is-current{% endif %}">
+    <span class="podium-rank">#{{ forloop.counter }}</span><span class="avatar avatar-lg">{{ student.initials }}</span><strong>{{ student.name }}</strong><span class="badge-chip"><i class="bi bi-patch-check-fill"></i> {% translate student.badge %}</span><b>{{ student.points }} XP</b><small><i class="bi bi-fire"></i> {% blocktranslate with streak=student.streak %}{{ streak }} day streak{% endblocktranslate %}</small>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="surface-card leaderboard-card">
+  <div class="section-title-row"><div><p class="eyebrow">{% translate "This season" %}</p><h2>{% translate "All learners" %}</h2></div><span class="season-note"><i class="bi bi-clock"></i> {% translate "Demo standings" %}</span></div>
+  <div class="leaderboard-list" role="list">
+    {% for student in students %}
+    <article class="leader-row {% if student.pk == current_student.pk %}current-row{% endif %}" role="listitem">
+      <span class="rank-number">#{{ forloop.counter }}</span><span class="avatar">{{ student.initials }}</span><div class="learner-name"><strong>{{ student.name }}{% if student.pk == current_student.pk %}<span>{% translate "You" %}</span>{% endif %}</strong><small class="mobile-only"><i class="bi bi-fire"></i> {% blocktranslate with streak=student.streak %}{{ streak }} days{% endblocktranslate %} · {% translate student.badge %}</small></div><span class="learner-streak"><i class="bi bi-fire"></i> {% blocktranslate with streak=student.streak %}{{ streak }} days{% endblocktranslate %}</span><span class="badge-chip learner-badge"><i class="bi bi-patch-check-fill"></i> {% translate student.badge %}</span><strong class="learner-points">{{ student.points }} <small>XP</small></strong>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+<p class="leaderboard-footnote"><i class="bi bi-info-circle"></i> {% translate "Homework points are added once when an eligible task is submitted." %}</p>
+{% endblock %}

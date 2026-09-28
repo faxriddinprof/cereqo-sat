@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#14213D"/><circle cx="1120" cy="80" r="250" fill="#4F6BFF" opacity=".16"/><circle cx="1090" cy="560" r="180" fill="#35C9A5" opacity=".1"/>
+  <text x="80" y="95" fill="#8FE3CF" font-family="Arial,sans-serif" font-size="27" font-weight="700" letter-spacing="3">CEREQO  •  MATH</text>
+  <text x="80" y="210" fill="white" font-family="Arial,sans-serif" font-size="58" font-weight="700">Linear equations:</text><text x="80" y="278" fill="white" font-family="Arial,sans-serif" font-size="58" font-weight="700">see the structure</text>
+  <rect x="80" y="348" width="620" height="3" rx="2" fill="#4F6BFF"/><text x="80" y="430" fill="#FFC857" font-family="Arial,sans-serif" font-size="41" font-weight="700">Name the unknown first.</text>
+  <text x="80" y="640" fill="#AEBBDA" font-family="Arial,sans-serif" font-size="28">Pause  •  set up  •  solve  •  check</text>
+</svg>

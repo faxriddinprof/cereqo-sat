@@ -1,0 +1,11 @@
+{% load i18n %}
+<div class="dropdown language-menu">
+  <button class="toolbar-button" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% translate 'Change language' %}">
+    <i class="bi bi-translate" aria-hidden="true"></i><span>{{ LANGUAGE_CODE|upper }}</span>
+  </button>
+  <div class="dropdown-menu dropdown-menu-end">
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input name="next" type="hidden" value="{{ request.get_full_path }}"><input name="language" type="hidden" value="uz"><button class="dropdown-item {% if LANGUAGE_CODE == 'uz' %}active{% endif %}" type="submit">O‘zbek</button></form>
+    <form action="{% url 'set_language' %}" method="post">{% csrf_token %}<input name="next" type="hidden" value="{{ request.get_full_path }}"><input name="language" type="hidden" value="en"><button class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}" type="submit">English</button></form>
+  </div>
+</div>
+<button class="toolbar-button" type="button" data-theme-toggle data-light-label="{% translate 'Switch to light mode' %}" data-dark-label="{% translate 'Switch to dark mode' %}" aria-label="{% translate 'Switch color theme' %}"><i class="bi bi-moon-stars" data-theme-icon aria-hidden="true"></i></button>

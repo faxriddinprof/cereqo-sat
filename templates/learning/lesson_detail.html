@@ -1,0 +1,33 @@
+{% extends 'base.html' %}{% load static i18n %}
+{% block title %}{% translate lesson.title %} · Cereqo{% endblock %}
+{% block content %}
+<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:dashboard' %}">{% translate "Home" %}</a><i class="bi bi-chevron-right"></i><span>{% translate "Learn" %}</span></nav>
+<section class="page-heading compact-heading">
+  <div><span class="subject-chip subject-{{ lesson.subject }}">{% translate lesson.get_subject_display %}</span><h1>{% translate lesson.title %}</h1><p>{% translate lesson.topic %}</p></div>
+  <div class="lesson-progress-ring" style="--progress: {{ lesson.progress_percent }}"><span>{{ lesson.progress_percent }}%</span><small>{% translate "viewed" %}</small></div>
+</section>
+
+<div class="lesson-layout">
+  <div class="lesson-main">
+    <article class="video-card">
+      <video controls playsinline preload="metadata" poster="{% static 'cereqo/video/demo-video-poster.jpg' %}" aria-label="{% translate 'Video lesson' %}: {{ lesson.title }}">
+        <source src="{% static lesson.video_file %}" type="video/mp4">
+        {% translate "Your browser does not support HTML video. The written lesson is available below." %}
+      </video>
+      <div class="video-meta"><span><i class="bi bi-clock"></i> {{ lesson.duration_minutes }} {% translate "min lesson outline" %}</span><span><i class="bi bi-play-btn"></i> {% translate "30 sec demo clip" %}</span><a href="https://peach.blender.org/" target="_blank" rel="noreferrer">Big Buck Bunny · Blender Foundation · CC BY 3.0</a></div>
+    </article>
+    <article class="surface-card lesson-notes">
+      <p class="eyebrow">{% translate "Lesson notes" %}</p><h2>{% translate "The key idea" %}</h2><p class="lead-copy">{% translate lesson.material %}</p>
+      <div class="strategy-box"><i class="bi bi-lightbulb-fill"></i><div><strong>{% translate "Test-day move" %}</strong><p>{% translate "Pause before calculating and name what the variable represents. That one habit prevents many setup errors." %}</p></div></div>
+    </article>
+  </div>
+  <aside class="lesson-side">
+    <article class="surface-card homework-cta">
+      <span class="cta-icon"><i class="bi bi-pencil-square"></i></span><p class="eyebrow">{% translate "Practice next" %}</p><h2>{% translate lesson.homework.title %}</h2><p>{% translate lesson.homework.description %}</p>
+      <div class="cta-details"><span><i class="bi bi-list-check"></i> {% blocktranslate with total=lesson.homework.questions.count %}{{ total }} questions{% endblocktranslate %}</span><span><i class="bi bi-calendar2"></i> {% translate "Due" %} {{ lesson.homework.deadline|date:'M j' }}</span></div>
+      <a class="btn btn-primary app-btn w-100" href="{% url 'learning:homework_detail' lesson.homework.id %}">{% translate "Open related homework" %} <i class="bi bi-arrow-right"></i></a>
+    </article>
+    {% if other_lessons %}<article class="surface-card more-lessons"><p class="eyebrow">{% translate "Up next" %}</p><h2>{% translate "More lessons" %}</h2>{% for item in other_lessons %}<a href="{% url 'learning:lesson_detail' item.id %}"><span class="subject-dot subject-{{ item.subject }}"></span><span><strong>{% translate item.title %}</strong><small>{% translate item.get_subject_display %} · {{ item.duration_minutes }} {% translate "min" %}</small></span><i class="bi bi-chevron-right"></i></a>{% endfor %}</article>{% endif %}
+  </aside>
+</div>
+{% endblock %}

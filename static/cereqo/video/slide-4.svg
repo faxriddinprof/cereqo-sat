@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#14213D"/><circle cx="1120" cy="80" r="250" fill="#4F6BFF" opacity=".16"/><circle cx="1100" cy="570" r="190" fill="#35C9A5" opacity=".1"/><text x="80" y="95" fill="#8FE3CF" font-family="Arial,sans-serif" font-size="27" font-weight="700" letter-spacing="3">STEP 3  •  CHECK</text>
+  <text x="80" y="210" fill="white" font-family="Arial,sans-serif" font-size="54" font-weight="700">Substitute your answer.</text>
+  <rect x="80" y="300" width="730" height="125" rx="22" fill="#173B48" stroke="#35C9A5" stroke-width="2"/><text x="125" y="382" fill="#8FE3CF" font-family="Arial,sans-serif" font-size="60" font-weight="700">24 + 18(6) = 132  ✓</text>
+  <text x="80" y="530" fill="#FFC857" font-family="Arial,sans-serif" font-size="35" font-weight="700">The value works in the original equation.</text><text x="80" y="640" fill="#AEBBDA" font-family="Arial,sans-serif" font-size="28">Now open the checkpoint and practice the move.</text>
+</svg>

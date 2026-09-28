@@ -1,0 +1,48 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate "Home" %} · Cereqo{% endblock %}
+{% block content %}
+<section class="page-heading home-heading">
+  <div><p class="eyebrow">{% translate "Today's plan" %}</p><h1>{% translate "Ready for your next step?" %}</h1><p>{% translate "A focused session today keeps your progress moving." %}</p></div>
+  <div class="streak-pill"><i class="bi bi-fire"></i><strong>{{ demo_student.streak }}</strong><span>{% translate "day streak" %}</span></div>
+</section>
+
+{% if today_lesson %}
+<section class="hero-card">
+  <div class="hero-card-copy">
+    <span class="subject-chip subject-{{ today_lesson.subject }}">{% translate "Today" %} · {% translate today_lesson.get_subject_display %}</span>
+    <p class="hero-overline">{% translate today_lesson.topic %}</p>
+    <h2>{% translate today_lesson.title %}</h2>
+    <p>{% translate today_lesson.summary %}</p>
+    <div class="lesson-meta"><span><i class="bi bi-play-circle"></i> {{ today_lesson.duration_minutes }} {% translate "min" %}</span><span><i class="bi bi-lightning-charge"></i> +100 XP</span></div>
+    <a class="btn btn-primary app-btn" href="{% url 'learning:lesson_detail' today_lesson.id %}">{% translate "Continue learning" %} <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <div class="hero-visual" aria-hidden="true"><i class="bi bi-graph-up-arrow"></i><small>{% translate "Skill focus" %}</small><strong>{% translate "Algebra" %}</strong></div>
+</section>
+{% endif %}
+
+<section class="metric-grid" aria-label="Learning overview">
+  <article class="metric-card"><span class="metric-icon mint"><i class="bi bi-check2-square"></i></span><div><span class="metric-label">{% translate "Pending tasks" %}</span><strong>{{ pending_count }}</strong><small>{% if priority %}{% translate "Next" %}: {% translate priority.homework.title as priority_title %}{{ priority_title|truncatechars:25 }}{% else %}{% translate "All caught up" %}{% endif %}</small></div></article>
+  <article class="metric-card"><span class="metric-icon yellow"><i class="bi bi-trophy"></i></span><div><span class="metric-label">{% translate "Your position" %}</span><strong>#{{ rank }}</strong><small>{% blocktranslate with total=student_count %}of {{ total }} learners{% endblocktranslate %}</small></div></article>
+  <article class="metric-card"><span class="metric-icon blue"><i class="bi bi-calendar-event"></i></span><div><span class="metric-label">{% translate "Demo test countdown" %}</span><strong>{% blocktranslate with days=countdown %}{{ days }} days{% endblocktranslate %}</strong><small>{{ exam_date|date:'M j, Y' }} · {% translate "demo date" %}</small></div></article>
+</section>
+
+<section class="dashboard-grid">
+  <article class="surface-card next-task-card">
+    <div class="section-title-row"><div><p class="eyebrow">{% translate "Study queue" %}</p><h2>{% translate "Your next task" %}</h2></div><a href="{% url 'learning:homework_list' %}">{% translate "View all" %}</a></div>
+    {% if priority %}
+    <div class="task-row">
+      <span class="task-subject-icon subject-{{ priority.homework.lesson.subject }}"><i class="bi {% if priority.homework.lesson.subject == 'math' %}bi-calculator{% else %}bi-body-text{% endif %}"></i></span>
+      <div class="task-row-copy"><strong>{% translate priority.homework.title %}</strong><span>{% translate priority.homework.lesson.get_subject_display %} · {% blocktranslate with total=priority.total %}{{ total }} questions{% endblocktranslate %}</span><small>{% translate "Due" %} {{ priority.homework.deadline|date:'D, M j · g:i A' }}</small></div>
+      <span class="status-badge status-{{ priority.status }}">{% if priority.status == 'in_progress' %}{% translate "In progress" %}{% elif priority.status == 'overdue' %}{% translate "Overdue" %}{% else %}{% translate "Not started" %}{% endif %}</span>
+      <a class="btn btn-primary app-btn" href="{% url 'learning:homework_detail' priority.homework.id %}">{% if priority.status == 'in_progress' %}{% translate "Resume" %}{% else %}{% translate "Start" %}{% endif %}</a>
+    </div>
+    {% else %}<div class="empty-state"><i class="bi bi-check-circle"></i><p>{% translate "You’re all caught up." %}</p></div>{% endif %}
+  </article>
+  <article class="surface-card progress-card">
+    <div class="section-title-row"><div><p class="eyebrow">{% translate "Learning path" %}</p><h2>{% translate "Weekly progress" %}</h2></div><span class="progress-number">{{ learning_progress }}%</span></div>
+    <div class="progress app-progress" role="progressbar" aria-label="{% translate 'Weekly learning progress' %}" aria-valuenow="{{ learning_progress }}" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width: {{ learning_progress }}%"></div></div>
+    <div class="progress-detail"><span><i class="bi bi-check-circle-fill"></i> {% translate "3 lessons explored" %}</span><span>{% translate "Target" %}: 5</span></div>
+    <p class="progress-note"><i class="bi bi-info-circle"></i> {% translate "Finish two more focused sessions to reach this week’s goal." %}</p>
+  </article>
+</section>
+{% endblock %}

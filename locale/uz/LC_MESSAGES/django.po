@@ -1,0 +1,755 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cereqo 1.0\n"
+"Language: uz\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "%(answered)s/%(total)s answered"
+msgstr "%(answered)s/%(total)s javob berildi"
+
+msgid "%(days)s days"
+msgstr "%(days)s kun"
+
+msgid "%(streak)s day streak"
+msgstr "%(streak)s kunlik seriya"
+
+msgid "%(streak)s days"
+msgstr "%(streak)s kun"
+
+msgid "%(total)s questions"
+msgstr "%(total)s ta savol"
+
+msgid "24 mpg"
+msgstr "24 mil/gallon"
+
+msgid "25 mpg"
+msgstr "25 mil/gallon"
+
+msgid "26 mpg"
+msgstr "26 mil/gallon"
+
+msgid "28 mpg"
+msgstr "28 mil/gallon"
+
+msgid "3 lessons explored"
+msgstr "3 ta dars ko‘rildi"
+
+msgid "30 sec demo clip"
+msgstr "30 soniyalik demo video"
+
+msgid "<strong data-answered-count>%(answered)s</strong>/%(total)s answered"
+msgstr "<strong data-answered-count>%(answered)s</strong>/%(total)s javob berildi"
+
+msgid "A car travels 156 miles on 6 gallons. What is the unit rate?"
+msgstr "Avtomobil 6 gallon yoqilg‘ida 156 mil yuradi. Bir gallon uchun masofa qancha?"
+
+msgid "A comparison group helps rule out broader factors such as weather."
+msgstr "Taqqoslash guruhi ob-havo kabi umumiy omillarni chiqarib tashlashga yordam beradi."
+
+msgid "A focused session today keeps your progress moving."
+msgstr "Bugungi diqqatli mashg‘ulot natijangizni oldinga siljitadi."
+
+msgid "A gym charges a $24 joining fee plus $18 per month. If Maya paid $132, how many months did she pay for?"
+msgstr "Sport zaliga kirish $24 va har oy $18 turadi. Maya $132 to‘lagan bo‘lsa, necha oy uchun to‘lagan?"
+
+msgid "A line passes through (2, 7) and (6, 19). What is its slope?"
+msgstr "To‘g‘ri chiziq (2, 7) va (6, 19) nuqtalardan o‘tadi. Uning qiyaligi nechaga teng?"
+
+msgid "A recipe uses 2.5 cups of flour for 20 cookies. How many cups are needed for 32 cookies?"
+msgstr "20 ta pechenye uchun 2.5 piyola un kerak. 32 ta uchun necha piyola kerak?"
+
+msgid "A short review of unit rates and equivalent ratios."
+msgstr "Birlik tezligi va teng nisbatlar bo‘yicha qisqa takrorlash."
+
+msgid "A study found that seedlings under blue light grew taller than those under red light. Which claim is best supported?"
+msgstr "Tadqiqotda ko‘k yorug‘likdagi nihollar qizil yorug‘likdagilardan balandroq o‘sdi. Qaysi fikr eng yaxshi qo‘llab-quvvatlanadi?"
+
+msgid "A town added protected bike lanes; bicycle trips rose 18% the next year. Which inference is most reasonable?"
+msgstr "Shaharda himoyalangan veloyo‘laklar qurildi; keyingi yili velosiped safarlari 18% oshdi. Qaysi xulosa eng asosli?"
+
+msgid "Accurate evidence selection across both passages."
+msgstr "Har ikki matnda dalillar aniq tanlangan."
+
+msgid "Advanced math clinic"
+msgstr "Murakkab matematika praktikumi"
+
+msgid "After insulation was installed, a building used 12% less heating energy. Which evidence would most strengthen the claim that insulation caused the decrease?"
+msgstr "Izolyatsiyadan keyin bino isitishga 12% kam energiya sarfladi. Kamayishga izolyatsiya sabab bo‘lganini qaysi dalil kuchaytiradi?"
+
+msgid "Algebra"
+msgstr "Algebra"
+
+msgid "Algebra Ace"
+msgstr "Algebra bilimdoni"
+
+msgid "Algebra · Linear equations"
+msgstr "Algebra · Chiziqli tenglamalar"
+
+msgid "All caught up"
+msgstr "Barchasi bajarilgan"
+
+msgid "All learners"
+msgstr "Barcha o‘quvchilar"
+
+msgid "All seedlings require blue light."
+msgstr "Barcha nihollarga ko‘k yorug‘lik zarur."
+
+msgid "All surveys are inaccurate."
+msgstr "Barcha so‘rovlar noto‘g‘ri."
+
+msgid "Answer all %(total)s questions before submitting."
+msgstr "Topshirishdan oldin barcha %(total)s ta savolga javob bering."
+
+msgid "Answers save automatically"
+msgstr "Javoblar avtomatik saqlanadi"
+
+msgid "Apply today’s equation-building strategy in four focused questions."
+msgstr "Bugungi tenglama tuzish usulini to‘rtta aniq savolda qo‘llang."
+
+msgid "As a result"
+msgstr "Natijada"
+
+msgid "Attendance"
+msgstr "Davomat"
+
+msgid "Attendance calendar"
+msgstr "Davomat taqvimi"
+
+msgid "Attendance tracks live classes only. Homework activity does not change it."
+msgstr "Davomat faqat jonli darslarni hisoblaydi. Uy vazifasi uni o‘zgartirmaydi."
+
+msgid "Attended"
+msgstr "Qatnashgan"
+
+msgid "Back to dashboard"
+msgstr "Bosh sahifaga qaytish"
+
+msgid "Blue light always improves plant health."
+msgstr "Ko‘k yorug‘lik har doim o‘simlik sog‘lig‘ini yaxshilaydi."
+
+msgid "Bring your checkpoint questions."
+msgstr "Nazorat savollaringizni olib keling."
+
+msgid "Car travel ended in the town."
+msgstr "Shaharda avtomobil qatnovi tugadi."
+
+msgid "Cereqo demo"
+msgstr "Cereqo demo"
+
+msgid "Change language"
+msgstr "Tilni o‘zgartirish"
+
+msgid "Choose a marked date to view the session."
+msgstr "Mashg‘ulotni ko‘rish uchun belgilangan sanani tanlang."
+
+msgid "Choose transitions by naming the logical relationship before looking at the options."
+msgstr "Variantlarni ko‘rishdan oldin mantiqiy bog‘lanishni aniqlab, bog‘lovchini tanlang."
+
+msgid "Class standings"
+msgstr "Guruh natijalari"
+
+msgid "Command of evidence in short passages"
+msgstr "Qisqa matnlarda dalillar bilan ishlash"
+
+msgid "Compare progress while learning at your own pace."
+msgstr "O‘z tezligingizda o‘qib, natijalarni taqqoslang."
+
+msgid "Completed"
+msgstr "Bajarilgan"
+
+msgid "Completed the source-matching challenge."
+msgstr "Manbalarni moslash topshirig‘i bajarildi."
+
+msgid "Consequently"
+msgstr "Natijada"
+
+msgid "Consistency King"
+msgstr "Izchillik ustasi"
+
+msgid "Continue learning"
+msgstr "Darsni davom ettirish"
+
+msgid "Core algebra workshop"
+msgstr "Asosiy algebra mashg‘uloti"
+
+msgid "Correlation alone does not establish causation."
+msgstr "Faqat bog‘liqlik sababiyatni isbotlamaydi."
+
+msgid "Cycling increased exactly 18% in every neighborhood."
+msgstr "Har bir mahallada velosiped haydash aynan 18% oshdi."
+
+msgid "Daily readers never watch television."
+msgstr "Har kuni o‘qiydiganlar hech qachon televizor ko‘rmaydi."
+
+msgid "Date"
+msgstr "Sana"
+
+msgid "Demo learner"
+msgstr "Demo o‘quvchi"
+
+msgid "Demo standings"
+msgstr "Demo natijalar"
+
+msgid "Demo test countdown"
+msgstr "Demo testgacha"
+
+msgid "Divide 156 miles by 6 gallons to get 26 miles per gallon."
+msgstr "156 milni 6 gallonga bo‘lsak, bir gallonga 26 mil chiqadi."
+
+msgid "Due"
+msgstr "Muddat"
+
+msgid "Each notebook costs $2.75, and 10 cost $27.50."
+msgstr "Har bir daftar $2.75, o‘ntasi esa $27.50 turadi."
+
+msgid "Every resident now owns a bicycle."
+msgstr "Endi har bir aholida velosiped bor."
+
+msgid "Evidence Expert"
+msgstr "Dalillar eksperti"
+
+msgid "Evidence and inference set"
+msgstr "Dalil va xulosa mashqlari"
+
+msgid "Expand to 3x − 12 = 2x + 7, then subtract 2x and add 12 to get x = 19."
+msgstr "3x − 12 = 2x + 7 ko‘rinishga oching, 2x ni ayirib 12 ni qo‘shing: x = 19."
+
+msgid "Expression of Ideas · Transitions"
+msgstr "Fikr ifodasi · Bog‘lovchilar"
+
+msgid "Finish two more focused sessions to reach this week’s goal."
+msgstr "Haftalik maqsad uchun yana ikki mashg‘ulotni yakunlang."
+
+msgid "Focused practice sets connected to each lesson."
+msgstr "Har bir darsga bog‘langan aniq va qisqa mashqlar."
+
+msgid "For 3(x − 4) = 2x + 7, what is the value of x?"
+msgstr "3(x − 4) = 2x + 7 tenglamada x ning qiymati nechaga teng?"
+
+msgid "For comparison"
+msgstr "Taqqoslash uchun"
+
+msgid "For example"
+msgstr "Masalan"
+
+msgid "For instance"
+msgstr "Masalan"
+
+msgid "Four notebooks cost $11. At the same rate, what do 10 notebooks cost?"
+msgstr "To‘rtta daftar $11 turadi. Shu narxda 10 ta daftar qancha turadi?"
+
+msgid "Fri"
+msgstr "Ju"
+
+msgid "Good start—review and grow."
+msgstr "Yaxshi boshlanish — tahlil qilib, davom eting."
+
+msgid "Home"
+msgstr "Bosh sahifa"
+
+msgid "Homework"
+msgstr "Uy vazifalari"
+
+msgid "Homework points are added once when an eligible task is submitted."
+msgstr "Uy vazifasi ballari topshirilganda faqat bir marta qo‘shiladi."
+
+msgid "However"
+msgstr "Biroq"
+
+msgid "Identify the relationship between ideas before choosing the connector."
+msgstr "Bog‘lovchini tanlashdan oldin fikrlar orasidagi munosabatni aniqlang."
+
+msgid "If 5y + 8 = 3y + 26, what is y?"
+msgstr "5y + 8 = 3y + 26 bo‘lsa, y nechaga teng?"
+
+msgid "In addition"
+msgstr "Bundan tashqari"
+
+msgid "In contrast"
+msgstr "Aksincha"
+
+msgid "In progress"
+msgstr "Jarayonda"
+
+msgid "Information and Ideas · Evidence"
+msgstr "Ma’lumot va g‘oyalar · Dalillar"
+
+msgid "Instead"
+msgstr "Buning o‘rniga"
+
+msgid "Interface adapted from"
+msgstr "Interfeys manbasi"
+
+msgid "Invalid answer."
+msgstr "Javob noto‘g‘ri formatda."
+
+msgid "Keep moving forward, %(name)s."
+msgstr "Oldinga intiling, %(name)s."
+
+msgid "Keep the spark going"
+msgstr "Sur’atni saqlang"
+
+msgid "Leaderboard"
+msgstr "Reyting jadvali"
+
+msgid "Learn"
+msgstr "Darslar"
+
+msgid "Learning path"
+msgstr "O‘quv yo‘li"
+
+msgid "Lesson notes"
+msgstr "Dars qaydlari"
+
+msgid "Light color can affect seedling height."
+msgstr "Yorug‘lik rangi nihol balandligiga ta’sir qilishi mumkin."
+
+msgid "Likewise"
+msgstr "Shuningdek"
+
+msgid "Linear equations checkpoint"
+msgstr "Chiziqli tenglamalar nazorati"
+
+msgid "Linear equations review"
+msgstr "Chiziqli tenglamalarni takrorlash"
+
+msgid "Linear equations: see the structure"
+msgstr "Chiziqli tenglamalar: tuzilmani ko‘ring"
+
+msgid "Live guided practice and Q&A."
+msgstr "Jonli yo‘naltirilgan mashq va savol-javob."
+
+msgid "Live sessions"
+msgstr "Jonli mashg‘ulotlar"
+
+msgid "Many desert plants store water in thick stems. ___, the saguaro expands after rainfall."
+msgstr "Ko‘plab cho‘l o‘simliklari suvni qalin poyasida saqlaydi. ___, saguaro yomg‘irdan keyin kengayadi."
+
+msgid "Match claims to evidence by testing exactly what each choice proves."
+msgstr "Har bir variant nimani isbotlashini tekshirib, fikrni dalil bilan moslang."
+
+msgid "Math"
+msgstr "Matematika"
+
+msgid "Meanwhile"
+msgstr "Shu orada"
+
+msgid "Missed"
+msgstr "Qoldirilgan"
+
+msgid "Momentum Maker"
+msgstr "Barqaror rivoj"
+
+msgid "Mon"
+msgstr "Du"
+
+msgid "More lessons"
+msgstr "Boshqa darslar"
+
+msgid "Name the unknown first. Translate one relationship at a time, then simplify both sides before isolating the variable. On the digital SAT, a quick substitution check often catches sign errors faster than reworking the algebra."
+msgstr "Avval noma’lumni belgilang. Har bir bog‘lanishni alohida tenglamaga o‘tkazing, so‘ng o‘zgaruvchini ajratishdan oldin ikki tomonni soddalashtiring. Raqamli SAT’da o‘rniga qo‘yib tekshirish ishora xatolarini tez topadi."
+
+msgid "Nevertheless"
+msgstr "Shunga qaramay"
+
+msgid "Next"
+msgstr "Keyingi"
+
+msgid "Next month"
+msgstr "Keyingi oy"
+
+msgid "No homework yet"
+msgstr "Hozircha uy vazifasi yo‘q"
+
+msgid "No lessons yet"
+msgstr "Hozircha darslar yo‘q"
+
+msgid "No session selected"
+msgstr "Mashg‘ulot tanlanmagan"
+
+msgid "Not started"
+msgstr "Boshlanmagan"
+
+msgid "Open related homework"
+msgstr "Bog‘liq vazifani ochish"
+
+msgid "Original practice content"
+msgstr "Original mashq materiallari"
+
+msgid "Otherwise"
+msgstr "Aks holda"
+
+msgid "Overdue"
+msgstr "Muddati o‘tgan"
+
+msgid "Past due · You can still submit"
+msgstr "Muddat o‘tgan · Hali ham topshirish mumkin"
+
+msgid "Pause before calculating and name what the variable represents. That one habit prevents many setup errors."
+msgstr "Hisoblashdan oldin o‘zgaruvchi nimani anglatishini aniqlang. Bu odat ko‘plab tuzish xatolarini oldini oladi."
+
+msgid "Pending tasks"
+msgstr "Kutilayotgan vazifalar"
+
+msgid "Practice next"
+msgstr "Keyingi mashq"
+
+msgid "Practice queue"
+msgstr "Mashqlar navbati"
+
+msgid "Practice selecting evidence that directly supports a claim."
+msgstr "Fikrni bevosita qo‘llab-quvvatlovchi dalilni tanlashni mashq qiling."
+
+msgid "Previous month"
+msgstr "Oldingi oy"
+
+msgid "Previously"
+msgstr "Avval"
+
+msgid "Problem-Solving and Data Analysis"
+msgstr "Masala yechish va ma’lumotlar tahlili"
+
+msgid "Progress saved. You can safely come back later."
+msgstr "Jarayon saqlandi. Keyinroq davom ettirishingiz mumkin."
+
+msgid "Question %(current)s of %(total)s"
+msgstr "%(total)s savoldan %(current)s-savol"
+
+msgid "Quick Starter"
+msgstr "Tezkor boshlovchi"
+
+msgid "Rank"
+msgstr "Reyting"
+
+msgid "Rates and ratios review"
+msgstr "Tezlik va nisbatlar takrori"
+
+msgid "Ratios, rates, and proportional reasoning"
+msgstr "Nisbatlar, tezliklar va proporsiyalar"
+
+msgid "Read the sentences without the blank and describe their relationship in plain language: contrast, cause, example, continuation, or conclusion. Only then choose the transition that expresses that relationship with the correct punctuation."
+msgstr "Gaplarni bo‘sh joysiz o‘qing va ularning bog‘lanishini aniqlang: qarama-qarshilik, sabab, misol, davom yoki xulosa. Shundan keyin mos tinish belgili bog‘lovchini tanlang."
+
+msgid "Reading & Writing"
+msgstr "O‘qish va yozish"
+
+msgid "Reading inference studio"
+msgstr "Matndan xulosa chiqarish mashg‘uloti"
+
+msgid "Ready for your next step?"
+msgstr "Keyingi qadamga tayyormisiz?"
+
+msgid "Ready to finish?"
+msgstr "Yakunlashga tayyormisiz?"
+
+msgid "Ready when you are"
+msgstr "Boshlashga tayyor"
+
+msgid "Recalibration is a consequence of the inconsistent readings."
+msgstr "Qayta sozlash bir xil bo‘lmagan ko‘rsatkichlarning oqibatidir."
+
+msgid "Red light prevents photosynthesis."
+msgstr "Qizil yorug‘lik fotosintezni to‘xtatadi."
+
+msgid "Restate the claim in precise terms. For each option, ask whether the evidence directly supports every important part of that claim—not merely the passage’s general topic."
+msgstr "Fikrni aniq so‘zlar bilan qayta ayting. Har bir variantda dalil matnning umumiy mavzusini emas, fikrning barcha muhim qismlarini bevosita qo‘llashini tekshiring."
+
+msgid "Result"
+msgstr "Natija"
+
+msgid "Resume"
+msgstr "Davom ettirish"
+
+msgid "Review completed classes and upcoming sessions."
+msgstr "O‘tilgan va kelgusi mashg‘ulotlarni ko‘ring."
+
+msgid "Review result"
+msgstr "Natijani ko‘rish"
+
+msgid "Review your answers before submitting. This attempt is final."
+msgstr "Topshirishdan oldin javoblarni tekshiring. Urinish yakuniy hisoblanadi."
+
+msgid "Revisit lesson"
+msgstr "Darsga qaytish"
+
+msgid "Rhetorical synthesis lab"
+msgstr "Ritorik sintez laboratoriyasi"
+
+msgid "Run the demo seed command to add the learning path."
+msgstr "Darslarni qo‘shish uchun demo ma’lumotlarini yuklang."
+
+msgid "SAT preparation"
+msgstr "SAT tayyorgarligi"
+
+msgid "Sat"
+msgstr "Sha"
+
+msgid "Save & exit"
+msgstr "Saqlash va chiqish"
+
+msgid "Save failed — use Save & exit"
+msgstr "Saqlanmadi — «Saqlash va chiqish»ni bosing"
+
+msgid "Saved at"
+msgstr "Saqlangan vaqt:"
+
+msgid "Saving…"
+msgstr "Saqlanmoqda…"
+
+msgid "Scale by 32/20 = 1.6; 2.5 × 1.6 = 4 cups."
+msgstr "32/20 = 1.6 marta oshiramiz; 2.5 × 1.6 = 4 piyola."
+
+msgid "Scheduled"
+msgstr "Rejalashtirilgan"
+
+msgid "Score"
+msgstr "Natija"
+
+msgid "See updated rank"
+msgstr "Yangilangan reytingni ko‘rish"
+
+msgid "Session details"
+msgstr "Mashg‘ulot tafsilotlari"
+
+msgid "Session recording and recap are available."
+msgstr "Mashg‘ulot yozuvi va qisqa xulosasi mavjud."
+
+msgid "Similar nearby buildings without new insulation showed no decrease."
+msgstr "Yangi izolyatsiyasiz yaqin binolarda kamayish kuzatilmagan."
+
+msgid "Similarly"
+msgstr "Xuddi shunday"
+
+msgid "Skill focus"
+msgstr "Asosiy ko‘nikma"
+
+msgid "Skip to content"
+msgstr "Asosiy kontentga o‘tish"
+
+msgid "Slope is the change in y divided by the change in x: (19 − 7)/(6 − 2) = 12/4 = 3."
+msgstr "Qiyalik y o‘zgarishini x o‘zgarishiga bo‘lish orqali topiladi: (19 − 7)/(6 − 2) = 12/4 = 3."
+
+msgid "Start"
+msgstr "Boshlash"
+
+msgid "Start task"
+msgstr "Vazifani boshlash"
+
+msgid "Strong work translating constraints into equations."
+msgstr "Shartlarni tenglamaga o‘tkazish bo‘yicha yaxshi natija."
+
+msgid "Strong work—checkpoint cleared!"
+msgstr "Ajoyib — nazorat bosqichi yakunlandi!"
+
+msgid "Study queue"
+msgstr "O‘quv navbati"
+
+msgid "Submit homework"
+msgstr "Vazifani topshirish"
+
+msgid "Submitted"
+msgstr "Topshirildi"
+
+msgid "Submitted late"
+msgstr "Kech topshirildi"
+
+msgid "Submitted! You earned %(points)s points."
+msgstr "Topshirildi! Siz %(points)s ball oldingiz."
+
+msgid "Subtract 3y and 8 from both sides: 2y = 18, so y = 9."
+msgstr "Ikki tomondan 3y va 8 ni ayiring: 2y = 18, demak y = 9."
+
+msgid "Sun"
+msgstr "Ya"
+
+msgid "Survey respondents who read daily reported higher vocabulary scores. What limitation matters most?"
+msgstr "Har kuni o‘qiydigan so‘rov qatnashchilari yuqori lug‘at natijalarini ko‘rsatdi. Eng muhim cheklov qaysi?"
+
+msgid "Switch color theme"
+msgstr "Rang rejimini o‘zgartirish"
+
+msgid "Switch to dark mode"
+msgstr "Tungi rejimga o‘tish"
+
+msgid "Switch to light mode"
+msgstr "Yorug‘ rejimga o‘tish"
+
+msgid "Target"
+msgstr "Maqsad"
+
+msgid "Tasks"
+msgstr "Vazifalar"
+
+msgid "Test-day move"
+msgstr "Test kunidagi usul"
+
+msgid "That winter was warmer than average."
+msgstr "O‘sha qish odatdagidan iliqroq bo‘lgan."
+
+msgid "The archive digitized its rare maps. ___, researchers worldwide can now study them."
+msgstr "Arxiv noyob xaritalarini raqamlashtirdi. ___, endi butun dunyodagi tadqiqotchilar ularni o‘rgana oladi."
+
+msgid "The building is 20 years old."
+msgstr "Bino 20 yoshda."
+
+msgid "The data supports an effect on height, not broader claims about health or necessity."
+msgstr "Ma’lumot balandlikka ta’sirni ko‘rsatadi, sog‘liq yoki zarurat haqidagi kengroq fikrlarni emas."
+
+msgid "The first trial produced inconsistent readings. ___, the team recalibrated the sensor before continuing."
+msgstr "Birinchi sinovda ko‘rsatkichlar bir xil chiqmadi. ___, jamoa davom etishdan oldin sensorni qayta sozladi."
+
+msgid "The insulation was blue."
+msgstr "Izolyatsiya ko‘k rangda bo‘lgan."
+
+msgid "The key idea"
+msgstr "Asosiy g‘oya"
+
+msgid "The lanes may have encouraged more cycling."
+msgstr "Yo‘laklar ko‘proq velosiped haydashga undagan bo‘lishi mumkin."
+
+msgid "The ratio of red to blue tiles is 3:5. If there are 30 blue tiles, how many are red?"
+msgstr "Qizil va ko‘k plitkalar nisbati 3:5. Ko‘k plitkalar 30 ta bo‘lsa, qizillari nechta?"
+
+msgid "The saguaro is a specific example of the general statement."
+msgstr "Saguaro umumiy fikrning aniq misolidir."
+
+msgid "The scale factor is 30 ÷ 5 = 6, so there are 3 × 6 = 18 red tiles."
+msgstr "Masshtab koeffitsiyenti 30 ÷ 5 = 6, demak 3 × 6 = 18 ta qizil plitka bor."
+
+msgid "The second sentence contrasts with the expectation created by the first, so ‘However’ fits."
+msgstr "Ikkinchi gap birinchi gap yaratgan kutilmaga qarama-qarshi, shuning uchun «Biroq» mos keladi."
+
+msgid "The survey cannot by itself prove that reading caused the scores."
+msgstr "So‘rovning o‘zi o‘qish natijaga sabab bo‘lganini isbotlay olmaydi."
+
+msgid "The timing supports a cautious connection, while the other choices overstate the evidence."
+msgstr "Vaqt ketma-ketligi ehtiyotkor bog‘lanishni qo‘llaydi, qolgan variantlar dalilni bo‘rttiradi."
+
+msgid "The trail looked short on the map. ___, its steep switchbacks made the hike demanding."
+msgstr "Xaritada so‘qmoq qisqa ko‘rindi. ___, uning tik burilishlari yurishni qiyinlashtirdi."
+
+msgid "Therefore"
+msgstr "Shuning uchun"
+
+msgid "This homework is already submitted."
+msgstr "Bu uy vazifasi allaqachon topshirilgan."
+
+msgid "This season"
+msgstr "Joriy davr"
+
+msgid "Thu"
+msgstr "Pa"
+
+msgid "Time"
+msgstr "Vaqt"
+
+msgid "Today"
+msgstr "Bugun"
+
+msgid "Today's plan"
+msgstr "Bugungi reja"
+
+msgid "Transition logic practice"
+msgstr "Bog‘lovchilar mantig‘i mashqi"
+
+msgid "Transitions and cohesion"
+msgstr "Bog‘lovchilar va matn yaxlitligi"
+
+msgid "Transitions that reveal logic"
+msgstr "Mantiqni ko‘rsatuvchi bog‘lovchilar"
+
+msgid "Tue"
+msgstr "Se"
+
+msgid "Turn word problems into equations, isolate the variable, and check the result efficiently."
+msgstr "Matnli masalani tenglamaga aylantiring, o‘zgaruvchini ajrating va natijani tez tekshiring."
+
+msgid "Up next"
+msgstr "Keyingi darslar"
+
+msgid "Up to %(points)s XP"
+msgstr "%(points)s XP gacha"
+
+msgid "Use units to organize multistep rate and proportion questions."
+msgstr "Ko‘p bosqichli nisbat masalalarini birliklar yordamida tartibga soling."
+
+msgid "Video lesson"
+msgstr "Video dars"
+
+msgid "View all"
+msgstr "Barchasini ko‘rish"
+
+msgid "Vocabulary cannot be measured."
+msgstr "Lug‘at boyligini o‘lchab bo‘lmaydi."
+
+msgid "Wed"
+msgstr "Cho"
+
+msgid "Weekly learning progress"
+msgstr "Haftalik o‘quv natijasi"
+
+msgid "Weekly progress"
+msgstr "Haftalik natija"
+
+msgid "Why"
+msgstr "Izoh"
+
+msgid "Word Wizard"
+msgstr "So‘z ustasi"
+
+msgid "Worldwide access is a result of digitization."
+msgstr "Butun dunyo bo‘ylab foydalanish raqamlashtirishning natijasidir."
+
+msgid "Write 24 + 18m = 132. Then 18m = 108, so m = 6."
+msgstr "24 + 18m = 132 deb yozamiz. 18m = 108, demak m = 6."
+
+msgid "Write units beside every quantity. Set up equivalent ratios in the same order, then estimate before calculating so an inverted ratio is easy to spot."
+msgstr "Har bir miqdor yoniga birlikni yozing. Teng nisbatlarni bir xil tartibda tuzing va teskari nisbatni tez sezish uchun hisoblashdan oldin taxmin qiling."
+
+msgid "You"
+msgstr "Siz"
+
+msgid "Your browser does not support HTML video. The written lesson is available below."
+msgstr "Brauzeringiz videoni qo‘llamaydi. Dars matni quyida mavjud."
+
+msgid "Your next practice set will appear here."
+msgstr "Keyingi mashqlar shu yerda ko‘rinadi."
+
+msgid "Your next task"
+msgstr "Keyingi vazifangiz"
+
+msgid "Your position"
+msgstr "Sizning o‘rningiz"
+
+msgid "Your rank"
+msgstr "Sizning o‘rningiz"
+
+msgid "Your study space"
+msgstr "O‘quv maydoningiz"
+
+msgid "You’re all caught up."
+msgstr "Barcha vazifalar bajarilgan."
+
+msgid "day streak"
+msgstr "kunlik seriya"
+
+msgid "demo date"
+msgstr "demo sana"
+
+msgid "learner"
+msgstr "o‘quvchi"
+
+msgid "min"
+msgstr "daq"
+
+msgid "min lesson outline"
+msgstr "daqiqalik dars rejasi"
+
+msgid "of %(total)s learners"
+msgstr "%(total)s o‘quvchi ichida"
+
+msgid "viewed"
+msgstr "ko‘rildi"
+

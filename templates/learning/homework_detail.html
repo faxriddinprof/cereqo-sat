@@ -1,0 +1,34 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate homework.title %} · Cereqo{% endblock %}
+{% block content %}
+<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:homework_list' %}">{% translate "Tasks" %}</a><i class="bi bi-chevron-right"></i><span>{% translate homework.title %}</span></nav>
+<section class="assignment-header">
+  <div><span class="subject-chip subject-{{ homework.lesson.subject }}">{% translate homework.lesson.get_subject_display %}</span><h1>{% translate homework.title %}</h1><p>{% translate homework.description %}</p><div class="task-facts"><span><i class="bi bi-calendar2"></i> {% translate "Due" %} {{ homework.deadline|date:'M j · g:i A' }}</span><span><i class="bi bi-stars"></i> {% blocktranslate with points=homework.max_points %}Up to {{ points }} XP{% endblocktranslate %}</span></div></div>
+  {% if submission.submitted_at %}<div class="result-badge"><span>{% translate "Result" %}</span><strong>{{ submission.score }}%</strong><small>+{{ submission.points_awarded }} XP</small></div>{% else %}<div class="assignment-progress"><span>{% blocktranslate with answered=answered_count total=total_questions %}<strong data-answered-count>{{ answered }}</strong>/{{ total }} answered{% endblocktranslate %}</span><div class="progress app-progress"><div class="progress-bar" data-progress-bar style="width:{{ progress }}%"></div></div><small data-save-status>{% translate "Answers save automatically" %}</small></div>{% endif %}
+</section>
+
+{% if submission.submitted_at %}
+<section class="result-summary {% if submission.score >= 75 %}result-good{% else %}result-practice{% endif %}"><i class="bi {% if submission.score >= 75 %}bi-stars{% else %}bi-arrow-repeat{% endif %}"></i><div><h2>{% if submission.score >= 75 %}{% translate "Strong work—checkpoint cleared!" %}{% else %}{% translate "Good start—review and grow." %}{% endif %}</h2><p>{% translate "Submitted" %} {{ submission.submitted_at|date:'M j, Y · g:i A' }}{% if submission.is_late %} · <strong>{% translate "Submitted late" %}</strong>{% endif %}</p></div><a href="{% url 'learning:leaderboard' %}">{% translate "See updated rank" %} <i class="bi bi-arrow-right"></i></a></section>
+{% endif %}
+
+<form method="post" class="question-form" data-homework-form data-autosave-url="{% url 'learning:autosave_answer' homework.id %}" data-saving-label="{% translate 'Saving…' %}" data-saved-label="{% translate 'Saved at' %}" data-failed-label="{% translate 'Save failed — use Save & exit' %}">
+  {% csrf_token %}
+  {% for row in question_rows %}
+  <article class="question-card">
+    <div class="question-legend" id="question-label-{{ row.question.id }}"><span>{% blocktranslate with current=forloop.counter total=total_questions %}Question {{ current }} of {{ total }}{% endblocktranslate %}</span>{% translate row.question.prompt %}</div>
+    <div class="answer-options" role="radiogroup" aria-labelledby="question-label-{{ row.question.id }}">
+      {% for key, text in row.question.options %}
+      <label class="answer-option {% if row.answer.selected_option == key %}selected{% endif %} {% if submission.submitted_at and key == row.question.correct_option %}correct{% elif submission.submitted_at and row.answer.selected_option == key and key != row.question.correct_option %}incorrect{% endif %}">
+        <input type="radio" name="question_{{ row.question.id }}" value="{{ key }}" data-question-id="{{ row.question.id }}" {% if row.answer.selected_option == key %}checked{% endif %} {% if submission.submitted_at %}disabled{% endif %}>
+        <span class="option-key">{{ key }}</span><span class="option-text">{% translate text %}</span>{% if submission.submitted_at and key == row.question.correct_option %}<i class="bi bi-check-circle-fill"></i>{% elif submission.submitted_at and row.answer.selected_option == key and key != row.question.correct_option %}<i class="bi bi-x-circle-fill"></i>{% endif %}
+      </label>
+      {% endfor %}
+    </div>
+    {% if submission.submitted_at %}<div class="explanation"><i class="bi bi-lightbulb"></i><div><strong>{% translate "Why" %}</strong><p>{% translate row.question.explanation %}</p></div></div>{% endif %}
+  </article>
+  {% endfor %}
+  {% if not submission.submitted_at %}
+  <div class="submission-bar"><div><strong>{% translate "Ready to finish?" %}</strong><span>{% translate "Review your answers before submitting. This attempt is final." %}</span></div><div><button class="btn btn-outline-primary app-btn" type="submit" name="action" value="save"><i class="bi bi-cloud-check"></i> {% translate "Save & exit" %}</button><button class="btn btn-primary app-btn" type="submit" name="action" value="submit">{% translate "Submit homework" %} <i class="bi bi-arrow-right"></i></button></div></div>
+  {% else %}<div class="completion-actions"><a class="btn btn-outline-primary app-btn" href="{% url 'learning:lesson_detail' homework.lesson.id %}"><i class="bi bi-play-circle"></i> {% translate "Revisit lesson" %}</a><a class="btn btn-primary app-btn" href="{% url 'learning:dashboard' %}">{% translate "Back to dashboard" %}</a></div>{% endif %}
+</form>
+{% endblock %}

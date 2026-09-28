@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#14213D"/><circle cx="1120" cy="80" r="250" fill="#4F6BFF" opacity=".16"/><text x="80" y="95" fill="#8FE3CF" font-family="Arial,sans-serif" font-size="27" font-weight="700" letter-spacing="3">STEP 1  •  TRANSLATE</text>
+  <text x="80" y="205" fill="white" font-family="Arial,sans-serif" font-size="43">A gym costs $24 to join</text><text x="80" y="265" fill="white" font-family="Arial,sans-serif" font-size="43">plus $18 each month.</text>
+  <rect x="80" y="332" width="820" height="120" rx="22" fill="#20345F" stroke="#4F6BFF" stroke-width="2"/><text x="125" y="410" fill="#8FE3CF" font-family="Arial,sans-serif" font-size="49" font-weight="700">Total $132  →  24 + 18m = 132</text>
+  <text x="80" y="555" fill="#C9D4EB" font-family="Arial,sans-serif" font-size="31">m represents the number of months.</text><text x="80" y="640" fill="#AEBBDA" font-family="Arial,sans-serif" font-size="28">Pause  •  set up  •  solve  •  check</text>
+</svg>
