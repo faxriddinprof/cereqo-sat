@@ -1,11 +1,6 @@
 {% extends 'base.html' %}{% load static i18n %}
 {% block title %}{% translate "Courses" %} · Cereqo{% endblock %}
 {% block content %}
-<section class="courses-heading">
-  <div><p class="eyebrow">{% translate "SAT learning paths" %}</p><h1>{% translate "Choose the course that matches your goal" %}</h1><p>{% translate "Every course follows the same clear system: sections, ordered lessons, a final test, and measurable results." %}</p></div>
-  <div class="courses-blueprint"><span><strong>2</strong>{% translate "exam sections" %}</span><i></i><span><strong>8</strong>{% translate "official domains" %}</span><i></i><span><strong>1600</strong>{% translate "total score" %}</span></div>
-</section>
-
 {% if user.is_authenticated %}
 <section class="course-list-section my-courses-section" aria-labelledby="my-courses-title">
   <div class="course-list-heading"><p class="eyebrow">{% translate "Continue learning" %}</p><h2 id="my-courses-title">{% translate "My courses" %}</h2></div>

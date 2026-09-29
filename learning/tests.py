@@ -88,6 +88,18 @@ class DemoFlowTests(TestCase):
         self.assertNotContains(page, "1400+")
         self.assertNotContains(page, "course-system-note")
 
+    def test_homepage_rotates_courses_without_duplicate_course_section(self):
+        page = self.client.get(reverse("learning:dashboard"))
+        self.assertContains(page, 'id="courseHero"')
+        self.assertContains(page, 'class="carousel-item', count=3)
+        self.assertContains(page, 'class="course-hero-media"', count=3)
+        self.assertNotContains(page, "hero-score-card")
+        self.assertNotContains(page, "minimal-courses")
+        self.assertNotContains(page, "minimal-trust")
+        self.assertContains(page, 'class="landing-section platform-showcase"')
+        self.assertContains(page, 'class="mentor-showcase-card', count=3)
+        self.assertContains(page, 'class="homepage-final-cta"')
+
     def test_each_section_ends_with_its_checkpoint(self):
         for section in CourseSection.objects.prefetch_related("lessons"):
             self.assertEqual(section.lessons.count(), 2)
@@ -108,7 +120,8 @@ class DemoFlowTests(TestCase):
             course_page = self.client.get(reverse("learning:learn"))
             self.assertContains(course_page, "Digital SAT Mastery")
             self.assertContains(course_page, "SAT Math Accelerator")
-            self.assertContains(course_page, "1600")
+            self.assertNotContains(course_page, "courses-heading")
+            self.assertNotContains(course_page, "courses-blueprint")
             course = Course.objects.get(is_active=True)
             course_detail = self.client.get(reverse("learning:course_detail", args=[course.pk]))
             self.assertContains(course_detail, "54")
@@ -188,12 +201,12 @@ class DemoFlowTests(TestCase):
         response = self.client.post(reverse("set_language"), {"language": "uz", "next": "/"})
         self.assertRedirects(response, "/")
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "SAT maqsadingizga aniq yo‘l.")
+        self.assertContains(dashboard, "Digital SAT Mastery · 8 haftalik yo‘l")
         self.assertContains(dashboard, ">UZ<")
 
         self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "A clear path to your SAT goal.")
+        self.assertContains(dashboard, "Digital SAT Mastery · 8-Week Path")
 
     def test_guest_can_only_open_home_courses_and_login(self):
         self.client.logout()

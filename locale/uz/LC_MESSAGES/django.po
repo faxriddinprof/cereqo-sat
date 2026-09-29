@@ -57,6 +57,9 @@ msgstr "3 ta dars ko‘rildi"
 msgid "30 sec demo clip"
 msgstr "30 soniyalik demo video"
 
+msgid "75 min guided session"
+msgstr "75 daqiqalik yo‘naltirilgan dars"
+
 msgid "<strong data-answered-count>%(answered)s</strong>/%(total)s answered"
 msgstr "<strong data-answered-count>%(answered)s</strong>/%(total)s javob berildi"
 
@@ -66,6 +69,9 @@ msgstr "75 daqiqalik o‘zlashtirish tartibi"
 msgid "A car travels 156 miles on 6 gallons. What is the unit rate?"
 msgstr "Avtomobil 6 gallon yoqilg‘ida 156 mil yuradi. Bir gallon uchun masofa qancha?"
 
+msgid "A checkpoint for every section"
+msgstr "Har bir bo‘lim uchun nazorat"
+
 msgid "A clear path to your SAT goal."
 msgstr "SAT maqsadingizga aniq yo‘l."
 
@@ -74,6 +80,9 @@ msgstr "Taqqoslash guruhi ob-havo kabi umumiy omillarni chiqarib tashlashga yord
 
 msgid "A complete Digital SAT learning ecosystem"
 msgstr "Mukammal Digital SAT ta’lim ekotizimi"
+
+msgid "A course map you can follow"
+msgstr "Tushunarli kurs xaritasi"
 
 msgid "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints."
 msgstr "Rasmiy raqamli SAT tuzilmasi, vaqtli mashqlar, tahlil va bo‘lim nazoratlari asosidagi yo‘nalishma-yo‘nalish o‘quv yo‘li."
@@ -129,6 +138,9 @@ msgstr "Har bir ball uchun aniq reja"
 msgid "A recipe uses 2.5 cups of flour for 20 cookies. How many cups are needed for 32 cookies?"
 msgstr "20 ta pechenye uchun 2.5 piyola un kerak. 32 ta uchun necha piyola kerak?"
 
+msgid "A schedule with real context"
+msgstr "Mazmunli o‘quv jadvali"
+
 msgid "A section-ending grammar set covering boundaries, form, structure, and sense."
 msgstr "Gap chegaralari, shakl, tuzilma va mazmunni qamrab oluvchi bo‘lim yakuniy grammatika to‘plami."
 
@@ -176,6 +188,9 @@ msgstr "Murakkab matematika intensiv kursi"
 
 msgid "Advanced Math · Core skill"
 msgstr "Murakkab matematika · Asosiy ko‘nikma"
+
+msgid "Advanced Math · Lesson 02"
+msgstr "Murakkab matematika · 02-dars"
 
 msgid "Advanced Math · Strategy lab"
 msgstr "Murakkab matematika · Strategiya laboratoriyasi"
@@ -318,6 +333,9 @@ msgstr "Masala yechish va ma’lumotlar tahlili bo‘yicha tayanch ko‘nikmalar
 msgid "Build the core Standard English Conventions skills, then prove mastery in a timed checkpoint."
 msgstr "Ingliz tili me’yorlari bo‘yicha tayanch ko‘nikmalarni yarating, so‘ng vaqtli nazoratda tasdiqlang."
 
+msgid "Built for your SAT routine"
+msgstr "SAT tartibingiz uchun yaratilgan"
+
 msgid "Car travel ended in the town."
 msgstr "Shaharda avtomobil qatnovi tugadi."
 
@@ -333,6 +351,12 @@ msgstr "Cereqo diagnostika, mentor darslari, bo‘lim testlari, aqlli jadval va 
 msgid "Cereqo demo"
 msgstr "Cereqo demo"
 
+msgid "Cereqo mentor explaining a lesson"
+msgstr "Darsni tushuntirayotgan Cereqo mentori"
+
+msgid "Cereqo mentors"
+msgstr "Cereqo mentorlari"
+
 msgid "Cereqo turns every completed lesson and section test into a visible next step across the course, calendar, profile, and ranking."
 msgstr "Cereqo har bir yakunlangan dars va bo‘lim testini kurs, kalendar, profil va reytingdagi aniq keyingi qadamga aylantiradi."
 
@@ -341,6 +365,9 @@ msgstr "Cereqo — SAT muvaffaqiyati sari yo‘lingiz"
 
 msgid "Change language"
 msgstr "Tilni o‘zgartirish"
+
+msgid "Choose a clear path now. Cereqo will keep the lessons, tests, and schedule connected from there."
+msgstr "Hozir aniq yo‘nalishni tanlang. Keyingi darslar, testlar va jadvalni Cereqo bir tizimda olib boradi."
 
 msgid "Choose a course built around your SAT goal."
 msgstr "SAT maqsadingizga mos kursni tanlang."
@@ -531,11 +558,17 @@ msgstr "Demo testgacha"
 msgid "Demo username"
 msgstr "Demo login"
 
+msgid "Different strengths. One teaching standard."
+msgstr "Turli kuchli yo‘nalishlar. Yagona ta’lim standarti."
+
 msgid "Digital SAT Mastery · 8-Week Path"
 msgstr "Digital SAT Mastery · 8 haftalik yo‘l"
 
 msgid "Digital SAT blueprint"
 msgstr "Raqamli SAT tuzilmasi"
+
+msgid "Digital SAT course"
+msgstr "Digital SAT kursi"
 
 msgid "Digital SAT learning platform"
 msgstr "Digital SAT ta’lim platformasi"
@@ -554,6 +587,9 @@ msgstr "Muddat"
 
 msgid "Each course follows the same transparent structure and opens a detailed section sidebar when you enter it."
 msgstr "Har bir kurs tushunarli tuzilishga ega va unga kirganda bo‘limlar ko‘rsatilgan batafsil yon panel ochiladi."
+
+msgid "Each course is led by a mentor who makes that SAT area clear, practical, and measurable."
+msgstr "Har bir kursni o‘sha SAT yo‘nalishini tushunarli, amaliy va o‘lchab bo‘ladigan qiladigan mentor olib boradi."
 
 msgid "Each lesson turns one SAT skill into a repeatable test-day decision."
 msgstr "Har dars bitta SAT ko‘nikmasini test kunida takrorlanadigan qarorga aylantiradi."
@@ -597,6 +633,9 @@ msgstr "Endi har bir aholida velosiped bor."
 msgid "Every step has a purpose"
 msgstr "Har bir qadamning maqsadi bor"
 
+msgid "Everything you need for the next study day."
+msgstr "Keyingi o‘quv kuningiz uchun hamma narsa."
+
 msgid "Evidence & rhetoric"
 msgstr "Dalillar va ritorika"
 
@@ -611,6 +650,9 @@ msgstr "Imtihon tuzilmasi"
 
 msgid "Expand to 3x − 12 = 2x + 7, then subtract 2x and add 12 to get x = 19."
 msgstr "3x − 12 = 2x + 7 ko‘rinishga oching, 2x ni ayirib 12 ni qo‘shing: x = 19."
+
+msgid "Explore all courses"
+msgstr "Barcha kurslarni ko‘rish"
 
 msgid "Explore course"
 msgstr "Kursni ko‘rib chiqish"
@@ -645,11 +687,17 @@ msgstr "Fikr ifodasi · Vaqtli mashq"
 msgid "Expression of Ideas · Transitions"
 msgstr "Fikr ifodasi · Bog‘lovchilar"
 
+msgid "Featured SAT courses"
+msgstr "Tanlangan SAT kurslari"
+
 msgid "Final task"
 msgstr "Yakuniy vazifa"
 
 msgid "Final test"
 msgstr "Yakuniy test"
+
+msgid "Finish each domain with a focused test."
+msgstr "Har bir yo‘nalishni aniq test bilan yakunlang."
 
 msgid "Finish the lessons in order, then clear the checkpoint at the end of each section."
 msgstr "Darslarni tartib bilan yakunlang, keyin har bo‘lim oxiridagi nazoratdan o‘ting."
@@ -692,6 +740,9 @@ msgstr "To‘rt qadam. Yagona mazmunli SAT yo‘li."
 
 msgid "Fri"
 msgstr "Ju"
+
+msgid "Friday · 20:00"
+msgstr "Juma · 20:00"
 
 msgid "Geometry and Trigonometry"
 msgstr "Geometriya va trigonometriya"
@@ -813,6 +864,9 @@ msgstr "Sur’atni saqlang"
 msgid "Know the starting point"
 msgstr "Boshlang‘ich nuqtani biling"
 
+msgid "Know what happens on every study day."
+msgstr "Har bir o‘quv kunida nima bo‘lishini biling."
+
 msgid "Know what to study next."
 msgstr "Keyin nimani o‘rganishni biling."
 
@@ -887,6 +941,9 @@ msgstr "Darslar"
 
 msgid "Lessons and tests"
 msgstr "Darslar va testlar"
+
+msgid "Lessons, section tests, and your schedule stay connected, so every result leads to a clear next step."
+msgstr "Darslar, bo‘lim testlari va jadvalingiz o‘zaro bog‘langan — har bir natija aniq keyingi qadamga olib boradi."
 
 msgid "Lessons, section tests, schedule, and progress — connected in one simple system."
 msgstr "Darslar, bo‘lim testlari, jadval va natijalar — yagona sodda tizimda."
@@ -1008,6 +1065,12 @@ msgstr "Yangi o‘quvchi"
 msgid "Next"
 msgstr "Keyingi"
 
+msgid "Next checkpoint"
+msgstr "Keyingi nazorat"
+
+msgid "Next course"
+msgstr "Keyingi kurs"
+
 msgid "Next lesson"
 msgstr "Keyingi dars"
 
@@ -1052,6 +1115,9 @@ msgstr "Yagona bog‘langan natija"
 
 msgid "One understandable system"
 msgstr "Bitta tushunarli tizim"
+
+msgid "Open %(course)s"
+msgstr "%(course)s kursini ochish"
 
 msgid "Open checkpoint"
 msgstr "Nazoratni ochish"
@@ -1148,6 +1214,9 @@ msgstr "Fikrni bevosita qo‘llab-quvvatlovchi dalilni tanlashni mashq qiling."
 
 msgid "Preview"
 msgstr "Ko‘rib chiqish"
+
+msgid "Previous course"
+msgstr "Oldingi kurs"
 
 msgid "Previous month"
 msgstr "Oldingi oy"
@@ -1323,6 +1392,9 @@ msgstr "SAT Reading & Writing Sprint · 4 haftalik yo‘l"
 msgid "SAT Strategy"
 msgstr "SAT strategiyasi"
 
+msgid "SAT class guided by a Cereqo mentor"
+msgstr "Cereqo mentori boshqarayotgan SAT darsi"
+
 msgid "SAT learning paths"
 msgstr "SAT o‘quv yo‘llari"
 
@@ -1425,6 +1497,9 @@ msgstr "Cereqo qanday ishlashini ko‘ring"
 msgid "See the demo profile"
 msgstr "Demo profilni ko‘rish"
 
+msgid "See the exact section and lesson ahead."
+msgstr "Oldindagi bo‘lim va darsni aniq ko‘ring."
+
 msgid "See the progress connect"
 msgstr "Natijalar bog‘lanishini ko‘ring"
 
@@ -1445,6 +1520,9 @@ msgstr "Maqsadni belgilang va e’tibor talab qiladigan O‘qish va yozish hamda
 
 msgid "Shapes, circles, and trigonometry"
 msgstr "Shakllar, aylanalar va trigonometriya"
+
+msgid "Show course %(number)s"
+msgstr "%(number)s-kursni ko‘rsatish"
 
 msgid "Show password"
 msgstr "Parolni ko‘rsatish"
@@ -1502,6 +1580,9 @@ msgstr "Aniq kursdan boshlang, har bir bo‘limni natija bilan yakunlang va keyi
 
 msgid "Start with a short concept model, work through a guided example, then solve a timed mini-set. Finish by logging the error type and the fastest reliable correction."
 msgstr "Qisqa tushuncha modelidan boshlang, yo‘naltirilgan misolni ishlang, keyin vaqtli mini-to‘plamni yeching. Oxirida xato turi va eng tez ishonchli tuzatishni jurnalga yozing."
+
+msgid "Start with the course that fits your SAT goal."
+msgstr "SAT maqsadingizga mos kursdan boshlang."
 
 msgid "Strong work translating constraints into equations."
 msgstr "Shartlarni tenglamaga o‘tkazish bo‘yicha yaxshi natija."
@@ -1799,6 +1880,9 @@ msgstr "Yo‘nalishlar xaritasi"
 
 msgid "Your next practice set will appear here."
 msgstr "Keyingi mashqlar shu yerda ko‘rinadi."
+
+msgid "Your next step"
+msgstr "Keyingi qadamingiz"
 
 msgid "Your next task"
 msgstr "Keyingi vazifangiz"

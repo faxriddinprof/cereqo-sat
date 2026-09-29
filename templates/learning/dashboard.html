@@ -1,26 +1,43 @@
 {% extends 'base.html' %}{% load static i18n %}
 {% block title %}{% translate "Cereqo — your path to SAT success" %}{% endblock %}
 {% block content %}
-<section class="landing-hero minimal-hero">
-  <div class="landing-hero-copy">
-    <div class="landing-kicker"><span class="kicker-dot"></span>{% translate "Digital SAT learning platform" %}</div>
-    <h1>{% translate "A clear path to your SAT goal." %}<span>{% translate "Learn. Practice. Improve." %}</span></h1>
-    <p>{% translate "Lessons, section tests, schedule, and progress — connected in one simple system." %}</p>
-    <div class="landing-hero-actions">
-      <a class="btn btn-primary app-btn landing-primary-cta" href="{% url 'learning:learn' %}">{% translate "Explore courses" %}<i class="bi bi-arrow-right"></i></a>
-      {% if user.is_authenticated %}<a class="landing-text-link" href="{% url 'learning:profile' %}"><span><i class="bi bi-person"></i></span>{% translate "My profile" %}</a>{% else %}<a class="landing-text-link" href="{% url 'login' %}"><span><i class="bi bi-box-arrow-in-right"></i></span>{% translate "Log in" %}</a>{% endif %}
+<section id="courseHero" class="carousel slide carousel-fade course-hero-carousel" data-bs-ride="carousel" data-bs-interval="5500" data-bs-touch="true" aria-label="{% translate 'Featured SAT courses' %}">
+  <div class="carousel-inner">
+    {% for card in course_cards %}
+    <article class="carousel-item{% if forloop.first %} active{% endif %}">
+      <div class="course-hero-slide">
+        <div class="course-hero-copy">
+          <div class="landing-kicker"><span class="kicker-dot"></span>{% translate "Digital SAT course" %}</div>
+          <p class="course-hero-count">0{{ forloop.counter }} <span>/ 0{{ course_cards|length }}</span></p>
+          <h1>{% translate card.course.title %}</h1>
+          <p class="course-hero-purpose">{% translate card.course.description %}</p>
+          <div class="course-hero-facts">
+            <span><i class="bi bi-layers"></i>{% blocktranslate with total=card.sections %}{{ total }} sections{% endblocktranslate %}</span>
+            <span><i class="bi bi-play-circle"></i>{% blocktranslate with total=card.lessons %}{{ total }} lessons{% endblocktranslate %}</span>
+          </div>
+          <div class="landing-hero-actions">
+            <a class="btn btn-primary app-btn landing-primary-cta" href="{% url 'learning:course_detail' card.course.id %}">{% if user.is_authenticated %}{% translate "Open course" %}{% else %}{% translate "Go to course" %}{% endif %}<i class="bi bi-arrow-right"></i></a>
+            <a class="landing-text-link" href="{% url 'learning:learn' %}"><span><i class="bi bi-grid"></i></span>{% translate "View all courses" %}</a>
+          </div>
+        </div>
+        <div class="course-hero-media">
+          <img src="{% static card.course.cover_image %}" alt="{% blocktranslate with teacher=card.course.instructor_name %}{{ teacher }} teaching the course{% endblocktranslate %}">
+          <div class="course-hero-shade"></div>
+          <div class="course-hero-teacher"><span><i class="bi bi-person-video3"></i></span><div><strong>{% translate card.course.instructor_name %}</strong><small>{% translate card.course.instructor_role %}</small></div></div>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="course-hero-navigation">
+    <div class="carousel-indicators">
+      {% for card in course_cards %}<button type="button" data-bs-target="#courseHero" data-bs-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active" aria-current="true"{% endif %} aria-label="{% blocktranslate with number=forloop.counter %}Show course {{ number }}{% endblocktranslate %}"></button>{% endfor %}
+    </div>
+    <div class="course-hero-arrows">
+      <button type="button" data-bs-target="#courseHero" data-bs-slide="prev" aria-label="{% translate 'Previous course' %}"><i class="bi bi-arrow-left"></i></button>
+      <button type="button" data-bs-target="#courseHero" data-bs-slide="next" aria-label="{% translate 'Next course' %}"><i class="bi bi-arrow-right"></i></button>
     </div>
   </div>
-  <div class="landing-hero-visual" aria-label="{% translate 'Cereqo SAT learning experience' %}">
-    <img src="{% static 'cereqo/img/mentors/cereqo-classroom.jpg' %}" alt="{% translate 'Teacher and students learning together' %}">
-    <div class="hero-image-shade"></div>
-    <div class="hero-score-card"><small>{% translate "Target score" %}</small><strong>1400<span>/1600</span></strong><div><i style="width:87.5%"></i></div></div>
-    <div class="hero-lesson-chip"><span><i class="bi bi-play-fill"></i></span><div><small>{% translate "Today's focus" %}</small><strong>{% translate "Command of Evidence" %}</strong></div></div>
-  </div>
-</section>
-
-<section class="landing-trust minimal-trust" aria-label="{% translate 'SAT platform facts' %}">
-  <div><strong>2</strong><span>{% translate "exam sections" %}</span></div><div><strong>8</strong><span>{% translate "skill domains" %}</span></div><div><strong>1600</strong><span>{% translate "maximum score" %}</span></div><div><strong>{{ course_cards|length }}</strong><span>{% translate "learning paths" %}</span></div>
 </section>
 
 <section class="minimal-value-strip" aria-label="{% translate 'Why Cereqo' %}">
@@ -29,25 +46,54 @@
   <article><span><i class="bi bi-graph-up-arrow"></i></span><div><h2>{% translate "Visible progress" %}</h2><p>{% translate "See every lesson turn into a result." %}</p></div></article>
 </section>
 
-<section class="landing-section minimal-courses" id="courses">
-  <div class="landing-section-heading compact-heading"><div><p class="landing-eyebrow">{% translate "Courses" %}</p><h2>{% translate "Choose your SAT path." %}</h2></div><a href="{% url 'learning:learn' %}">{% translate "All courses" %}<i class="bi bi-arrow-right"></i></a></div>
-  <div class="landing-course-grid">
-    {% for card in course_cards %}<article class="landing-course-card course-tone-{{ forloop.counter }} compact-course-card">
-      <div class="course-card-cover"><img src="{% static card.course.cover_image %}" alt="{% blocktranslate with teacher=card.course.instructor_name %}{{ teacher }} teaching the course{% endblocktranslate %}"><div><strong>{% translate card.course.instructor_name %}</strong><small>{% translate card.course.instructor_role %}</small></div></div>
-      <h3>{% translate card.course.title %}</h3>
-      <p>{% translate card.course.description %}</p>
-      <div class="landing-course-facts"><span><strong>{{ card.sections }}</strong>{% translate "sections" %}</span><span><strong>{{ card.lessons }}</strong>{% translate "lessons" %}</span></div>
-      {% if user.is_authenticated %}<a href="{% url 'learning:course_detail' card.course.id %}">{% translate "Open course" %}<i class="bi bi-arrow-up-right"></i></a>{% else %}<a href="{% url 'learning:course_detail' card.course.id %}">{% translate "Go to course" %}<i class="bi bi-arrow-up-right"></i></a>{% endif %}
-    </article>{% endfor %}
+<section class="landing-section platform-showcase">
+  <div class="platform-showcase-copy">
+    <p class="landing-eyebrow">{% translate "Built for your SAT routine" %}</p>
+    <h2>{% translate "Everything you need for the next study day." %}</h2>
+    <p>{% translate "Lessons, section tests, and your schedule stay connected, so every result leads to a clear next step." %}</p>
+    <div class="showcase-feature-list">
+      <article><span><i class="bi bi-signpost-split"></i></span><div><h3>{% translate "A course map you can follow" %}</h3><p>{% translate "See the exact section and lesson ahead." %}</p></div></article>
+      <article><span><i class="bi bi-ui-checks-grid"></i></span><div><h3>{% translate "A checkpoint for every section" %}</h3><p>{% translate "Finish each domain with a focused test." %}</p></div></article>
+      <article><span><i class="bi bi-calendar2-week"></i></span><div><h3>{% translate "A schedule with real context" %}</h3><p>{% translate "Know what happens on every study day." %}</p></div></article>
+    </div>
+  </div>
+  <div class="platform-showcase-visual">
+    <div class="showcase-photo-main"><img src="{% static 'cereqo/img/mentors/cereqo-classroom.jpg' %}" alt="{% translate 'SAT class guided by a Cereqo mentor' %}"></div>
+    <div class="showcase-photo-secondary"><img src="{% static 'cereqo/img/mentors/mentor-daniel.jpg' %}" alt="{% translate 'Cereqo mentor explaining a lesson' %}"></div>
+    <div class="showcase-plan-card"><span><i class="bi bi-play-fill"></i></span><div><small>{% translate "Today's plan" %}</small><strong>{% translate "Advanced Math · Lesson 02" %}</strong><em>{% translate "75 min guided session" %}</em></div></div>
+    <div class="showcase-checkpoint-card"><i class="bi bi-check2-circle"></i><span><small>{% translate "Next checkpoint" %}</small><strong>{% translate "Friday · 20:00" %}</strong></span></div>
   </div>
 </section>
 
-<section class="landing-section minimal-mentors">
-  <div class="landing-section-heading compact-heading"><div><p class="landing-eyebrow">{% translate "Mentors" %}</p><h2>{% translate "Learn with clear explanations." %}</h2></div><small>{% translate "Demo mentor profiles" %}</small></div>
-  <div class="minimal-mentor-grid">
-    <article><img src="{% static 'cereqo/img/mentors/mentor-madina.jpg' %}" alt=""><div><strong>Madina Karimova</strong><span>{% translate "Reading & Writing" %}</span></div></article>
-    <article><img src="{% static 'cereqo/img/mentors/mentor-aziz.jpg' %}" alt=""><div><strong>Aziz Rahmonov</strong><span>{% translate "SAT Math" %}</span></div></article>
-    <article><img src="{% static 'cereqo/img/mentors/mentor-daniel.jpg' %}" alt=""><div><strong>Daniel Brooks</strong><span>{% translate "SAT Strategy" %}</span></div></article>
+<section class="landing-section mentor-showcase">
+  <div class="mentor-showcase-heading">
+    <div><p class="landing-eyebrow">{% translate "Cereqo mentors" %}</p><h2>{% translate "Different strengths. One teaching standard." %}</h2></div>
+    <p>{% translate "Each course is led by a mentor who makes that SAT area clear, practical, and measurable." %}</p>
+  </div>
+  <div class="mentor-showcase-grid">
+    {% for card in course_cards %}
+    <article class="mentor-showcase-card{% if forloop.first %} mentor-featured{% endif %}">
+      <div class="mentor-showcase-photo">
+        {% if forloop.first %}<img src="{% static 'cereqo/img/mentors/mentor-daniel.jpg' %}" alt="{% translate card.course.instructor_name %}">{% else %}<img src="{% static card.course.cover_image %}" alt="{% translate card.course.instructor_name %}">{% endif %}
+        <span>{% translate card.course.instructor_role %}</span>
+      </div>
+      <div class="mentor-showcase-body">
+        <div><h3>{% translate card.course.instructor_name %}</h3><p>{% translate card.course.title %}</p></div>
+        <a href="{% url 'learning:course_detail' card.course.id %}" aria-label="{% blocktranslate with course=card.course.title %}Open {{ course }}{% endblocktranslate %}"><i class="bi bi-arrow-up-right"></i></a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="homepage-final-cta">
+  <img src="{% static 'cereqo/img/mentors/cereqo-classroom.jpg' %}" alt="">
+  <div class="homepage-final-shade"></div>
+  <div class="homepage-final-content">
+    <p class="landing-eyebrow">{% translate "Your next step" %}</p>
+    <h2>{% translate "Start with the course that fits your SAT goal." %}</h2>
+    <p>{% translate "Choose a clear path now. Cereqo will keep the lessons, tests, and schedule connected from there." %}</p>
+    <a class="btn btn-light app-btn" href="{% url 'learning:learn' %}">{% translate "Explore all courses" %}<i class="bi bi-arrow-right"></i></a>
   </div>
 </section>
 
