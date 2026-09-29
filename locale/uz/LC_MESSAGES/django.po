@@ -270,6 +270,9 @@ msgstr "Davomat faqat jonli darslarni hisoblaydi. Uy vazifasi uni o‘zgartirmay
 msgid "Attended"
 msgstr "Qatnashgan"
 
+msgid "Back to courses"
+msgstr "Kurslarga qaytish"
+
 msgid "Back to dashboard"
 msgstr "Bosh sahifaga qaytish"
 
@@ -477,8 +480,14 @@ msgstr "Kurs rejasi"
 msgid "Course progress"
 msgstr "Kurs natijasi"
 
+msgid "Course sections"
+msgstr "Kurs bo‘limlari"
+
 msgid "Course sequence"
 msgstr "Kurs ketma-ketligi"
+
+msgid "Course structure"
+msgstr "Kurs tuzilishi"
 
 msgid "Course tasks"
 msgstr "Kurs vazifalari"
@@ -689,6 +698,9 @@ msgstr "Fikr ifodasi · Bog‘lovchilar"
 
 msgid "Featured SAT courses"
 msgstr "Tanlangan SAT kurslari"
+
+msgid "Final checkpoint"
+msgstr "Yakuniy nazorat"
 
 msgid "Final task"
 msgstr "Yakuniy vazifa"
@@ -1119,6 +1131,9 @@ msgstr "Bitta tushunarli tizim"
 msgid "Open %(course)s"
 msgstr "%(course)s kursini ochish"
 
+msgid "Open a section to see its lessons and final checkpoint."
+msgstr "Bo‘limni ochib, uning darslari va yakuniy nazoratini ko‘ring."
+
 msgid "Open checkpoint"
 msgstr "Nazoratni ochish"
 
@@ -1394,6 +1409,9 @@ msgstr "SAT strategiyasi"
 
 msgid "SAT class guided by a Cereqo mentor"
 msgstr "Cereqo mentori boshqarayotgan SAT darsi"
+
+msgid "SAT course"
+msgstr "SAT kursi"
 
 msgid "SAT learning paths"
 msgstr "SAT o‘quv yo‘llari"
@@ -1913,6 +1931,9 @@ msgstr "boshlang‘ich"
 
 msgid "classes"
 msgstr "ta dars"
+
+msgid "completed"
+msgstr "yakunlangan"
 
 msgid "course complete"
 msgstr "kurs yakunlandi"

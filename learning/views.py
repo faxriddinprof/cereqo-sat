@@ -138,11 +138,12 @@ def course_detail(request, course_id):
     student = _student(request)
     course = get_object_or_404(Course, pk=course_id)
     section_cards = _course_section_cards(course, student)
+    course_lessons = Lesson.objects.filter(section__course=course)
     next_lesson = (
-        Lesson.objects.filter(section__course=course, scheduled_date__gte=timezone.localdate())
+        course_lessons.filter(scheduled_date__gte=timezone.localdate())
         .order_by("scheduled_date", "sort_order")
         .first()
-        or Lesson.objects.filter(section__course=course).last()
+        or course_lessons.last()
     )
     return render(
         request,
@@ -153,7 +154,8 @@ def course_detail(request, course_id):
             "section_cards": section_cards,
             "next_lesson": next_lesson,
             "course_progress": course.progress_percent,
-            "course_navigation": _course_navigation(course, student),
+            "total_lessons": course_lessons.count(),
+            "completed_lessons": course_lessons.filter(progress_percent=100).count(),
         },
     )
 
