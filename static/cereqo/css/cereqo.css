@@ -948,6 +948,13 @@ html[data-theme="dark"] .auth-brand img { filter: brightness(0) invert(1); }
 /* Homepage course carousel */
 .course-hero-carousel { width:min(1180px,calc(100% - 28px)); margin:34px auto 30px; padding-bottom:58px; }
 .course-hero-carousel .carousel-inner { overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--surface); box-shadow:0 24px 60px rgba(20,33,61,.12); }
+.course-hero-carousel.carousel-fade .carousel-item { transition:opacity .56s ease-in-out; will-change:opacity; }
+.course-hero-carousel.carousel-fade .course-hero-copy { opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .2s ease,transform .24s ease; }
+.course-hero-carousel.carousel-fade .carousel-item.active .course-hero-copy { opacity:1; transform:translateY(0); pointer-events:auto; }
+.course-hero-carousel.carousel-fade .carousel-item.active.carousel-item-start .course-hero-copy,
+.course-hero-carousel.carousel-fade .carousel-item.active.carousel-item-end .course-hero-copy { opacity:0; transform:translateY(-6px); pointer-events:none; transition-delay:0s; }
+.course-hero-carousel.carousel-fade .carousel-item-next.carousel-item-start .course-hero-copy,
+.course-hero-carousel.carousel-fade .carousel-item-prev.carousel-item-end .course-hero-copy { opacity:1; transform:translateY(0); transition-delay:.28s; }
 .course-hero-slide { display:grid; grid-template-columns:minmax(0,1fr); min-height:680px; }
 .course-hero-copy { position:relative; display:flex; flex-direction:column; justify-content:center; padding:32px 24px 28px; }
 .course-hero-count { position:absolute; top:25px; right:24px; margin:0; color:var(--navy); font-size:.75rem; font-weight:900; letter-spacing:.04em; }
@@ -992,6 +999,7 @@ html[data-theme="dark"] .course-hero-carousel .carousel-inner { box-shadow:0 24p
 }
 @media (prefers-reduced-motion: reduce) {
   .course-hero-carousel .carousel-item { transition:none; }
+  .course-hero-carousel .course-hero-copy { transition:none; }
   .course-hero-navigation .carousel-indicators [data-bs-target], .course-hero-arrows button { transition:none; }
 }
 

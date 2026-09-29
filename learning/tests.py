@@ -91,6 +91,7 @@ class DemoFlowTests(TestCase):
     def test_homepage_rotates_courses_without_duplicate_course_section(self):
         page = self.client.get(reverse("learning:dashboard"))
         self.assertContains(page, 'id="courseHero"')
+        self.assertContains(page, "carousel-fade")
         self.assertContains(page, 'class="carousel-item', count=3)
         self.assertContains(page, 'class="course-hero-media"', count=3)
         self.assertNotContains(page, "hero-score-card")
