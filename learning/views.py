@@ -46,6 +46,37 @@ def _homework_cards(student):
     return cards
 
 
+def _course_section_cards(course, student):
+    sections = course.sections.prefetch_related(
+        "lessons", "checkpoint__submissions__answers", "checkpoint__questions"
+    )
+    cards = []
+    for section in sections:
+        checkpoint = getattr(section, "checkpoint", None)
+        cards.append(
+            {
+                "section": section,
+                "lessons": list(section.lessons.all()),
+                "status": section.status_for(student),
+                "progress": section.progress_percent,
+                "checkpoint": checkpoint,
+                "checkpoint_status": checkpoint.status_for(student) if checkpoint else None,
+            }
+        )
+    return cards
+
+
+def _course_navigation(course, student, active_section_id=None, active_lesson_id=None, active_homework_id=None):
+    return {
+        "course": course,
+        "progress": course.progress_percent,
+        "sections": _course_section_cards(course, student),
+        "active_section_id": active_section_id,
+        "active_lesson_id": active_lesson_id,
+        "active_homework_id": active_homework_id,
+    }
+
+
 def dashboard(request):
     student = _student()
     course = Course.objects.filter(is_active=True).first()
@@ -65,6 +96,12 @@ def dashboard(request):
     lessons = course_lessons
     learning_progress = round(sum(item.progress_percent for item in lessons) / lessons.count()) if lessons else 0
     lessons_explored = lessons.filter(progress_percent__gt=0).count()
+    section_cards = _course_section_cards(course, student) if course else []
+    current_section = next(
+        (item for item in section_cards if item["status"] == "current"),
+        next((item for item in section_cards if item["status"] == "needs_attention"), None),
+    )
+    next_session = AttendanceSession.objects.select_related("lesson__section").filter(date__gte=today).first()
     return render(
         request,
         "learning/dashboard.html",
@@ -79,6 +116,8 @@ def dashboard(request):
             "lessons_explored": lessons_explored,
             "lesson_count": lessons.count(),
             "course": course,
+            "current_section": current_section,
+            "next_session": next_session,
             "rank": student.rank,
             "student_count": Student.objects.count(),
         },
@@ -87,23 +126,33 @@ def dashboard(request):
 
 def learn(request):
     student = _student()
-    course = Course.objects.filter(is_active=True).first()
-    if not course:
+    courses = list(Course.objects.prefetch_related("sections__lessons").all())
+    if not courses:
         return render(request, "learning/empty.html", {"active_nav": "learn"})
-    sections = course.sections.prefetch_related("lessons", "checkpoint__submissions__answers", "checkpoint__questions")
-    section_cards = []
-    for section in sections:
-        checkpoint = getattr(section, "checkpoint", None)
-        section_cards.append(
+    course_cards = []
+    for course in courses:
+        lessons = Lesson.objects.filter(section__course=course)
+        course_cards.append(
             {
-                "section": section,
-                "lessons": list(section.lessons.all()),
-                "status": section.status_for(student),
-                "progress": section.progress_percent,
-                "checkpoint": checkpoint,
-                "checkpoint_status": checkpoint.status_for(student) if checkpoint else None,
+                "course": course,
+                "progress": course.progress_percent,
+                "sections": course.sections.count(),
+                "lessons": lessons.count(),
+                "completed_lessons": lessons.filter(progress_percent=100).count(),
+                "status": "active" if course.is_active else "upcoming",
             }
         )
+    return render(
+        request,
+        "learning/course_list.html",
+        {"active_nav": "learn", "course_cards": course_cards},
+    )
+
+
+def course_detail(request, course_id):
+    student = _student()
+    course = get_object_or_404(Course, pk=course_id)
+    section_cards = _course_section_cards(course, student)
     next_lesson = (
         Lesson.objects.filter(section__course=course, scheduled_date__gte=timezone.localdate())
         .order_by("scheduled_date", "sort_order")
@@ -119,6 +168,7 @@ def learn(request):
             "section_cards": section_cards,
             "next_lesson": next_lesson,
             "course_progress": course.progress_percent,
+            "course_navigation": _course_navigation(course, student),
         },
     )
 
@@ -144,6 +194,9 @@ def section_detail(request, section_id):
             "section_status": section.status_for(student),
             "previous_section": previous_section,
             "next_section": next_section,
+            "course_navigation": _course_navigation(
+                section.course, student, active_section_id=section.pk
+            ),
         },
     )
 
@@ -164,6 +217,12 @@ def lesson_detail(request, lesson_id):
             "lesson": lesson,
             "homework": homework,
             "other_lessons": other_lessons,
+            "course_navigation": _course_navigation(
+                lesson.section.course,
+                _student(),
+                active_section_id=lesson.section_id,
+                active_lesson_id=lesson.pk,
+            ) if lesson.section_id else None,
         },
     )
 
@@ -220,6 +279,12 @@ def homework_detail(request, homework_id):
             "answered_count": answered_count,
             "total_questions": len(questions),
             "progress": progress,
+            "course_navigation": _course_navigation(
+                homework.section.course,
+                student,
+                active_section_id=homework.section_id,
+                active_homework_id=homework.pk,
+            ) if homework.section_id else None,
         },
     )
 
@@ -259,6 +324,26 @@ def leaderboard(request):
         request,
         "learning/leaderboard.html",
         {"active_nav": "rank", "students": students, "current_student": student},
+    )
+
+
+def profile(request):
+    student = _student()
+    courses = list(Course.objects.prefetch_related("sections__lessons").all())
+    recent_submissions = student.submissions.select_related(
+        "homework__section__course"
+    ).filter(submitted_at__isnull=False).order_by("-submitted_at")[:5]
+    completed_tasks = student.submissions.filter(submitted_at__isnull=False).count()
+    return render(
+        request,
+        "learning/profile.html",
+        {
+            "active_nav": None,
+            "student": student,
+            "courses": courses,
+            "recent_submissions": recent_submissions,
+            "completed_tasks": completed_tasks,
+        },
     )
 
 

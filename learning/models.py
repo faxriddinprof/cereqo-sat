@@ -80,12 +80,14 @@ class CourseSection(models.Model):
         return round(sum(lessons.values_list("progress_percent", flat=True)) / total) if total else 0
 
     def status_for(self, student):
+        today = timezone.localdate()
+        if self.start_date <= today <= self.end_date:
+            return "current"
+        if self.start_date > today:
+            return "upcoming"
         checkpoint = getattr(self, "checkpoint", None)
         if checkpoint and checkpoint.status_for(student) == "completed":
             return "completed"
-        today = timezone.localdate()
-        if self.start_date > today:
-            return "upcoming"
         if self.end_date < today:
             return "needs_attention"
         return "current"

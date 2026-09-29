@@ -1,6 +1,6 @@
 # Cereqo SAT demo
 
-Cereqo is a mobile-first Django demo for a connected SAT study journey. Its active 8-week course follows all eight official digital SAT content domains, with ordered 75-minute classes, one checkpoint at the end of each section, and a calendar generated directly from the course schedule. Video lessons, homework autosave/submission, points, ranking, and attendance remain connected throughout the flow. The interface supports Uzbek and English, along with persistent light and dark themes.
+Cereqo is a mobile-first Django demo for a connected SAT study journey. The desktop experience uses a top navigation bar and a separate contextual sidebar inside each course. The demo catalog includes a complete 8-week SAT course plus focused Math and Reading & Writing courses. Every course follows a clear course → section → lesson → final test → result structure. Video lessons, homework autosave/submission, profile results, points, ranking, and the course-generated schedule remain connected throughout the flow. The interface supports Uzbek and English, along with persistent light and dark themes.
 
 ## Run locally on macOS
 

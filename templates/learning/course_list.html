@@ -1,0 +1,28 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate "Courses" %} · Cereqo{% endblock %}
+{% block content %}
+<section class="courses-heading">
+  <div><p class="eyebrow">{% translate "SAT learning paths" %}</p><h1>{% translate "Choose the course that matches your goal" %}</h1><p>{% translate "Every course follows the same clear system: sections, ordered lessons, a final test, and measurable results." %}</p></div>
+  <div class="courses-blueprint"><span><strong>2</strong>{% translate "exam sections" %}</span><i></i><span><strong>8</strong>{% translate "official domains" %}</span><i></i><span><strong>1600</strong>{% translate "total score" %}</span></div>
+</section>
+
+<section class="course-catalog">
+  {% for card in course_cards %}
+  <article class="catalog-card catalog-accent-{{ forloop.counter }} {% if card.course.is_active %}featured-course{% endif %}">
+    <div class="catalog-card-top">
+      <span class="catalog-index">0{{ forloop.counter }}</span>
+      <span class="course-state course-state-{{ card.status }}">{% if card.status == 'active' %}<i class="bi bi-record-circle"></i>{% translate "In progress" %}{% else %}<i class="bi bi-calendar2"></i>{% translate "Upcoming" %}{% endif %}</span>
+    </div>
+    <div class="catalog-icon"><i class="bi {% if 'Math' in card.course.title %}bi-calculator{% elif 'Writing' in card.course.title %}bi-body-text{% else %}bi-compass{% endif %}"></i></div>
+    <p class="catalog-label">{% if 'Math' in card.course.title %}{% translate "Math focus" %}{% elif 'Writing' in card.course.title %}{% translate "Reading & Writing focus" %}{% else %}{% translate "Complete SAT preparation" %}{% endif %}</p>
+    <h2>{% translate card.course.title %}</h2>
+    <p>{% translate card.course.description %}</p>
+    <div class="catalog-facts"><span><i class="bi bi-layers"></i>{% blocktranslate with total=card.sections %}{{ total }} sections{% endblocktranslate %}</span><span><i class="bi bi-play-circle"></i>{% blocktranslate with total=card.lessons %}{{ total }} lessons{% endblocktranslate %}</span><span><i class="bi bi-bullseye"></i>{{ card.course.target_score }}+</span></div>
+    <div class="catalog-progress"><div><span>{% translate "Progress" %}</span><strong>{{ card.progress }}%</strong></div><div class="progress app-progress"><div class="progress-bar" style="width:{{ card.progress }}%"></div></div><small>{% blocktranslate with completed=card.completed_lessons total=card.lessons %}{{ completed }} of {{ total }} lessons complete{% endblocktranslate %}</small></div>
+    <div class="catalog-footer"><span>{{ card.course.start_date|date:'M j' }} — {{ card.course.end_date|date:'M j, Y' }}</span><a class="btn {% if card.course.is_active %}btn-primary{% else %}btn-outline-primary{% endif %} app-btn" href="{% url 'learning:course_detail' card.course.id %}">{% if card.course.is_active %}{% translate "Continue course" %}{% else %}{% translate "Explore course" %}{% endif %}<i class="bi bi-arrow-right"></i></a></div>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="course-system-note surface-card"><span class="sat-mark">SAT</span><div><p class="eyebrow">{% translate "One understandable system" %}</p><h2>{% translate "Course → section → lesson → final test → result" %}</h2><p>{% translate "The platform always shows what you are learning, why it matters, and what comes next." %}</p></div></section>
+{% endblock %}

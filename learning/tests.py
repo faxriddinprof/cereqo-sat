@@ -34,6 +34,7 @@ class DemoFlowTests(TestCase):
         self.assertEqual(before["sections"], CourseSection.objects.count())
 
     def test_course_uses_all_official_domains_in_order(self):
+        self.assertEqual(Course.objects.count(), 3)
         course = Course.objects.get(is_active=True)
         self.assertEqual(course.sections.count(), 8)
         self.assertEqual(Lesson.objects.filter(section__course=course).count(), 16)
@@ -70,12 +71,26 @@ class DemoFlowTests(TestCase):
         with translation.override("en"):
             course_page = self.client.get(reverse("learning:learn"))
             self.assertContains(course_page, "Digital SAT Mastery")
-            self.assertContains(course_page, "54")
+            self.assertContains(course_page, "SAT Math Accelerator")
+            self.assertContains(course_page, "1600")
+            course = Course.objects.get(is_active=True)
+            course_detail = self.client.get(reverse("learning:course_detail", args=[course.pk]))
+            self.assertContains(course_detail, "54")
+            self.assertContains(course_detail, 'class="course-sidebar"')
+            self.assertContains(course_detail, "Final task")
             section = CourseSection.objects.first()
             section_page = self.client.get(reverse("learning:section_detail", args=[section.pk]))
             self.assertContains(section_page, section.title)
             calendar_page = self.client.get(reverse("learning:attendance"))
             self.assertContains(calendar_page, "Course calendar")
+            profile_page = self.client.get(reverse("learning:profile"))
+            self.assertContains(profile_page, "Learner profile")
+
+    def test_profile_is_reached_from_avatar_menu_not_main_navigation(self):
+        dashboard = self.client.get(reverse("learning:dashboard"))
+        self.assertContains(dashboard, reverse("learning:profile"))
+        self.assertContains(dashboard, 'class="dropdown profile-menu"')
+        self.assertNotContains(dashboard, '<nav class="desktop-main-nav" aria-label="Main navigation"><a href="/profile/"')
 
     def test_initial_data_exposes_all_four_computed_states(self):
         states = {homework.status_for(self.student) for homework in Homework.objects.all()}
@@ -137,9 +152,9 @@ class DemoFlowTests(TestCase):
         response = self.client.post(reverse("set_language"), {"language": "uz", "next": "/"})
         self.assertRedirects(response, "/")
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "Keyingi qadamga tayyormisiz?")
+        self.assertContains(dashboard, "SAT rejangiz tayyor, Alex Morgan.")
         self.assertContains(dashboard, ">UZ<")
 
         self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "Ready for your next step?")
+        self.assertContains(dashboard, "Your SAT plan is ready, Alex Morgan.")

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{% translate "Profile" %} · Cereqo{% endblock %}
+{% block content %}
+<section class="profile-hero">
+  <span class="avatar profile-avatar">{{ student.initials }}</span>
+  <div><p class="eyebrow">{% translate "Learner profile" %}</p><h1>{{ student.name }}</h1><p>{% translate student.badge %}</p></div>
+  <div class="profile-rank"><small>{% translate "Overall rank" %}</small><strong>#{{ student.rank }}</strong><span>{{ student.points }} XP</span></div>
+</section>
+
+<section class="profile-stat-grid">
+  <article><i class="bi bi-fire"></i><span><strong>{{ student.streak }}</strong><small>{% translate "day streak" %}</small></span></article>
+  <article><i class="bi bi-check2-circle"></i><span><strong>{{ completed_tasks }}</strong><small>{% translate "tests completed" %}</small></span></article>
+  <article><i class="bi bi-journal-bookmark"></i><span><strong>{{ courses|length }}</strong><small>{% translate "available courses" %}</small></span></article>
+</section>
+
+<div class="profile-grid">
+  <section class="surface-card profile-courses"><div class="section-title-row"><div><p class="eyebrow">{% translate "My learning" %}</p><h2>{% translate "Courses" %}</h2></div><a href="{% url 'learning:learn' %}">{% translate "View all" %}</a></div>{% for course in courses %}<a href="{% url 'learning:course_detail' course.id %}"><span class="course-mini-icon"><i class="bi bi-compass"></i></span><span><strong>{% translate course.title %}</strong><small>{{ course.sections.count }} {% translate "sections" %} · {{ course.progress_percent }}%</small><i class="mini-track"><b style="width:{{ course.progress_percent }}%"></b></i></span><i class="bi bi-chevron-right"></i></a>{% endfor %}</section>
+  <section class="surface-card profile-results"><div class="section-title-row"><div><p class="eyebrow">{% translate "Performance" %}</p><h2>{% translate "Recent test results" %}</h2></div></div>{% for submission in recent_submissions %}<div class="result-row"><span><strong>{% translate submission.homework.title %}</strong><small>{% translate submission.homework.section.domain %} · {{ submission.submitted_at|date:'M j' }}</small></span><b>{{ submission.score }}%</b></div>{% empty %}<div class="empty-state"><i class="bi bi-clipboard-data"></i><p>{% translate "Completed tests will appear here." %}</p></div>{% endfor %}</section>
+</div>
+{% endblock %}

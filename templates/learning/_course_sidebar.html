@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="course-outline-head">
+  <a href="{% url 'learning:learn' %}"><i class="bi bi-arrow-left"></i>{% translate "All courses" %}</a>
+  <h2>{% translate course_navigation.course.title %}</h2>
+  <div><span>{% translate "Course progress" %}</span><strong>{{ course_navigation.progress }}%</strong></div>
+  <div class="progress app-progress"><div class="progress-bar" style="width:{{ course_navigation.progress }}%"></div></div>
+</div>
+<nav class="course-outline-nav" aria-label="{% translate 'Course outline' %}">
+  {% for card in course_navigation.sections %}
+  <details {% if course_navigation.active_section_id == card.section.id or card.status == 'current' %}open{% endif %}>
+    <summary>
+      <span class="outline-number">{{ card.section.order|stringformat:'02d' }}</span>
+      <span><strong>{% translate card.section.domain %}</strong><small>{{ card.progress }}% · {{ card.lessons|length }} {% translate "lessons" %}</small></span>
+      <i class="bi bi-chevron-down"></i>
+    </summary>
+    <div class="outline-items">
+      {% for lesson in card.lessons %}<a class="{% if course_navigation.active_lesson_id == lesson.id %}active{% endif %}" href="{% url 'learning:lesson_detail' lesson.id %}"><i class="bi {% if lesson.progress_percent == 100 %}bi-check-circle-fill{% elif lesson.progress_percent > 0 %}bi-play-circle-fill{% else %}bi-circle{% endif %}"></i><span><strong>{% translate lesson.title %}</strong><small>{{ lesson.progress_percent }}% {% translate "viewed" %}</small></span></a>{% endfor %}
+      {% if card.checkpoint %}<a class="outline-test {% if course_navigation.active_homework_id == card.checkpoint.id %}active{% endif %}" href="{% url 'learning:homework_detail' card.checkpoint.id %}"><i class="bi bi-flag-fill"></i><span><strong>{% translate "Final task" %}</strong><small>{% translate card.checkpoint.title %}</small></span><b class="status-{{ card.checkpoint_status }}">{% if card.checkpoint_status == 'completed' %}<i class="bi bi-check"></i>{% else %}{% translate "Test" %}{% endif %}</b></a>{% endif %}
+    </div>
+  </details>
+  {% endfor %}
+</nav>

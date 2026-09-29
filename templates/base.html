@@ -5,77 +5,49 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#14213D">
-  <meta name="description" content="Cereqo — focused, gamified SAT preparation">
+  <meta name="description" content="Cereqo — structured digital SAT preparation">
   <title>{% block title %}Cereqo{% endblock %}</title>
   <link rel="icon" type="image/png" href="{% static 'cereqo/img/cereqo-logo.png' %}">
   <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'vendor/bootstrap-icons/css/bootstrap-icons.css' %}">
   <link rel="stylesheet" href="{% static 'cereqo/css/cereqo.css' %}">
-  <script>
-    (function () {
-      var saved = localStorage.getItem('cereqo.theme');
-      var theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.dataset.theme = theme;
-      document.documentElement.dataset.bsTheme = theme;
-    })();
-  </script>
+  <script>(function(){var saved=localStorage.getItem('cereqo.theme');var theme=saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.dataset.theme=theme;document.documentElement.dataset.bsTheme=theme;})();</script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">{% translate "Skip to content" %}</a>
-  <div class="app-shell">
-    <aside class="desktop-sidebar" aria-label="Main navigation">
-      <a class="sidebar-brand" href="{% url 'learning:dashboard' %}" aria-label="Cereqo home">
-        <img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo">
-      </a>
-      <div class="sidebar-kicker">{% translate "SAT preparation" %}</div>
-      <nav class="sidebar-nav">
-        {% include 'learning/_nav_links.html' %}
-      </nav>
-      {% if demo_student %}
-      <div class="sidebar-profile">
-        <span class="avatar">{{ demo_student.initials }}</span>
-        <div><strong>{{ demo_student.name }}</strong><small>{% translate "Demo learner" %}</small></div>
-      </div>
-      <div class="sidebar-streak"><i class="bi bi-fire" aria-hidden="true"></i><span><strong>{% blocktranslate with streak=demo_student.streak %}{{ streak }} day streak{% endblocktranslate %}</strong><small>{% translate "Keep the spark going" %}</small></span></div>
-      {% endif %}
-      <div class="sidebar-attribution">{% translate "Interface adapted from" %} <a href="https://github.com/HasanMahmudDev" target="_blank" rel="noreferrer">AdminHMD</a> · MIT</div>
-    </aside>
+  <div class="app-shell topnav-shell">
+    <header class="mobile-header">
+      <a href="{% url 'learning:dashboard' %}" aria-label="Cereqo home"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
+      <div class="header-actions">{% if demo_student %}<div class="mobile-points"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</div>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% include 'learning/_profile_menu.html' %}</div>
+    </header>
 
-    <div class="app-main">
-      <header class="mobile-header">
-        <a href="{% url 'learning:dashboard' %}" aria-label="Cereqo home"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
-        <div class="header-actions">
-          {% if demo_student %}<div class="mobile-points"><i class="bi bi-stars" aria-hidden="true"></i> {{ demo_student.points }} XP</div>{% endif %}
-          {% include 'learning/_toolbar_controls.html' %}
-        </div>
-      </header>
-      <header class="desktop-topbar">
-        <div>
-          <p class="topbar-eyebrow">{% translate "Your study space" %}</p>
-          <p class="topbar-greeting">{% blocktranslate with name=demo_student.name|default:_('learner') %}Keep moving forward, {{ name }}.{% endblocktranslate %}</p>
-        </div>
-        <div class="topbar-metrics">{% if demo_student %}<span><i class="bi bi-fire"></i> {% blocktranslate with streak=demo_student.streak %}{{ streak }} days{% endblocktranslate %}</span><span><i class="bi bi-stars"></i> {{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if demo_student %}<span class="avatar avatar-sm">{{ demo_student.initials }}</span>{% endif %}</div>
-      </header>
+    <header class="desktop-topbar main-navbar">
+      <a class="topnav-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"><span>{% translate "Digital SAT platform" %}</span></a>
+      <nav class="desktop-main-nav" aria-label="Main navigation">{% include 'learning/_nav_links.html' %}</nav>
+      <div class="topnav-actions">{% if demo_student %}<span class="topnav-xp"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% include 'learning/_profile_menu.html' %}</div>
+    </header>
 
+    {% if course_navigation %}<aside class="course-sidebar">{% include 'learning/_course_sidebar.html' %}</aside>{% endif %}
+
+    <div class="app-main {% if course_navigation %}has-course-sidebar{% endif %}">
+      {% if course_navigation %}<div class="course-mobile-bar"><span><small>{% translate "Current course" %}</small><strong>{% translate course_navigation.course.title %}</strong></span><button type="button" data-bs-toggle="offcanvas" data-bs-target="#courseOutline" aria-controls="courseOutline"><i class="bi bi-list-nested"></i>{% translate "Course plan" %}</button></div>{% endif %}
       <main id="main-content" class="page-content" tabindex="-1">
-        {% if messages %}
-        <div class="message-stack" aria-live="polite">
-          {% for message in messages %}<div class="app-alert app-alert-{{ message.tags }}"><i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i><span>{{ message }}</span></div>{% endfor %}
-        </div>
-        {% endif %}
+        {% if messages %}<div class="message-stack" aria-live="polite">{% for message in messages %}<div class="app-alert app-alert-{{ message.tags }}"><i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i><span>{{ message }}</span></div>{% endfor %}</div>{% endif %}
         {% block content %}{% endblock %}
         <footer class="page-footer">{% translate "Cereqo demo" %} · {% translate "Original practice content" %} · AdminHMD template by <a href="https://github.com/HasanMahmudDev" target="_blank" rel="noreferrer">Md. Hasan Mahmud</a> (MIT)</footer>
       </main>
     </div>
 
     <nav class="mobile-bottom-nav" aria-label="Primary navigation">
-      <a href="{% url 'learning:dashboard' %}" class="{% if active_nav == 'home' %}active{% endif %}" {% if active_nav == 'home' %}aria-current="page"{% endif %}><i class="bi bi-house-door{% if active_nav == 'home' %}-fill{% endif %}"></i><span>{% translate "Home" %}</span></a>
-      <a href="{% url 'learning:learn' %}" class="{% if active_nav == 'learn' %}active{% endif %}" {% if active_nav == 'learn' %}aria-current="page"{% endif %}><i class="bi bi-play-btn{% if active_nav == 'learn' %}-fill{% endif %}"></i><span>{% translate "Learn" %}</span></a>
-      <a href="{% url 'learning:homework_list' %}" class="{% if active_nav == 'tasks' %}active{% endif %}" {% if active_nav == 'tasks' %}aria-current="page"{% endif %}><i class="bi bi-check2-square"></i><span>{% translate "Tasks" %}</span></a>
-      <a href="{% url 'learning:leaderboard' %}" class="{% if active_nav == 'rank' %}active{% endif %}" {% if active_nav == 'rank' %}aria-current="page"{% endif %}><i class="bi bi-trophy{% if active_nav == 'rank' %}-fill{% endif %}"></i><span>{% translate "Rank" %}</span></a>
-      <a href="{% url 'learning:attendance' %}" class="{% if active_nav == 'attendance' %}active{% endif %}" {% if active_nav == 'attendance' %}aria-current="page"{% endif %}><i class="bi bi-calendar3"></i><span>{% translate "Attendance" %}</span></a>
+      <a href="{% url 'learning:dashboard' %}" class="{% if active_nav == 'home' %}active{% endif %}"><i class="bi bi-house-door{% if active_nav == 'home' %}-fill{% endif %}"></i><span>{% translate "Home" %}</span></a>
+      <a href="{% url 'learning:learn' %}" class="{% if active_nav == 'learn' %}active{% endif %}"><i class="bi bi-collection-play{% if active_nav == 'learn' %}-fill{% endif %}"></i><span>{% translate "Courses" %}</span></a>
+      <a href="{% url 'learning:homework_list' %}" class="{% if active_nav == 'tasks' %}active{% endif %}"><i class="bi bi-check2-square"></i><span>{% translate "Tasks" %}</span></a>
+      <a href="{% url 'learning:leaderboard' %}" class="{% if active_nav == 'rank' %}active{% endif %}"><i class="bi bi-trophy{% if active_nav == 'rank' %}-fill{% endif %}"></i><span>{% translate "Rank" %}</span></a>
+      <a href="{% url 'learning:attendance' %}" class="{% if active_nav == 'attendance' %}active{% endif %}"><i class="bi bi-calendar3"></i><span>{% translate "Schedule" %}</span></a>
     </nav>
   </div>
+
+  {% if course_navigation %}<div class="offcanvas offcanvas-start course-offcanvas" tabindex="-1" id="courseOutline" aria-labelledby="courseOutlineLabel"><div class="offcanvas-header"><h2 id="courseOutlineLabel">{% translate "Course plan" %}</h2><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div><div class="offcanvas-body">{% include 'learning/_course_sidebar.html' %}</div></div>{% endif %}
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'cereqo/js/cereqo.js' %}"></script>
   {% block scripts %}{% endblock %}

@@ -190,6 +190,28 @@ SECTION_SPECS = [
 ]
 
 
+DEMO_COURSES = [
+    {
+        "code": "sat-math-accelerator",
+        "title": "SAT Math Accelerator · 4-Week Path",
+        "description": "A focused math course for linear models, nonlinear functions, data analysis, and geometry.",
+        "start_offset": 7,
+        "target_score": 760,
+        "subject": "math",
+        "domains": ["Algebra", "Advanced Math", "Problem-Solving and Data Analysis", "Geometry and Trigonometry"],
+    },
+    {
+        "code": "sat-reading-writing-sprint",
+        "title": "SAT Reading & Writing Sprint · 4-Week Path",
+        "description": "A focused literacy course for evidence, vocabulary, grammar, synthesis, and transitions.",
+        "start_offset": 14,
+        "target_score": 720,
+        "subject": "rw",
+        "domains": ["Information and Ideas", "Craft and Structure", "Standard English Conventions", "Expression of Ideas"],
+    },
+]
+
+
 class Command(BaseCommand):
     help = "Create or refresh the idempotent Cereqo demo dataset."
 
@@ -343,6 +365,104 @@ class Command(BaseCommand):
             homework.questions.exclude(position__in=positions).delete()
 
         CourseSection.objects.filter(course=course).exclude(pk__in=[item.pk for item in sections]).delete()
+
+        for demo_spec in DEMO_COURSES:
+            demo_start = today + timedelta(days=demo_spec["start_offset"])
+            demo_course, _ = Course.objects.update_or_create(
+                code=demo_spec["code"],
+                defaults={
+                    "title": demo_spec["title"],
+                    "description": demo_spec["description"],
+                    "start_date": demo_start,
+                    "end_date": demo_start + timedelta(days=27),
+                    "target_score": demo_spec["target_score"],
+                    "is_active": False,
+                },
+            )
+            demo_section_ids = []
+            for demo_order, domain in enumerate(demo_spec["domains"], start=1):
+                section_start = demo_start + timedelta(days=(demo_order - 1) * 7)
+                demo_section, _ = CourseSection.objects.update_or_create(
+                    course=demo_course,
+                    order=demo_order,
+                    defaults={
+                        "title": f"{domain} intensive",
+                        "domain": domain,
+                        "subject": demo_spec["subject"],
+                        "description": f"Build speed and accuracy across the highest-value {domain} skills.",
+                        "start_date": section_start,
+                        "end_date": section_start + timedelta(days=6),
+                        "exam_weight_percent": 25,
+                    },
+                )
+                demo_section_ids.append(demo_section.pk)
+                for sequence, suffix in ((1, "Strategy lab"), (2, "Timed practice")):
+                    demo_lesson, _ = Lesson.objects.update_or_create(
+                        section=demo_section,
+                        sequence=sequence,
+                        defaults={
+                            "title": f"{domain} · {suffix}",
+                            "section": demo_section,
+                            "subject": demo_spec["subject"],
+                            "topic": domain,
+                            "duration_minutes": 8,
+                            "session_minutes": 75,
+                            "summary": f"A focused {domain} session built around repeatable SAT decisions.",
+                            "material": "Model the skill, complete guided examples, solve a timed set, and classify every error before moving on.",
+                            "progress_percent": 0,
+                            "is_today": False,
+                            "scheduled_date": section_start + timedelta(days=sequence * 2 - 2),
+                            "sort_order": 1000 + demo_order * 10 + sequence,
+                            "video_file": "cereqo/video/demo-lesson-video.mp4",
+                        },
+                    )
+                    if sequence == 2:
+                        demo_deadline = timezone.make_aware(
+                            datetime.combine(demo_section.end_date + timedelta(days=1), time(20, 0))
+                        )
+                        demo_homework, _ = Homework.objects.get_or_create(
+                            lesson=demo_lesson,
+                            defaults={
+                                "title": f"{domain} final test",
+                                "description": f"Section mastery test for {domain}.",
+                                "deadline": demo_deadline,
+                            },
+                        )
+                        demo_homework.section = demo_section
+                        demo_homework.title = f"{domain} final test"
+                        demo_homework.description = f"Section mastery test for {domain}."
+                        demo_homework.deadline = demo_deadline
+                        demo_homework.max_points = 100
+                        demo_homework.sort_order = 100 + demo_order
+                        demo_homework.save()
+                        demo_questions = (
+                            [
+                                ("If 4x + 3 = 19, what is x?", "2", "3", "4", "5", "C", "Subtract 3, then divide 16 by 4."),
+                                ("A value increases from 40 to 50. What is the percent increase?", "10%", "20%", "25%", "40%", "C", "The increase is 10, and 10/40 = 25%."),
+                            ]
+                            if demo_spec["subject"] == "math"
+                            else [
+                                ("Which transition best signals a contrast?", "Therefore", "However", "For example", "Similarly", "B", "‘However’ signals contrast."),
+                                ("Which choice most directly supports a claim?", "A related opinion", "A repeated topic", "Specific relevant evidence", "A broad assumption", "C", "Direct, relevant evidence best supports a claim."),
+                            ]
+                        )
+                        for position, values in enumerate(demo_questions, start=1):
+                            prompt, a, b, c, d, correct, explanation = values
+                            Question.objects.update_or_create(
+                                homework=demo_homework,
+                                position=position,
+                                defaults={
+                                    "prompt": prompt,
+                                    "option_a": a,
+                                    "option_b": b,
+                                    "option_c": c,
+                                    "option_d": d,
+                                    "correct_option": correct,
+                                    "explanation": explanation,
+                                },
+                            )
+                        demo_homework.questions.exclude(position__in=[1, 2]).delete()
+            CourseSection.objects.filter(course=demo_course).exclude(pk__in=demo_section_ids).delete()
 
         demo_student = students["Alex Morgan"]
         in_progress, created = Submission.objects.get_or_create(student=demo_student, homework=homeworks["transitions"])

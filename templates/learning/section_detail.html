@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% load i18n %}
 {% block title %}{% translate section.title %} · Cereqo{% endblock %}
 {% block content %}
-<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:dashboard' %}">{% translate "Home" %}</a><i class="bi bi-chevron-right"></i><a href="{% url 'learning:learn' %}">{% translate "Course" %}</a><i class="bi bi-chevron-right"></i><span>{% translate section.domain %}</span></nav>
+<nav class="breadcrumb-row" aria-label="Breadcrumb"><a href="{% url 'learning:learn' %}">{% translate "Courses" %}</a><i class="bi bi-chevron-right"></i><a href="{% url 'learning:course_detail' section.course.id %}">{% translate section.course.title %}</a><i class="bi bi-chevron-right"></i><span>{% translate section.domain %}</span></nav>
 <section class="section-detail-hero subject-panel-{{ section.subject }}">
   <div><span class="section-number">{% blocktranslate with number=section.order %}Section {{ number }}{% endblocktranslate %}</span><p class="eyebrow">{% translate section.domain %}</p><h1>{% translate section.title %}</h1><p>{% translate section.description %}</p></div>
   <div class="section-detail-meta"><strong>{{ section.progress_percent }}%</strong><span>{% translate "section progress" %}</span><small>{{ section.start_date|date:'M j' }} — {{ section.end_date|date:'M j' }}</small></div>
