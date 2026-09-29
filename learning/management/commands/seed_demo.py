@@ -221,6 +221,58 @@ DEMO_COURSES = [
 ]
 
 
+INDEPENDENT_TASKS = [
+    {
+        "key": "vocabulary",
+        "title": "Weekly SAT vocabulary challenge",
+        "description": "Use context clues to choose precise meanings in a short mentor-assigned set.",
+        "subject": "rw",
+        "assigned_by": "Madina Karimova",
+        "deadline_days": 3,
+        "questions": [
+            ("In the passage, ‘novel’ most nearly means", "lengthy", "original", "fictional", "uncertain", "B", "Here ‘novel’ describes an original approach, not a type of book."),
+            ("Which word best completes a sentence describing a careful and exact method?", "random", "meticulous", "brief", "casual", "B", "‘Meticulous’ means very careful and precise."),
+        ],
+    },
+    {
+        "key": "speed",
+        "title": "Mixed Math speed drill",
+        "description": "Complete a compact mixed set while keeping each decision under ninety seconds.",
+        "subject": "math",
+        "assigned_by": "Aziz Rahmonov",
+        "deadline_days": 1,
+        "questions": [
+            ("If 3x + 5 = 20, what is x?", "3", "5", "7", "15", "B", "Subtract 5, then divide 15 by 3 to get 5."),
+            ("What is 15% of 80?", "8", "10", "12", "15", "C", "0.15 × 80 = 12."),
+        ],
+    },
+    {
+        "key": "accuracy",
+        "title": "Evidence accuracy clinic",
+        "description": "Review claim-and-evidence choices and identify the exact reason each distractor fails.",
+        "subject": "rw",
+        "assigned_by": "Cereqo academic team",
+        "deadline_days": -2,
+        "questions": [
+            ("The strongest evidence for a claim should be", "broadly related", "specific and directly relevant", "the longest option", "an unsupported opinion", "B", "Strong evidence directly supports the precise claim."),
+            ("Which choice weakens an inference most?", "A relevant comparison", "A repeated detail", "A credible alternative explanation", "A precise measurement", "C", "A credible alternative explanation makes the original inference less certain."),
+        ],
+    },
+    {
+        "key": "diagnostic",
+        "title": "Diagnostic mini set",
+        "description": "A brief mixed diagnostic used by your mentor to plan the next coaching session.",
+        "subject": "math",
+        "assigned_by": "Daniel Brooks",
+        "deadline_days": -5,
+        "questions": [
+            ("A line has slope 2 and passes through (0, 3). Which equation represents it?", "y = 2x + 3", "y = 3x + 2", "y = 2x − 3", "y = x + 5", "A", "Slope-intercept form is y = mx + b, so y = 2x + 3."),
+            ("If x² = 49 and x is positive, what is x?", "5", "6", "7", "9", "C", "The positive square root of 49 is 7."),
+        ],
+    },
+]
+
+
 class Command(BaseCommand):
     help = "Create or refresh the idempotent Cereqo demo dataset."
 
@@ -231,13 +283,13 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         if options["reset"]:
             AttendanceSession.objects.all().delete()
+            Homework.objects.filter(kind=Homework.INDEPENDENT).delete()
             DemoConfig.objects.all().delete()
             Student.objects.all().delete()
             Course.objects.all().delete()
             Lesson.objects.all().delete()
 
         today = timezone.localdate()
-        now = timezone.now()
         DemoConfig.objects.update_or_create(
             name="Cereqo demo", defaults={"exam_date": today + timedelta(days=73)}
         )
@@ -369,6 +421,9 @@ class Command(BaseCommand):
                 },
             )
             homework.section = section
+            homework.kind = Homework.COURSE
+            homework.subject = lesson.subject
+            homework.assigned_by = course.instructor_name
             homework.title = item["homework_title"]
             homework.description = item["homework_description"]
             homework.deadline = deadline
@@ -463,6 +518,9 @@ class Command(BaseCommand):
                             },
                         )
                         demo_homework.section = demo_section
+                        demo_homework.kind = Homework.COURSE
+                        demo_homework.subject = demo_lesson.subject
+                        demo_homework.assigned_by = demo_course.instructor_name
                         demo_homework.title = f"{domain} final test"
                         demo_homework.description = f"Section mastery test for {domain}."
                         demo_homework.deadline = demo_deadline
@@ -497,6 +555,71 @@ class Command(BaseCommand):
                             )
                         demo_homework.questions.exclude(position__in=[1, 2]).delete()
             CourseSection.objects.filter(course=demo_course).exclude(pk__in=demo_section_ids).delete()
+
+        independent_homeworks = {}
+        independent_titles = []
+        for order, item in enumerate(INDEPENDENT_TASKS, start=1):
+            deadline = timezone.make_aware(
+                datetime.combine(today + timedelta(days=item["deadline_days"]), time(20, 0))
+            )
+            homework, _ = Homework.objects.update_or_create(
+                kind=Homework.INDEPENDENT,
+                title=item["title"],
+                defaults={
+                    "lesson": None,
+                    "section": None,
+                    "subject": item["subject"],
+                    "assigned_by": item["assigned_by"],
+                    "description": item["description"],
+                    "deadline": deadline,
+                    "max_points": 60,
+                    "sort_order": order,
+                },
+            )
+            independent_titles.append(item["title"])
+            independent_homeworks[item["key"]] = homework
+            for position, values in enumerate(item["questions"], start=1):
+                prompt, a, b, c, d, correct, explanation = values
+                Question.objects.update_or_create(
+                    homework=homework,
+                    position=position,
+                    defaults={
+                        "prompt": prompt,
+                        "option_a": a,
+                        "option_b": b,
+                        "option_c": c,
+                        "option_d": d,
+                        "correct_option": correct,
+                        "explanation": explanation,
+                    },
+                )
+            homework.questions.exclude(position__in=range(1, len(item["questions"]) + 1)).delete()
+        Homework.objects.filter(kind=Homework.INDEPENDENT).exclude(title__in=independent_titles).delete()
+
+        independent_progress, created = Submission.objects.get_or_create(
+            student=demo_student, homework=independent_homeworks["speed"]
+        )
+        if created:
+            first = independent_homeworks["speed"].questions.first()
+            Answer.objects.create(submission=independent_progress, question=first, selected_option="B")
+
+        independent_completed, created = Submission.objects.get_or_create(
+            student=demo_student, homework=independent_homeworks["diagnostic"]
+        )
+        if created:
+            for question in independent_homeworks["diagnostic"].questions.all():
+                Answer.objects.create(
+                    submission=independent_completed,
+                    question=question,
+                    selected_option=question.correct_option,
+                )
+            submitted_at = independent_homeworks["diagnostic"].deadline - timedelta(hours=2)
+            Submission.objects.filter(pk=independent_completed.pk).update(
+                started_at=submitted_at - timedelta(minutes=20),
+                submitted_at=submitted_at,
+                score=100,
+                points_awarded=60,
+            )
 
         in_progress, created = Submission.objects.get_or_create(student=demo_student, homework=homeworks["transitions"])
         if created:

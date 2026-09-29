@@ -1,22 +1,30 @@
 {% extends 'base.html' %}{% load i18n %}
 {% block title %}{% translate "Tasks" %} · Cereqo{% endblock %}
 {% block content %}
-<section class="page-heading"><div><p class="eyebrow">{% translate "Section checkpoints" %}</p><h1>{% translate "Course tasks" %}</h1><p>{% translate "Each task closes a course section and measures mastery of its SAT domain." %}</p></div></section>
-<section class="status-summary" aria-label="Homework status summary">
+<section class="page-heading tasks-heading">
+  <div><p class="eyebrow">{% translate "Independent work" %}</p><h1>{% translate "Tasks" %}</h1><p>{% translate "Assignments from your mentors that sit outside a course. Every task has a clear deadline and saved progress." %}</p></div>
+  <a class="btn btn-outline-primary app-btn" href="{% url 'learning:attendance' %}"><i class="bi bi-calendar3"></i> {% translate "Open schedule" %}</a>
+</section>
+<section class="status-summary" aria-label="{% translate 'Task status summary' %}">
   <div><strong>{{ counts.in_progress }}</strong><span>{% translate "In progress" %}</span></div><div><strong>{{ counts.not_started }}</strong><span>{% translate "Not started" %}</span></div><div><strong>{{ counts.overdue }}</strong><span>{% translate "Overdue" %}</span></div><div><strong>{{ counts.completed }}</strong><span>{% translate "Completed" %}</span></div>
 </section>
 <section class="task-list">
   {% for card in cards %}
-  <article class="homework-card status-border-{{ card.status }}">
+  <article class="homework-card independent-task-card status-border-{{ card.status }}">
     <div class="homework-main">
-      <span class="task-subject-icon subject-{{ card.homework.lesson.subject }}"><i class="bi {% if card.homework.lesson.subject == 'math' %}bi-calculator{% else %}bi-body-text{% endif %}"></i></span>
-      <div><div class="card-title-line"><span class="status-badge status-{{ card.status }}">{% if card.status == 'not_started' %}{% translate "Not started" %}{% elif card.status == 'in_progress' %}{% translate "In progress" %}{% elif card.status == 'overdue' %}{% translate "Overdue" %}{% else %}{% translate "Completed" %}{% endif %}</span><span class="section-task-label">{% translate card.homework.section.course.title %} · {% translate "Section" %} {{ card.homework.section.order }}</span>{% if card.submission.is_late %}<span class="late-note"><i class="bi bi-clock-history"></i> {% translate "Submitted late" %}</span>{% endif %}</div><h2>{% translate card.homework.title %}</h2><p>{% translate card.homework.description %}</p><div class="task-facts"><span>{% translate card.homework.section.domain %}</span><span>{% blocktranslate with total=card.total %}{{ total }} questions{% endblocktranslate %}</span><span>{% translate "Due" %} {{ card.homework.deadline|date:'M j · g:i A' }}</span></div></div>
+      <span class="task-subject-icon subject-{{ card.homework.subject }}"><i class="bi {% if card.homework.subject == 'math' %}bi-calculator{% else %}bi-body-text{% endif %}"></i></span>
+      <div>
+        <div class="card-title-line"><span class="status-badge status-{{ card.status }}">{% if card.status == 'not_started' %}{% translate "Not started" %}{% elif card.status == 'in_progress' %}{% translate "In progress" %}{% elif card.status == 'overdue' %}{% translate "Overdue" %}{% else %}{% translate "Completed" %}{% endif %}</span><span class="section-task-label"><i class="bi bi-person"></i> {% translate card.homework.assigned_by %}</span>{% if card.submission.is_late %}<span class="late-note"><i class="bi bi-clock-history"></i> {% translate "Submitted late" %}</span>{% endif %}</div>
+        <h2>{% translate card.homework.title %}</h2><p>{% translate card.homework.description %}</p>
+        <div class="task-facts"><span><i class="bi bi-bookmark"></i> {% translate card.homework.get_subject_display %}</span><span><i class="bi bi-list-check"></i> {% blocktranslate with total=card.total %}{{ total }} questions{% endblocktranslate %}</span><span class="deadline-fact deadline-{{ card.deadline_tone }}"><i class="bi bi-calendar2-check"></i> {% translate "Due" %} {{ card.homework.deadline|date:'M j · g:i A' }}</span></div>
+      </div>
     </div>
     <div class="homework-action">
-      {% if card.status == 'completed' %}<div class="score-display"><strong>{{ card.submission.score }}%</strong><span>{% translate "Score" %}</span></div>{% elif card.status == 'in_progress' %}<div class="mini-progress"><span>{% blocktranslate with answered=card.answered total=card.total %}{{ answered }}/{{ total }} answered{% endblocktranslate %}</span><div><i style="width:{% widthratio card.answered card.total 100 %}%"></i></div></div>{% elif card.status == 'overdue' %}<p class="overdue-copy">{% translate "Past due · You can still submit" %}</p>{% else %}<p class="ready-copy">{% translate "Ready when you are" %}</p>{% endif %}
+      {% if card.status == 'completed' %}<div class="score-display"><strong>{{ card.submission.score }}%</strong><span>{% translate "Score" %}</span></div>{% elif card.status == 'in_progress' %}<div class="mini-progress"><span>{% blocktranslate with answered=card.answered total=card.total %}{{ answered }}/{{ total }} answered{% endblocktranslate %}</span><div><i style="width:{% widthratio card.answered card.total 100 %}%"></i></div></div>{% elif card.status == 'overdue' %}<p class="overdue-copy">{% translate "Past due · You can still submit" %}</p>{% elif card.days_until_due == 0 %}<p class="ready-copy">{% translate "Due today" %}</p>{% elif card.days_until_due == 1 %}<p class="ready-copy">{% translate "Due tomorrow" %}</p>{% else %}<p class="ready-copy">{% translate "Ready when you are" %}</p>{% endif %}
       <a class="btn {% if card.status == 'completed' %}btn-outline-primary{% else %}btn-primary{% endif %} app-btn" href="{% url 'learning:homework_detail' card.homework.id %}">{% if card.status == 'completed' %}{% translate "Review result" %}{% elif card.status == 'in_progress' %}{% translate "Resume" %}{% else %}{% translate "Start task" %}{% endif %} <i class="bi bi-arrow-right"></i></a>
     </div>
   </article>
-  {% empty %}<div class="surface-card empty-state"><i class="bi bi-inbox"></i><h2>{% translate "No homework yet" %}</h2><p>{% translate "Your next practice set will appear here." %}</p></div>{% endfor %}
+  {% empty %}<div class="surface-card empty-state"><i class="bi bi-inbox"></i><h2>{% translate "No independent tasks" %}</h2><p>{% translate "New assignments from your mentors will appear here." %}</p></div>{% endfor %}
 </section>
+<p class="leaderboard-footnote"><i class="bi bi-info-circle"></i> {% translate "Course checkpoints stay inside their course sections; this page only shows separate assignments." %}</p>
 {% endblock %}

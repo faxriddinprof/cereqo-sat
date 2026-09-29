@@ -157,10 +157,22 @@ class Lesson(models.Model):
 
 
 class Homework(models.Model):
-    lesson = models.OneToOneField(Lesson, on_delete=models.CASCADE, related_name="homework")
+    COURSE = "course"
+    INDEPENDENT = "independent"
+    KIND_CHOICES = [
+        (COURSE, "Course checkpoint"),
+        (INDEPENDENT, "Independent task"),
+    ]
+
+    lesson = models.OneToOneField(
+        Lesson, on_delete=models.CASCADE, related_name="homework", null=True, blank=True
+    )
     section = models.OneToOneField(
         CourseSection, on_delete=models.CASCADE, related_name="checkpoint", null=True, blank=True
     )
+    kind = models.CharField(max_length=12, choices=KIND_CHOICES, default=COURSE, db_index=True)
+    subject = models.CharField(max_length=10, choices=Lesson.SUBJECT_CHOICES, default="math")
+    assigned_by = models.CharField(max_length=100, default="Cereqo academic team")
     title = models.CharField(max_length=160)
     description = models.TextField()
     deadline = models.DateTimeField()
@@ -172,6 +184,10 @@ class Homework(models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def is_course_checkpoint(self):
+        return self.kind == self.COURSE
 
     def submission_for(self, student):
         return self.submissions.filter(student=student).first()

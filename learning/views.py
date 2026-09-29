@@ -31,19 +31,30 @@ def _student(request):
     return student_for_user(request.user)
 
 
-def _homework_cards(student):
+def _homework_cards(student, kind=Homework.INDEPENDENT):
     cards = []
-    for homework in Homework.objects.select_related(
+    today = timezone.localdate()
+    for homework in Homework.objects.filter(kind=kind).select_related(
         "lesson", "section", "section__course"
     ).prefetch_related("submissions__answers", "questions"):
         submission = homework.submission_for(student)
+        status = homework.status_for(student)
+        due_date = timezone.localdate(homework.deadline)
+        days_until_due = (due_date - today).days
         cards.append(
             {
                 "homework": homework,
                 "submission": submission,
-                "status": homework.status_for(student),
+                "status": status,
                 "answered": submission.answers.count() if submission else 0,
                 "total": homework.questions.count(),
+                "days_until_due": days_until_due,
+                "deadline_tone": (
+                    "complete" if status == "completed"
+                    else "overdue" if days_until_due < 0
+                    else "urgent" if days_until_due <= 2
+                    else "upcoming"
+                ),
             }
         )
     return cards
@@ -263,7 +274,7 @@ def homework_detail(request, homework_id):
         request,
         "learning/homework_detail.html",
         {
-            "active_nav": "tasks",
+            "active_nav": "learn" if homework.is_course_checkpoint else "tasks",
             "homework": homework,
             "submission": submission,
             "question_rows": question_rows,
@@ -325,7 +336,7 @@ def profile(request):
     student = _student(request)
     courses = list(Course.objects.prefetch_related("sections__lessons").all())
     recent_submissions = student.submissions.select_related(
-        "homework__section__course"
+        "homework__section__course", "homework__lesson"
     ).filter(submitted_at__isnull=False).order_by("-submitted_at")[:5]
     completed_tasks = student.submissions.filter(submitted_at__isnull=False).count()
     return render(
@@ -343,6 +354,7 @@ def profile(request):
 
 @login_required
 def attendance(request):
+    student = _student(request)
     today = timezone.localdate()
     try:
         year = int(request.GET.get("year", today.year))
@@ -359,6 +371,20 @@ def attendance(request):
         date__range=(month_start, month_end)
     )
     sessions = {item.date: item for item in session_query}
+    task_query = Homework.objects.select_related("lesson", "section__course").filter(
+        Q(kind=Homework.INDEPENDENT)
+        | Q(kind=Homework.COURSE, section__course__enrollments__student=student),
+        deadline__date__range=(month_start, month_end),
+    ).distinct()
+    tasks = []
+    tasks_by_date = {}
+    for homework in task_query:
+        task = {
+            "homework": homework,
+            "status": homework.status_for(student),
+        }
+        tasks.append(task)
+        tasks_by_date.setdefault(timezone.localdate(homework.deadline), []).append(task)
     cal = calendar.Calendar(firstweekday=0)
     weeks = []
     for week in cal.monthdatescalendar(year, month):
@@ -370,22 +396,25 @@ def attendance(request):
                     "in_month": day.month == month,
                     "is_today": day == today,
                     "session": sessions.get(day),
+                    "tasks": tasks_by_date.get(day, []),
                 }
                 for day in week
             ]
         )
-    selected = sessions.get(focus_date) or next(iter(sessions.values()), None)
+    selected_session = sessions.get(focus_date)
+    selected_tasks = tasks_by_date.get(focus_date, [])
     status_counts = AttendanceSession.objects.filter(date__range=(month_start, month_end)).aggregate(
         attended=Count("id", filter=Q(status="attended")),
         missed=Count("id", filter=Q(status="missed")),
         scheduled=Count("id", filter=Q(status="scheduled")),
     )
+    task_counts = {
+        "total": len(tasks),
+        "independent": sum(item["homework"].kind == Homework.INDEPENDENT for item in tasks),
+        "course": sum(item["homework"].kind == Homework.COURSE for item in tasks),
+    }
     previous = month_start - timedelta(days=1)
     next_month = month_end + timedelta(days=1)
-    course = Course.objects.filter(is_active=True).first()
-    course_sections = (
-        course.sections.filter(start_date__lte=month_end, end_date__gte=month_start) if course else []
-    )
     return render(
         request,
         "learning/attendance.html",
@@ -397,10 +426,11 @@ def attendance(request):
             "month": month,
             "previous": previous,
             "next_month": next_month,
-            "selected": selected,
+            "focus_date": focus_date,
+            "selected_session": selected_session,
+            "selected_tasks": selected_tasks,
             "status_counts": status_counts,
-            "course": course,
-            "course_sections": course_sections,
+            "task_counts": task_counts,
             "weekday_labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         },
     )

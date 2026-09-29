@@ -22,7 +22,7 @@
     </header>
 
     <header class="desktop-topbar main-navbar">
-      <a class="topnav-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"><span>{% translate "Digital SAT platform" %}</span></a>
+      <a class="topnav-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
       <nav class="desktop-main-nav" aria-label="Main navigation">{% include 'learning/_nav_links.html' %}</nav>
       <div class="topnav-actions">{% if user.is_authenticated and demo_student %}<span class="topnav-xp"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if user.is_authenticated %}{% include 'learning/_profile_menu.html' %}{% else %}<a class="btn btn-primary navbar-login" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>{% translate "Log in" %}</a>{% endif %}</div>
     </header>

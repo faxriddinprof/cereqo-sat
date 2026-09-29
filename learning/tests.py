@@ -3,6 +3,7 @@ import json
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.management import call_command
+from django.db.models import Q
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import translation
@@ -136,7 +137,7 @@ class DemoFlowTests(TestCase):
             self.assertContains(section_page, section.title)
             self.assertContains(section_page, 'class="course-sidebar"')
             calendar_page = self.client.get(reverse("learning:attendance"))
-            self.assertContains(calendar_page, "Course calendar")
+            self.assertContains(calendar_page, "Learning calendar")
             profile_page = self.client.get(reverse("learning:profile"))
             self.assertContains(profile_page, "Learner profile")
 
@@ -147,8 +148,47 @@ class DemoFlowTests(TestCase):
         self.assertNotContains(dashboard, '<nav class="desktop-main-nav" aria-label="Main navigation"><a href="/profile/"')
 
     def test_initial_data_exposes_all_four_computed_states(self):
-        states = {homework.status_for(self.student) for homework in Homework.objects.all()}
+        states = {
+            homework.status_for(self.student)
+            for homework in Homework.objects.filter(kind=Homework.INDEPENDENT)
+        }
         self.assertEqual(states, {"not_started", "in_progress", "overdue", "completed"})
+
+    def test_tasks_page_only_lists_independent_assignments(self):
+        self.client.post(reverse("set_language"), {"language": "en", "next": "/homework/"})
+        with translation.override("en"):
+            page = self.client.get(reverse("learning:homework_list"))
+            self.assertEqual(page.status_code, 200)
+            self.assertEqual(len(page.context["cards"]), 4)
+            self.assertTrue(
+                all(card["homework"].kind == Homework.INDEPENDENT for card in page.context["cards"])
+            )
+            self.assertContains(page, "Weekly SAT vocabulary challenge")
+            self.assertNotContains(page, "Linear equations checkpoint")
+            self.assertContains(page, "outside a course")
+
+    def test_schedule_combines_lessons_and_all_task_deadlines(self):
+        page = self.client.get(reverse("learning:attendance"))
+        self.assertEqual(page.status_code, 200)
+        self.assertEqual(
+            page.context["task_counts"]["total"],
+            Homework.objects.filter(
+                Q(kind=Homework.INDEPENDENT)
+                | Q(kind=Homework.COURSE, section__course__enrollments__student=self.student),
+                deadline__date__year=page.context["year"],
+                deadline__date__month=page.context["month"],
+            ).distinct().count(),
+        )
+        self.assertGreater(page.context["task_counts"]["independent"], 0)
+        self.assertGreater(page.context["task_counts"]["course"], 0)
+        self.assertContains(page, "task-marker")
+
+    def test_independent_task_detail_has_no_course_sidebar(self):
+        homework = Homework.objects.filter(kind=Homework.INDEPENDENT).first()
+        page = self.client.get(reverse("learning:homework_detail", args=[homework.pk]))
+        self.assertEqual(page.status_code, 200)
+        self.assertIsNone(page.context["course_navigation"])
+        self.assertNotContains(page, 'class="course-sidebar"')
 
     def test_autosave_persists_answer_for_resume(self):
         homework = Homework.objects.get(lesson__is_today=True)
