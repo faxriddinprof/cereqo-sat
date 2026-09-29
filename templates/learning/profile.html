@@ -1,20 +1,49 @@
-{% extends 'base.html' %}{% load i18n %}
+{% extends 'base.html' %}{% load i18n static %}
 {% block title %}{% translate "Profile" %} · Cereqo{% endblock %}
 {% block content %}
-<section class="profile-hero">
-  <span class="avatar profile-avatar">{{ student.initials }}</span>
-  <div><p class="eyebrow">{% translate "Learner profile" %}</p><h1>{{ student.name }}</h1><p>{% translate student.badge %}</p></div>
-  <div class="profile-rank"><small>{% translate "Overall rank" %}</small><strong>#{{ student.rank }}</strong><span>{{ student.points }} XP</span></div>
+<section class="profile-banner">
+  <div class="profile-cover"><img src="{% static 'cereqo/img/profile-cover-sat.png' %}" alt="{% translate 'Cereqo SAT study workspace' %}"></div>
+  <div class="profile-identity">
+    <span class="avatar profile-avatar">{{ student.initials }}</span>
+    <div class="profile-identity-copy">
+      <p class="eyebrow">{% translate "Learner profile" %}</p>
+      <div class="profile-name-row"><h1>{{ student.name }}</h1><span class="profile-level"><i class="bi bi-lightning-charge-fill"></i>{{ student.points }} XP</span></div>
+      <p class="profile-handle">@{{ request.user.username }}</p>
+      <div class="profile-tags"><span><i class="bi bi-patch-check-fill"></i>{% translate student.badge %}</span><span><i class="bi bi-calendar3"></i>{% blocktranslate with joined=request.user.date_joined|date:'M Y' %}Joined {{ joined }}{% endblocktranslate %}</span></div>
+    </div>
+  </div>
 </section>
 
 <section class="profile-stat-grid">
-  <article><i class="bi bi-fire"></i><span><strong>{{ student.streak }}</strong><small>{% translate "day streak" %}</small></span></article>
-  <article><i class="bi bi-check2-circle"></i><span><strong>{{ completed_tasks }}</strong><small>{% translate "tests completed" %}</small></span></article>
-  <article><i class="bi bi-journal-bookmark"></i><span><strong>{{ courses|length }}</strong><small>{% translate "available courses" %}</small></span></article>
+  <article><span class="profile-stat-icon stat-fire"><i class="bi bi-fire"></i></span><span><strong>{{ student.streak }}</strong><small>{% translate "day streak" %}</small></span></article>
+  <article><span class="profile-stat-icon stat-lessons"><i class="bi bi-play-circle"></i></span><span><strong>{{ completed_lessons }}</strong><small>{% translate "lessons completed" %}</small></span></article>
+  <article><span class="profile-stat-icon stat-tests"><i class="bi bi-check2-circle"></i></span><span><strong>{{ completed_tasks }}</strong><small>{% translate "tasks completed" %}</small></span></article>
+  <article><span class="profile-stat-icon stat-score"><i class="bi bi-graph-up-arrow"></i></span><span><strong>{% if average_score is not None %}{{ average_score }}%{% else %}—{% endif %}</strong><small>{% translate "average score" %}</small></span></article>
 </section>
 
-<div class="profile-grid">
-  <section class="surface-card profile-courses"><div class="section-title-row"><div><p class="eyebrow">{% translate "My learning" %}</p><h2>{% translate "Courses" %}</h2></div><a href="{% url 'learning:learn' %}">{% translate "View all" %}</a></div>{% for course in courses %}<a href="{% url 'learning:course_detail' course.id %}"><span class="course-mini-icon"><i class="bi bi-compass"></i></span><span><strong>{% translate course.title %}</strong><small>{{ course.sections.count }} {% translate "sections" %} · {{ course.progress_percent }}%</small><i class="mini-track"><b style="width:{{ course.progress_percent }}%"></b></i></span><i class="bi bi-chevron-right"></i></a>{% endfor %}</section>
-  <section class="surface-card profile-results"><div class="section-title-row"><div><p class="eyebrow">{% translate "Performance" %}</p><h2>{% translate "Recent test results" %}</h2></div></div>{% for submission in recent_submissions %}<div class="result-row"><span><strong>{% translate submission.homework.title %}</strong><small>{% if submission.homework.section %}{% translate submission.homework.section.domain %}{% else %}{% translate "Independent task" %}{% endif %} · {{ submission.submitted_at|date:'M j' }}</small></span><b>{{ submission.score }}%</b></div>{% empty %}<div class="empty-state"><i class="bi bi-clipboard-data"></i><p>{% translate "Completed tests will appear here." %}</p></div>{% endfor %}</section>
+<section class="surface-card profile-activity">
+  <div class="profile-section-head"><div><p class="eyebrow">{% translate "Learning consistency" %}</p><h2>{% translate "My activity" %}</h2><p>{% translate "Lessons, attendance, saved answers, and submitted tasks across the last 12 months." %}</p></div><div class="activity-summary"><strong>{{ activity.active_days }}</strong><span>{% translate "active days" %}</span></div></div>
+  <div class="activity-scroll" tabindex="0" aria-label="{% translate 'Yearly learning activity chart' %}">
+    <div class="activity-chart">
+      <div class="activity-months">{% for month in activity.month_labels %}<span style="grid-column:{{ month.column }}">{{ month.date|date:'M' }}</span>{% endfor %}</div>
+      <div class="activity-chart-body">
+        <div class="activity-weekdays"><span>{% translate "Mon" %}</span><span></span><span>{% translate "Wed" %}</span><span></span><span>{% translate "Fri" %}</span><span></span><span></span></div>
+        <div class="activity-grid">{% for week in activity.weeks %}{% for day in week %}<span class="activity-cell activity-level-{{ day.level }}{% if day.is_today %} is-today{% endif %}{% if day.is_future %} is-future{% endif %}" title="{% blocktranslate with total=day.count activity_date=day.date|date:'M j, Y' %}{{ total }} activities on {{ activity_date }}{% endblocktranslate %}" aria-label="{% blocktranslate with total=day.count activity_date=day.date|date:'M j, Y' %}{{ total }} activities on {{ activity_date }}{% endblocktranslate %}"></span>{% endfor %}{% endfor %}</div>
+      </div>
+    </div>
+  </div>
+  <div class="activity-footer"><span>{% blocktranslate with days=activity.active_days %}{{ days }} active days in the last 12 months{% endblocktranslate %}</span><div class="activity-legend"><small>{% translate "Less" %}</small>{% for level in "01234" %}<i class="activity-level-{{ level }}"></i>{% endfor %}<small>{% translate "More" %}</small></div></div>
+</section>
+
+<div class="profile-content-grid">
+  <section class="surface-card profile-courses">
+    <div class="profile-section-head compact"><div><p class="eyebrow">{% translate "My learning" %}</p><h2>{% translate "My courses" %}</h2></div><a href="{% url 'learning:learn' %}">{% translate "View all" %}<i class="bi bi-arrow-right"></i></a></div>
+    <div class="profile-course-list">{% for course in courses %}<a class="profile-course-card" href="{% url 'learning:course_detail' course.id %}"><img src="{% static course.cover_image %}" alt=""><span class="profile-course-copy"><small>{% translate course.instructor_name %}</small><strong>{% translate course.title %}</strong><span>{{ course.sections.count }} {% translate "sections" %} · {{ course.progress_percent }}% {% translate "complete" %}</span><i class="mini-track"><b style="width:{{ course.progress_percent }}%"></b></i></span><i class="bi bi-arrow-up-right"></i></a>{% empty %}<div class="empty-state"><i class="bi bi-journal-bookmark"></i><h2>{% translate "No enrolled courses" %}</h2><p>{% translate "Choose a course to start building your SAT plan." %}</p><a class="btn btn-primary app-btn" href="{% url 'learning:learn' %}">{% translate "Browse courses" %}</a></div>{% endfor %}</div>
+  </section>
+
+  <section class="surface-card profile-results">
+    <div class="profile-section-head compact"><div><p class="eyebrow">{% translate "Performance" %}</p><h2>{% translate "Recent results" %}</h2></div></div>
+    <div class="profile-result-list">{% for submission in recent_submissions %}<a class="result-row" href="{% url 'learning:homework_detail' submission.homework.id %}"><span class="result-type-icon"><i class="bi {% if submission.homework.section %}bi-flag{% else %}bi-list-check{% endif %}"></i></span><span><strong>{% translate submission.homework.title %}</strong><small>{% if submission.homework.section %}{% translate submission.homework.section.domain %}{% else %}{% translate "Independent task" %}{% endif %} · {{ submission.submitted_at|date:'M j' }}</small></span><b>{{ submission.score }}%</b></a>{% empty %}<div class="empty-state"><i class="bi bi-clipboard-data"></i><h2>{% translate "No results yet" %}</h2><p>{% translate "Completed tasks will appear here." %}</p></div>{% endfor %}</div>
+  </section>
 </div>
 {% endblock %}

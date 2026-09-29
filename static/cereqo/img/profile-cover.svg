@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 420" role="img" aria-labelledby="title desc">
+  <title id="title">Cereqo SAT profile cover</title>
+  <desc id="desc">A dark abstract study map with contour lines, a coordinate grid, and focused SAT accents.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b13"/>
+      <stop offset="0.56" stop-color="#111a2a"/>
+      <stop offset="1" stop-color="#0a1220"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="12%" r="76%">
+      <stop offset="0" stop-color="#4965ff" stop-opacity=".25"/>
+      <stop offset=".52" stop-color="#1e315e" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#08101d" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="54" height="54" patternUnits="userSpaceOnUse">
+      <path d="M54 0H0V54" fill="none" stroke="#7f90ad" stroke-opacity=".08" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.4" fill="#9cacc8" fill-opacity=".16"/>
+    </pattern>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="420" fill="url(#bg)"/>
+  <rect width="1600" height="420" fill="url(#glow)"/>
+  <rect width="1600" height="420" fill="url(#grid)"/>
+  <g fill="none" stroke="#a7b4cb" stroke-opacity=".12" stroke-width="3">
+    <path d="M-60 67C96-15 228 23 332 103s210 96 329 38S918-1 1072 42s275 124 580 28"/>
+    <path d="M-67 122C83 41 212 72 305 143s210 100 335 49S895 49 1051 85s282 127 605 38"/>
+    <path d="M-75 182C70 103 193 119 281 184s209 105 338 62 251-141 410-108 291 128 633 37"/>
+    <path d="M-86 248C52 172 171 164 257 225s207 111 339 76 248-135 412-105 300 130 662 40"/>
+    <path d="M-92 320C42 251 153 218 238 276s205 120 341 92 245-126 413-99 310 130 686 49"/>
+    <path d="M167 451c68-76 133-101 203-76s91 24 146-13 112-42 183-7 138 39 219-5 148-64 259-17 201 55 326-2"/>
+  </g>
+  <g fill="none" stroke="#637dff" stroke-opacity=".22" stroke-width="2">
+    <path d="M1152-32c-72 57-97 114-66 171s97 55 116 119-10 112-61 176"/>
+    <path d="M1208-35c-65 59-81 110-51 158s94 51 115 119-3 118-54 190"/>
+    <path d="M1269-39c-59 64-66 108-35 149s91 49 115 121 4 122-47 196"/>
+  </g>
+  <g transform="translate(112 84)">
+    <rect width="70" height="70" rx="16" fill="#f5b942" fill-opacity=".12" stroke="#f5b942" stroke-opacity=".36"/>
+    <path d="M18 38h15l-5 20 25-32H38l5-17z" fill="#f5b942"/>
+  </g>
+  <g transform="translate(1370 254)" fill="none" stroke="#45d7b3" stroke-width="2">
+    <circle cx="22" cy="22" r="21" opacity=".46"/>
+    <circle cx="22" cy="22" r="10" opacity=".72"/>
+    <path d="M22-8v60M-8 22h60" opacity=".3"/>
+  </g>
+  <circle cx="1346" cy="111" r="54" fill="#4f6bff" opacity=".09" filter="url(#soft)"/>
+  <circle cx="271" cy="337" r="72" fill="#45d7b3" opacity=".06" filter="url(#soft)"/>
+</svg>

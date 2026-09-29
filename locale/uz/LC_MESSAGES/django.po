@@ -12,6 +12,9 @@ msgstr "%(answered)s/%(total)s javob berildi"
 msgid "%(completed)s of %(total)s lessons complete"
 msgstr "%(total)s darsdan %(completed)s tasi yakunlangan"
 
+msgid "%(days)s active days in the last 12 months"
+msgstr "So‘nggi 12 oyda %(days)s ta faol kun"
+
 msgid "%(days)s days"
 msgstr "%(days)s kun"
 
@@ -26,6 +29,9 @@ msgstr "%(streak)s kun"
 
 msgid "%(teacher)s teaching the course"
 msgstr "Kurs o‘qituvchisi %(teacher)s dars jarayonida"
+
+msgid "%(total)s activities on %(activity_date)s"
+msgstr "%(activity_date)s kuni %(total)s ta faollik"
 
 msgid "%(total)s domain sections"
 msgstr "%(total)s ta yo‘nalish bo‘limi"
@@ -360,6 +366,9 @@ msgstr "Navigatsiya yo‘li"
 msgid "Bring your checkpoint questions."
 msgstr "Nazorat savollaringizni olib keling."
 
+msgid "Browse courses"
+msgstr "Kurslarni ko‘rish"
+
 msgid "Build it with a clear system."
 msgstr "Uni aniq tizim bilan yarating."
 
@@ -426,6 +435,9 @@ msgstr "Asosiy g‘oyalar va sonli dalillar"
 msgid "Cereqo SAT learning experience"
 msgstr "Cereqo SAT ta’lim muhiti"
 
+msgid "Cereqo SAT study workspace"
+msgstr "Cereqo SAT o‘quv muhiti"
+
 msgid "Cereqo academic team"
 msgstr "Cereqo akademik jamoasi"
 
@@ -437,6 +449,9 @@ msgstr "Cereqo demo"
 
 msgid "Cereqo home"
 msgstr "Cereqo bosh sahifasi"
+
+msgid "Cereqo learners"
+msgstr "Cereqo o‘quvchilari"
 
 msgid "Cereqo mentor explaining a lesson"
 msgstr "Darsni tushuntirayotgan Cereqo mentori"
@@ -458,6 +473,9 @@ msgstr "Hozir aniq yo‘nalishni tanlang. Keyingi darslar, testlar va jadvalni C
 
 msgid "Choose a course built around your SAT goal."
 msgstr "SAT maqsadingizga mos kursni tanlang."
+
+msgid "Choose a course to start building your SAT plan."
+msgstr "SAT rejangizni boshlash uchun kurs tanlang."
 
 msgid "Choose a marked date to view the session."
 msgstr "Mashg‘ulotni ko‘rish uchun belgilangan sanani tanlang."
@@ -512,6 +530,9 @@ msgstr "Bajarilgan"
 
 msgid "Completed lessons"
 msgstr "Yakunlangan darslar"
+
+msgid "Completed tasks will appear here."
+msgstr "Bajarilgan vazifalar shu yerda ko‘rinadi."
 
 msgid "Completed tests will appear here."
 msgstr "Yakunlangan testlar shu yerda ko‘rinadi."
@@ -1026,6 +1047,9 @@ msgstr "Interfeys manbasi"
 msgid "Invalid answer."
 msgstr "Javob noto‘g‘ri formatda."
 
+msgid "Joined %(joined)s"
+msgstr "%(joined)s dan beri a’zo"
+
 msgid "Keep moving forward, %(name)s."
 msgstr "Oldinga intiling, %(name)s."
 
@@ -1086,6 +1110,9 @@ msgstr "O‘quvchi profili"
 msgid "Learning calendar"
 msgstr "O‘quv kalendari"
 
+msgid "Learning consistency"
+msgstr "O‘qish izchilligi"
+
 msgid "Learning path"
 msgstr "O‘quv yo‘li"
 
@@ -1094,6 +1121,9 @@ msgstr "O‘quv yo‘llari"
 
 msgid "Learning system"
 msgstr "O‘quv tizimi"
+
+msgid "Less"
+msgstr "Kam"
 
 msgid "Lesson"
 msgstr "Dars"
@@ -1115,6 +1145,9 @@ msgstr "Darslar"
 
 msgid "Lessons and tests"
 msgstr "Darslar va testlar"
+
+msgid "Lessons, attendance, saved answers, and submitted tasks across the last 12 months."
+msgstr "So‘nggi 12 oydagi darslar, davomat, saqlangan javoblar va topshirilgan vazifalar."
 
 msgid "Lessons, section tests, and your schedule stay connected, so every result leads to a clear next step."
 msgstr "Darslar, bo‘lim testlari va jadvalingiz o‘zaro bog‘langan — har bir natija aniq keyingi qadamga olib boradi."
@@ -1230,11 +1263,17 @@ msgstr "Du"
 msgid "Monthly schedule summary"
 msgstr "Oylik jadval xulosasi"
 
+msgid "More"
+msgstr "Ko‘p"
+
 msgid "More lessons"
 msgstr "Boshqa darslar"
 
 msgid "Move through ordered sections and lessons instead of guessing what to study next."
 msgstr "Keyin nimani o‘qishni taxmin qilish o‘rniga bo‘lim va darslarni tartib bilan o‘ting."
+
+msgid "My activity"
+msgstr "Mening faoliyatim"
 
 msgid "My courses"
 msgstr "Mening kurslarim"
@@ -1284,6 +1323,9 @@ msgstr "Keyingi rejalashtirilgan dars"
 msgid "Next section"
 msgstr "Keyingi bo‘lim"
 
+msgid "No enrolled courses"
+msgstr "Yozilgan kurslar yo‘q"
+
 msgid "No events this day"
 msgstr "Bu kunda reja yo‘q"
 
@@ -1295,6 +1337,9 @@ msgstr "Mustaqil vazifalar yo‘q"
 
 msgid "No lessons yet"
 msgstr "Hozircha darslar yo‘q"
+
+msgid "No results yet"
+msgstr "Hozircha natijalar yo‘q"
 
 msgid "No session selected"
 msgstr "Mashg‘ulot tanlanmagan"
@@ -1544,6 +1589,9 @@ msgstr "Boshlashga tayyor"
 
 msgid "Recalibration is a consequence of the inconsistent readings."
 msgstr "Qayta sozlash bir xil bo‘lmagan ko‘rsatkichlarning oqibatidir."
+
+msgid "Recent results"
+msgstr "So‘nggi natijalar"
 
 msgid "Recent test results"
 msgstr "So‘nggi test natijalari"
@@ -2190,6 +2238,9 @@ msgstr "24 + 18m = 132 deb yozamiz. 18m = 108, demak m = 6."
 msgid "Write units beside every quantity. Set up equivalent ratios in the same order, then estimate before calculating so an inverted ratio is easy to spot."
 msgstr "Har bir miqdor yoniga birlikni yozing. Teng nisbatlarni bir xil tartibda tuzing va teskari nisbatni tez sezish uchun hisoblashdan oldin taxmin qiling."
 
+msgid "Yearly learning activity chart"
+msgstr "Yillik o‘quv faolligi jadvali"
+
 msgid "You"
 msgstr "Siz"
 
@@ -2235,6 +2286,9 @@ msgstr "O‘quv maydoningiz"
 msgid "You’re all caught up."
 msgstr "Barcha vazifalar bajarilgan."
 
+msgid "active days"
+msgstr "faol kun"
+
 msgid "adaptive exam sections"
 msgstr "adaptiv imtihon qismi"
 
@@ -2246,6 +2300,9 @@ msgstr "ko‘plik shakli: are"
 
 msgid "available courses"
 msgstr "ta mavjud kurs"
+
+msgid "average score"
+msgstr "o‘rtacha natija"
 
 msgid "avoid a claim"
 msgstr "fikr bildirishdan qochish uchun"
@@ -2267,6 +2324,9 @@ msgstr "erkin"
 
 msgid "classes"
 msgstr "ta dars"
+
+msgid "complete"
+msgstr "yakunlangan"
 
 msgid "completed"
 msgstr "yakunlangan"
@@ -2330,6 +2390,9 @@ msgstr "uzun"
 
 msgid "lessons"
 msgstr "ta dars"
+
+msgid "lessons completed"
+msgstr "dars yakunlandi"
 
 msgid "limited"
 msgstr "cheklangan"
@@ -2405,6 +2468,9 @@ msgstr "aniq va bevosita tegishli"
 
 msgid "target"
 msgstr "maqsad"
+
+msgid "tasks completed"
+msgstr "vazifa bajarildi"
 
 msgid "tests completed"
 msgstr "ta test yakunlangan"

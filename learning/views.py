@@ -1,10 +1,11 @@
 import calendar
 import json
+from collections import defaultdict
 from datetime import date, timedelta
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, Q
+from django.db.models import Avg, Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -107,6 +108,78 @@ def _course_cards(courses=None):
             }
         )
     return cards
+
+
+def _profile_activity(student):
+    """Build a deterministic 53-week activity grid from real learning events."""
+    today = timezone.localdate()
+    grid_end = today + timedelta(days=6 - today.weekday())
+    grid_start = grid_end - timedelta(days=(53 * 7) - 1)
+    activity = defaultdict(int)
+
+    submissions = student.submissions.prefetch_related("answers").filter(
+        started_at__date__gte=grid_start,
+        started_at__date__lte=grid_end,
+    )
+    for submission in submissions:
+        activity[timezone.localdate(submission.started_at)] += 1
+        if submission.submitted_at:
+            activity[timezone.localdate(submission.submitted_at)] += 3
+        for answer in submission.answers.all():
+            answer_date = timezone.localdate(answer.saved_at)
+            if grid_start <= answer_date <= grid_end:
+                activity[answer_date] += 1
+
+    enrolled_courses = Course.objects.filter(enrollments__student=student)
+    lessons = Lesson.objects.filter(
+        section__course__in=enrolled_courses,
+        scheduled_date__range=(grid_start, grid_end),
+        progress_percent__gt=0,
+    )
+    for lesson in lessons:
+        activity[lesson.scheduled_date] += max(1, min(3, round(lesson.progress_percent / 40)))
+
+    attended_sessions = AttendanceSession.objects.filter(
+        lesson__section__course__in=enrolled_courses,
+        date__range=(grid_start, grid_end),
+        status="attended",
+    )
+    for session in attended_sessions:
+        activity[session.date] += 2
+
+    weeks = []
+    month_labels = []
+    previous_month = None
+    for week_index in range(53):
+        week_start = grid_start + timedelta(days=week_index * 7)
+        if week_start.month != previous_month:
+            month_labels.append({"date": week_start, "column": week_index + 1})
+            previous_month = week_start.month
+        days = []
+        for day_index in range(7):
+            day = week_start + timedelta(days=day_index)
+            count = activity.get(day, 0)
+            level = 0 if count == 0 else 1 if count == 1 else 2 if count <= 3 else 3 if count <= 5 else 4
+            days.append(
+                {
+                    "date": day,
+                    "count": count,
+                    "level": level,
+                    "is_future": day > today,
+                    "is_today": day == today,
+                }
+            )
+        weeks.append(days)
+
+    visible_activity = {day: count for day, count in activity.items() if grid_start <= day <= today}
+    return {
+        "weeks": weeks,
+        "month_labels": month_labels,
+        "active_days": len(visible_activity),
+        "total": sum(visible_activity.values()),
+        "start": grid_start,
+        "end": today,
+    }
 
 
 def dashboard(request):
@@ -334,11 +407,20 @@ def leaderboard(request):
 @login_required
 def profile(request):
     student = _student(request)
-    courses = list(Course.objects.prefetch_related("sections__lessons").all())
-    recent_submissions = student.submissions.select_related(
+    courses = list(
+        Course.objects.filter(enrollments__student=student)
+        .prefetch_related("sections__lessons")
+        .distinct()
+    )
+    completed_submissions = student.submissions.filter(submitted_at__isnull=False)
+    recent_submissions = completed_submissions.select_related(
         "homework__section__course", "homework__lesson"
-    ).filter(submitted_at__isnull=False).order_by("-submitted_at")[:5]
-    completed_tasks = student.submissions.filter(submitted_at__isnull=False).count()
+    ).order_by("-submitted_at")[:5]
+    completed_tasks = completed_submissions.count()
+    average_score = completed_submissions.aggregate(average=Avg("score"))["average"]
+    completed_lessons = Lesson.objects.filter(
+        section__course__in=courses, progress_percent=100
+    ).count()
     return render(
         request,
         "learning/profile.html",
@@ -348,6 +430,9 @@ def profile(request):
             "courses": courses,
             "recent_submissions": recent_submissions,
             "completed_tasks": completed_tasks,
+            "completed_lessons": completed_lessons,
+            "average_score": round(average_score) if average_score is not None else None,
+            "activity": _profile_activity(student),
         },
     )
 

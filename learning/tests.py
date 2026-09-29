@@ -148,6 +148,16 @@ class DemoFlowTests(TestCase):
         self.assertContains(dashboard, 'class="dropdown profile-menu"')
         self.assertNotContains(dashboard, '<nav class="desktop-main-nav" aria-label="Main navigation"><a href="/profile/"')
 
+    def test_profile_shows_real_activity_and_enrolled_courses(self):
+        page = self.client.get(reverse("learning:profile"))
+        self.assertEqual(page.status_code, 200)
+        self.assertContains(page, "cereqo/img/profile-cover-sat.png")
+        self.assertContains(page, 'class="activity-cell', count=371)
+        self.assertEqual(len(page.context["activity"]["weeks"]), 53)
+        self.assertGreater(page.context["activity"]["active_days"], 0)
+        self.assertEqual(len(page.context["courses"]), 1)
+        self.assertContains(page, 'class="profile-course-card"', count=1)
+
     def test_initial_data_exposes_all_four_computed_states(self):
         states = {
             homework.status_for(self.student)
