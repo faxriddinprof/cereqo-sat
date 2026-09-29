@@ -3,7 +3,7 @@
 {% block content %}
 <section class="page-heading"><div><p class="eyebrow">{% translate "Class standings" %}</p><h1>{% translate "Leaderboard" %}</h1><p>{% translate "Compare progress while learning at your own pace." %}</p></div><div class="your-rank-callout"><span>{% translate "Your rank" %}</span><strong>#{{ current_student.rank }}</strong><small>{{ current_student.points }} XP</small></div></section>
 
-<section class="podium" aria-label="Top three learners">
+<section class="podium" aria-label="{% translate 'Top three learners' %}">
   {% for student in students|slice:':3' %}
   <article class="podium-place place-{{ forloop.counter }} {% if student.pk == current_student.pk %}is-current{% endif %}">
     <span class="podium-rank">#{{ forloop.counter }}</span><span class="avatar avatar-lg">{{ student.initials }}</span><strong>{{ student.name }}</strong><span class="badge-chip"><i class="bi bi-patch-check-fill"></i> {% translate student.badge %}</span><b>{{ student.points }} XP</b><small><i class="bi bi-fire"></i> {% blocktranslate with streak=student.streak %}{{ streak }} day streak{% endblocktranslate %}</small>

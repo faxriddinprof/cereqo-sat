@@ -63,6 +63,9 @@ msgstr "30 soniyalik demo video"
 msgid "75 min guided session"
 msgstr "75 daqiqalik yo‘naltirilgan dars"
 
+msgid ": and"
+msgstr ": va"
+
 msgid "<strong data-answered-count>%(answered)s</strong>/%(total)s answered"
 msgstr "<strong data-answered-count>%(answered)s</strong>/%(total)s javob berildi"
 
@@ -72,11 +75,17 @@ msgstr "75 daqiqalik o‘zlashtirish tartibi"
 msgid "A brief mixed diagnostic used by your mentor to plan the next coaching session."
 msgstr "Mentor keyingi mashg‘ulotni rejalashi uchun qisqa aralash diagnostika."
 
+msgid "A broad assumption"
+msgstr "Umumiy taxmin"
+
 msgid "A car travels 156 miles on 6 gallons. What is the unit rate?"
 msgstr "Avtomobil 6 gallon yoqilg‘ida 156 mil yuradi. Bir gallon uchun masofa qancha?"
 
 msgid "A checkpoint for every section"
 msgstr "Har bir bo‘lim uchun nazorat"
+
+msgid "A circle has radius 6. What is its area?"
+msgstr "Aylananing radiusi 6. Uning yuzi qancha?"
 
 msgid "A clear path to your SAT goal."
 msgstr "SAT maqsadingizga aniq yo‘l."
@@ -95,6 +104,9 @@ msgstr "Ishonchli muqobil izoh"
 
 msgid "A credible alternative explanation makes the original inference less certain."
 msgstr "Ishonchli muqobil izoh dastlabki xulosaning aniqligini pasaytiradi."
+
+msgid "A cylinder has radius 3 and height 4. What is its volume?"
+msgstr "Silindrning radiusi 3, balandligi 4. Uning hajmi qancha?"
 
 msgid "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints."
 msgstr "Rasmiy raqamli SAT tuzilmasi, vaqtli mashqlar, tahlil va bo‘lim nazoratlari asosidagi yo‘nalishma-yo‘nalish o‘quv yo‘li."
@@ -153,8 +165,14 @@ msgstr "Har bir ball uchun aniq reja"
 msgid "A precise measurement"
 msgstr "Aniq o‘lchov"
 
+msgid "A qualified claim is limited or made less absolute."
+msgstr "Cheklovli fikrning qat’iyligi kamaytirilgan yoki doirasi toraytirilgan bo‘ladi."
+
 msgid "A recipe uses 2.5 cups of flour for 20 cookies. How many cups are needed for 32 cookies?"
 msgstr "20 ta pechenye uchun 2.5 piyola un kerak. 32 ta uchun necha piyola kerak?"
+
+msgid "A related opinion"
+msgstr "Mavzuga aloqador fikr"
 
 msgid "A relevant comparison"
 msgstr "Tegishli taqqoslash"
@@ -162,11 +180,20 @@ msgstr "Tegishli taqqoslash"
 msgid "A repeated detail"
 msgstr "Takrorlangan tafsilot"
 
+msgid "A repeated topic"
+msgstr "Takrorlangan mavzu"
+
+msgid "A right triangle has legs 5 and 12. Its hypotenuse is"
+msgstr "To‘g‘ri burchakli uchburchak katetlari 5 va 12. Uning gipotenuzasi qancha?"
+
 msgid "A schedule with real context"
 msgstr "Mazmunli o‘quv jadvali"
 
 msgid "A section-ending grammar set covering boundaries, form, structure, and sense."
 msgstr "Gap chegaralari, shakl, tuzilma va mazmunni qamrab oluvchi bo‘lim yakuniy grammatika to‘plami."
+
+msgid "A semicolon correctly joins two closely related independent clauses."
+msgstr "Nuqtali vergul mazmunan yaqin bo‘lgan ikkita mustaqil gapni to‘g‘ri bog‘laydi."
 
 msgid "A short review of unit rates and equivalent ratios."
 msgstr "Birlik tezligi va teng nisbatlar bo‘yicha qisqa takrorlash."
@@ -186,6 +213,9 @@ msgstr "Lug‘at, maqsad, tuzilma va juft matnlar tahlili bo‘yicha vaqtli bo�
 msgid "A town added protected bike lanes; bicycle trips rose 18% the next year. Which inference is most reasonable?"
 msgstr "Shaharda himoyalangan veloyo‘laklar qurildi; keyingi yili velosiped safarlari 18% oshdi. Qaysi xulosa eng asosli?"
 
+msgid "A value increases from 40 to 50. What is the percent increase?"
+msgstr "Qiymat 40 dan 50 ga oshdi. Foizli o‘sish qancha?"
+
 msgid "About us"
 msgstr "Biz haqimizda"
 
@@ -197,6 +227,9 @@ msgstr "Faol kurs"
 
 msgid "Adaptive by module"
 msgstr "Modul bo‘yicha adaptiv"
+
+msgid "AdminHMD template by"
+msgstr "AdminHMD shabloni muallifi"
 
 msgid "Advanced Math"
 msgstr "Murakkab matematika"
@@ -273,6 +306,9 @@ msgstr "Barcha nihollarga ko‘k yorug‘lik zarur."
 msgid "All surveys are inaccurate."
 msgstr "Barcha so‘rovlar noto‘g‘ri."
 
+msgid "An author describes an old theory before presenting new evidence mainly to"
+msgstr "Muallif yangi dalilni keltirishdan oldin eski nazariyani asosan nima uchun tasvirlaydi?"
+
 msgid "Answer all %(total)s questions before submitting."
 msgstr "Topshirishdan oldin barcha %(total)s ta savolga javob bering."
 
@@ -281,6 +317,9 @@ msgstr "Javoblar avtomatik saqlanadi"
 
 msgid "Apply today’s equation-building strategy in four focused questions."
 msgstr "Bugungi tenglama tuzish usulini to‘rtta aniq savolda qo‘llang."
+
+msgid "Area is πr² = π(6²) = 36π."
+msgstr "Yuza πr² = π(6²) = 36π ga teng."
 
 msgid "As a result"
 msgstr "Natijada"
@@ -314,6 +353,9 @@ msgstr "Vazifalarga qaytish"
 
 msgid "Blue light always improves plant health."
 msgstr "Ko‘k yorug‘lik har doim o‘simlik sog‘lig‘ini yaxshilaydi."
+
+msgid "Breadcrumb"
+msgstr "Navigatsiya yo‘li"
 
 msgid "Bring your checkpoint questions."
 msgstr "Nazorat savollaringizni olib keling."
@@ -372,6 +414,9 @@ msgstr "Ingliz tili me’yorlari bo‘yicha tayanch ko‘nikmalarni yarating, so
 msgid "Built for your SAT routine"
 msgstr "SAT tartibingiz uchun yaratilgan"
 
+msgid "By the Pythagorean theorem, √(5² + 12²) = √169 = 13."
+msgstr "Pifagor teoremasiga ko‘ra, √(5² + 12²) = √169 = 13."
+
 msgid "Car travel ended in the town."
 msgstr "Shaharda avtomobil qatnovi tugadi."
 
@@ -389,6 +434,9 @@ msgstr "Cereqo diagnostika, mentor darslari, bo‘lim testlari, aqlli jadval va 
 
 msgid "Cereqo demo"
 msgstr "Cereqo demo"
+
+msgid "Cereqo home"
+msgstr "Cereqo bosh sahifasi"
 
 msgid "Cereqo mentor explaining a lesson"
 msgstr "Darsni tushuntirayotgan Cereqo mentori"
@@ -432,6 +480,9 @@ msgstr "Guruh natijalari"
 msgid "Clear course map"
 msgstr "Aniq kurs xaritasi"
 
+msgid "Close"
+msgstr "Yopish"
+
 msgid "Command of Evidence"
 msgstr "Dalillar bilan ishlash"
 
@@ -473,6 +524,9 @@ msgstr "Tushuncha"
 
 msgid "Concept model, guided practice, timed set, and error-log review."
 msgstr "Tushuncha modeli, yo‘naltirilgan mashq, vaqtli to‘plam va xatolar jurnalini tahlil qilish."
+
+msgid "Connect equivalent expressions, nonlinear equations, and their graphs."
+msgstr "Teng kuchli ifodalar, chiziqsiz tenglamalar va ularning grafiklari orasidagi bog‘lanishni toping."
 
 msgid "Consequently"
 msgstr "Natijada"
@@ -645,6 +699,9 @@ msgstr "Digital SAT platformasi"
 msgid "Digital SAT preparation"
 msgstr "Digital SAT tayyorgarligi"
 
+msgid "Direct, relevant evidence best supports a claim."
+msgstr "Fikrni bevosita va tegishli dalil eng yaxshi qo‘llab-quvvatlaydi."
+
 msgid "Divide 156 miles by 6 gallons to get 26 miles per gallon."
 msgstr "156 milni 6 gallonga bo‘lsak, bir gallonga 26 mil chiqadi."
 
@@ -671,6 +728,9 @@ msgstr "Har bir daftar $2.75, o‘ntasi esa $27.50 turadi."
 
 msgid "Each task closes a course section and measures mastery of its SAT domain."
 msgstr "Har vazifa kurs bo‘limini yakunlaydi va shu SAT yo‘nalishi o‘zlashtirilishini o‘lchaydi."
+
+msgid "Edit sentence boundaries, agreement, and modifiers with repeatable grammar checks."
+msgstr "Takror qo‘llanadigan grammatik tekshiruvlar orqali gap chegaralari, moslashuv va aniqlovchilarni tahrir qiling."
 
 msgid "End of section"
 msgstr "Bo‘lim yakuni"
@@ -783,6 +843,9 @@ msgstr "Darslarni tartib bilan yakunlang, keyin har bo‘lim oxiridagi nazoratda
 msgid "Finish two more focused sessions to reach this week’s goal."
 msgstr "Haftalik maqsad uchun yana ikki mashg‘ulotni yakunlang."
 
+msgid "First identify complete clauses. Then choose punctuation based on the boundary between them. Finally, verify subject–verb agreement and place modifiers beside the words they describe."
+msgstr "Avval tugallangan gap qismlarini aniqlang. So‘ng ular orasidagi chegaraga mos tinish belgisini tanlang. Yakunda ega-kesim mosligini tekshiring va aniqlovchilarni ular izohlaydigan so‘z yoniga joylashtiring."
+
 msgid "Focused mentors"
 msgstr "Tajribali mentorlar"
 
@@ -882,8 +945,14 @@ msgstr "Biroq"
 msgid "Identify the relationship between ideas before choosing the connector."
 msgstr "Bog‘lovchini tanlashdan oldin fikrlar orasidagi munosabatni aniqlang."
 
+msgid "If 2ˣ = 32, what is x?"
+msgstr "2ˣ = 32 bo‘lsa, x nechaga teng?"
+
 msgid "If 3x + 5 = 20, what is x?"
 msgstr "3x + 5 = 20 bo‘lsa, x nechaga teng?"
+
+msgid "If 4x + 3 = 19, what is x?"
+msgstr "4x + 3 = 19 bo‘lsa, x nechaga teng?"
 
 msgid "If 5y + 8 = 3y + 26, what is y?"
 msgstr "5y + 8 = 3y + 26 bo‘lsa, y nechaga teng?"
@@ -902,6 +971,9 @@ msgstr "Geometriyani tushuntirayotgan illyustrativ o‘qituvchi"
 
 msgid "In addition"
 msgstr "Bundan tashqari"
+
+msgid "In context, the word ‘qualified’ most nearly means"
+msgstr "Kontekstda «qualified» so‘zi qaysi ma’noga eng yaqin?"
 
 msgid "In contrast"
 msgstr "Aksincha"
@@ -1092,11 +1164,20 @@ msgstr "Boshlash uchun kiring"
 msgid "Log out"
 msgstr "Chiqish"
 
+msgid "Look for structure before expanding. Factoring reveals zeros, vertex form reveals a minimum or maximum, and exponential form reveals a constant percent change."
+msgstr "Yoyishdan oldin tuzilmani kuzating. Ko‘paytuvchilarga ajratish nollarni, cho‘qqi ko‘rinishi minimum yoki maksimumni, eksponensial ko‘rinish esa doimiy foizli o‘zgarishni ko‘rsatadi."
+
+msgid "Main navigation"
+msgstr "Asosiy navigatsiya"
+
 msgid "Make every study session count."
 msgstr "Har bir mashg‘ulotni natijaga aylantiring."
 
 msgid "Many desert plants store water in thick stems. ___, the saguaro expands after rainfall."
 msgstr "Ko‘plab cho‘l o‘simliklari suvni qalin poyasida saqlaydi. ___, saguaro yomg‘irdan keyin kengayadi."
+
+msgid "Mark known lengths and angles directly on the diagram. Choose a relationship only after naming the target: similarity, Pythagorean theorem, trigonometric ratio, circle property, area, or volume."
+msgstr "Ma’lum uzunlik va burchaklarni bevosita chizmada belgilang. Maqsadni — o‘xshashlik, Pifagor teoremasi, trigonometrik nisbat, aylana xossasi, yuza yoki hajmni — aniqlagandan keyingina mos bog‘lanishni tanlang."
 
 msgid "Mastery rule"
 msgstr "O‘zlashtirish mezoni"
@@ -1121,6 +1202,12 @@ msgstr "Mentorlar"
 
 msgid "Mentors explain the reasoning behind SAT questions, not just the correct option."
 msgstr "Mentorlar faqat to‘g‘ri javobni emas, SAT savoli ortidagi mantiqni ham tushuntiradi."
+
+msgid "Mina is the person walking, so she must immediately follow the modifier."
+msgstr "Yurayotgan shaxs Mina bo‘lgani uchun aniqlovchidan keyin darhol uning nomi kelishi kerak."
+
+msgid "Mina studied the sculptures"
+msgstr "Mina haykallarni o‘rgandi"
 
 msgid "Missed"
 msgstr "Qoldirilgan"
@@ -1157,6 +1244,9 @@ msgstr "Mening ta’limim"
 
 msgid "My profile"
 msgstr "Mening profilim"
+
+msgid "Name the job of each sentence and paragraph. For paired texts, state each author’s position independently before comparing where they agree, differ, or qualify one another."
+msgstr "Har bir gap va paragraf vazifasini aniqlang. Juft matnlarda mualliflarning pozitsiyasini alohida belgilang, so‘ng ularning fikrlari qayerda mos kelishi, farqlanishi yoki bir-birini cheklashini taqqoslang."
 
 msgid "Name the unknown first. Translate one relationship at a time, then simplify both sides before isolating the variable. On the digital SAT, a quick substitution check often catches sign errors faster than reworking the algebra."
 msgstr "Avval noma’lumni belgilang. Har bir bog‘lanishni alohida tenglamaga o‘tkazing, so‘ng o‘zgaruvchini ajratishdan oldin ikki tomonni soddalashtiring. Raqamli SAT’da o‘rniga qo‘yib tekshirish ishora xatolarini tez topadi."
@@ -1356,6 +1446,9 @@ msgstr "Oldingi bo‘lim"
 msgid "Previously"
 msgstr "Avval"
 
+msgid "Primary navigation"
+msgstr "Birlamchi navigatsiya"
+
 msgid "Problem-Solving and Data Analysis"
 msgstr "Masala yechish va ma’lumotlar tahlili"
 
@@ -1415,6 +1508,9 @@ msgstr "Tezliklar, foizlar va ma’lumotlar"
 
 msgid "Ratios, rates, and proportional reasoning"
 msgstr "Nisbatlar, tezliklar va proporsiyalar"
+
+msgid "Read like a writer: track purpose, structure, and relationships across short texts."
+msgstr "Muallif nigohi bilan o‘qing: qisqa matnlardagi maqsad, tuzilma va bog‘lanishlarni kuzating."
 
 msgid "Read the sentences without the blank and describe their relationship in plain language: contrast, cause, example, continuation, or conclusion. Only then choose the transition that expresses that relationship with the correct punctuation."
 msgstr "Gaplarni bo‘sh joysiz o‘qing va ularning bog‘lanishini aniqlang: qarama-qarshilik, sabab, misol, davom yoki xulosa. Shundan keyin mos tinish belgili bog‘lovchini tanlang."
@@ -1674,6 +1770,9 @@ msgstr "Yangi izolyatsiyasiz yaqin binolarda kamayish kuzatilmagan."
 msgid "Similarly"
 msgstr "Xuddi shunday"
 
+msgid "Since 32 = 2⁵, x = 5."
+msgstr "32 = 2⁵ bo‘lgani uchun x = 5."
+
 msgid "Skill focus"
 msgstr "Asosiy ko‘nikma"
 
@@ -1685,6 +1784,9 @@ msgstr "Qiyalik y o‘zgarishini x o‘zgarishiga bo‘lish orqali topiladi: (19
 
 msgid "Slope-intercept form is y = mx + b, so y = 2x + 3."
 msgstr "Qiyalik-kesishma ko‘rinishi y = mx + b, demak y = 2x + 3."
+
+msgid "Specific relevant evidence"
+msgstr "Aniq va tegishli dalil"
 
 msgid "Standard English Conventions"
 msgstr "Ingliz tili me’yorlari"
@@ -1755,6 +1857,9 @@ msgstr "Kech topshirildi"
 msgid "Submitted! You earned %(points)s points."
 msgstr "Topshirildi! Siz %(points)s ball oldingiz."
 
+msgid "Subtract 3, then divide 16 by 4."
+msgstr "3 ni ayiring, so‘ng 16 ni 4 ga bo‘ling."
+
 msgid "Subtract 3y and 8 from both sides: 2y = 18, so y = 9."
 msgstr "Ikki tomondan 3y va 8 ni ayiring: 2y = 18, demak y = 9."
 
@@ -1803,6 +1908,12 @@ msgstr "Test"
 msgid "Test-day move"
 msgstr "Test kunidagi usul"
 
+msgid "Text 1 calls the policy effective; Text 2 says its effect is promising but not yet proven. Text 2 would most likely"
+msgstr "1-matn siyosatni samarali deb ataydi; 2-matn esa uning ta’siri umidli, ammo hali isbotlanmaganini aytadi. 2-matn, ehtimol:"
+
+msgid "Text 2 accepts the possibility but reduces the certainty of Text 1’s claim."
+msgstr "2-matn ehtimolni tan oladi, ammo 1-matn fikrining qat’iyligini pasaytiradi."
+
 msgid "Text structure and cross-text connections"
 msgstr "Matn tuzilishi va matnlararo bog‘lanish"
 
@@ -1824,6 +1935,9 @@ msgstr "Taqvim kurs ketma-ketligidan avtomatik tuziladi. Nazoratlar Vazifalarda 
 msgid "The checkpoint unlocks at the end of this section’s lesson sequence."
 msgstr "Nazorat ushbu bo‘lim darslari yakunida ochiladi."
 
+msgid "The collection of maps ___ housed in a climate-controlled room."
+msgstr "Xaritalar to‘plami iqlimi nazorat qilinadigan xonada ___ saqlanadi."
+
 msgid "The data supports an effect on height, not broader claims about health or necessity."
 msgstr "Ma’lumot balandlikka ta’sirni ko‘rsatadi, sog‘liq yoki zarurat haqidagi kengroq fikrlarni emas."
 
@@ -1833,6 +1947,12 @@ msgstr "To‘liq adaptiv simulyatsiyadan oldingi so‘nggi yo‘nalish nazorati.
 msgid "The first trial produced inconsistent readings. ___, the team recalibrated the sensor before continuing."
 msgstr "Birinchi sinovda ko‘rsatkichlar bir xil chiqmadi. ___, jamoa davom etishdan oldin sensorni qayta sozladi."
 
+msgid "The graph of y = (x − 4)² + 2 has its minimum at"
+msgstr "y = (x − 4)² + 2 grafigining minimum nuqtasi qayerda?"
+
+msgid "The increase is 10, and 10/40 = 25%."
+msgstr "O‘sish 10 ga teng va 10/40 = 25%."
+
 msgid "The insulation was blue."
 msgstr "Izolyatsiya ko‘k rangda bo‘lgan."
 
@@ -1841,6 +1961,9 @@ msgstr "Asosiy g‘oya"
 
 msgid "The lanes may have encouraged more cycling."
 msgstr "Yo‘laklar ko‘proq velosiped haydashga undagan bo‘lishi mumkin."
+
+msgid "The old theory establishes the position that the new evidence challenges."
+msgstr "Eski nazariya yangi dalil shubha ostiga oladigan pozitsiyani belgilab beradi."
 
 msgid "The platform always shows what you are learning, why it matters, and what comes next."
 msgstr "Platforma nimani o‘rganayotganingizni, uning ahamiyatini va keyingi qadamni doim ko‘rsatadi."
@@ -1857,6 +1980,9 @@ msgstr "Qizil va ko‘k plitkalar nisbati 3:5. Ko‘k plitkalar 30 ta bo‘lsa, 
 msgid "The saguaro is a specific example of the general statement."
 msgstr "Saguaro umumiy fikrning aniq misolidir."
 
+msgid "The samples were stored at low temperature ___ the team analyzed them the next morning."
+msgstr "Namunalar past haroratda saqlandi ___ jamoa ularni ertasi kuni ertalab tahlil qildi."
+
 msgid "The scale factor is 30 ÷ 5 = 6, so there are 3 × 6 = 18 red tiles."
 msgstr "Masshtab koeffitsiyenti 30 ÷ 5 = 6, demak 3 × 6 = 18 ta qizil plitka bor."
 
@@ -1865,6 +1991,9 @@ msgstr "Ikkinchi gap birinchi gap yaratgan kutilmaga qarama-qarshi, shuning uchu
 
 msgid "The strongest evidence for a claim should be"
 msgstr "Fikrni qo‘llovchi eng kuchli dalil qanday bo‘lishi kerak?"
+
+msgid "The subject is the singular noun ‘collection,’ so ‘is’ agrees."
+msgstr "Ega birlikdagi «collection» so‘zi bo‘lgani uchun «is» unga mos keladi."
 
 msgid "The survey cannot by itself prove that reading caused the scores."
 msgstr "So‘rovning o‘zi o‘qish natijaga sabab bo‘lganini isbotlay olmaydi."
@@ -1886,6 +2015,9 @@ msgstr "Bu demo mentor profillari kelajakdagi Cereqo jamoasi qanday ko‘rsatili
 
 msgid "This homework is already submitted."
 msgstr "Bu uy vazifasi allaqachon topshirilgan."
+
+msgid "This is a difference of squares: x² − 3² = (x − 3)(x + 3)."
+msgstr "Bu kvadratlar ayirmasi: x² − 3² = (x − 3)(x + 3)."
 
 msgid "This season"
 msgstr "Joriy davr"
@@ -1911,6 +2043,9 @@ msgstr "Bugungi mavzu"
 msgid "Today's plan"
 msgstr "Bugungi reja"
 
+msgid "Top three learners"
+msgstr "Eng yaxshi uch o‘quvchi"
+
 msgid "Total tasks"
 msgstr "Jami vazifalar"
 
@@ -1925,6 +2060,9 @@ msgstr "Bog‘lovchilar va matn yaxlitligi"
 
 msgid "Transitions that reveal logic"
 msgstr "Mantiqni ko‘rsatuvchi bog‘lovchilar"
+
+msgid "Translate diagrams into relationships using geometry and trigonometry."
+msgstr "Chizmalarni geometriya va trigonometriya yordamida matematik bog‘lanishlarga aylantiring."
 
 msgid "Triangles and trigonometric ratios"
 msgstr "Uchburchaklar va trigonometrik nisbatlar"
@@ -1962,6 +2100,9 @@ msgstr "Login"
 msgid "Uzbek and English"
 msgstr "O‘zbek va ingliz tillari"
 
+msgid "Vertex form y = (x − h)² + k has vertex (h, k)."
+msgstr "y = (x − h)² + k cho‘qqi ko‘rinishining cho‘qqisi (h, k) bo‘ladi."
+
 msgid "Video lesson"
 msgstr "Video dars"
 
@@ -1982,6 +2123,12 @@ msgstr "Ko‘rinadigan natija"
 
 msgid "Vocabulary cannot be measured."
 msgstr "Lug‘at boyligini o‘lchab bo‘lmaydi."
+
+msgid "Volume is πr²h = π(3²)(4) = 36π."
+msgstr "Hajm πr²h = π(3²)(4) = 36π ga teng."
+
+msgid "Walking through the gallery, ___"
+msgstr "Galereya bo‘ylab yurarkan, ___"
 
 msgid "We built Cereqo around one idea: every lesson, task, and score must explain what it changes and what the student should do next."
 msgstr "Cereqo bitta tamoyil asosida qurildi: har bir dars, vazifa va natija nimani o‘zgartirgani hamda keyingi qadamni tushuntirishi kerak."
@@ -2004,8 +2151,17 @@ msgstr "Cereqo’ga xush kelibsiz"
 msgid "What is 15% of 80?"
 msgstr "80 ning 15 foizi qancha?"
 
+msgid "Which choice most directly supports a claim?"
+msgstr "Qaysi variant fikrni eng bevosita qo‘llab-quvvatlaydi?"
+
 msgid "Which choice weakens an inference most?"
 msgstr "Qaysi variant xulosani eng ko‘p zaiflashtiradi?"
+
+msgid "Which expression is equivalent to x² − 9?"
+msgstr "Qaysi ifoda x² − 9 ga teng kuchli?"
+
+msgid "Which transition best signals a contrast?"
+msgstr "Qaysi bog‘lovchi qarama-qarshilikni eng yaxshi ifodalaydi?"
 
 msgid "Which word best completes a sentence describing a careful and exact method?"
 msgstr "Ehtiyotkor va aniq usulni tasvirlaydigan gapga qaysi so‘z mos?"
@@ -2085,11 +2241,20 @@ msgstr "adaptiv imtihon qismi"
 msgid "an unsupported opinion"
 msgstr "asossiz fikr"
 
+msgid "are"
+msgstr "ko‘plik shakli: are"
+
 msgid "available courses"
 msgstr "ta mavjud kurs"
 
+msgid "avoid a claim"
+msgstr "fikr bildirishdan qochish uchun"
+
 msgid "baseline"
 msgstr "boshlang‘ich"
+
+msgid "because,"
+msgstr "chunki,"
 
 msgid "brief"
 msgstr "qisqa"
@@ -2118,11 +2283,20 @@ msgstr "kunlik seriya"
 msgid "deadlines"
 msgstr "ta muddat"
 
+msgid "define a technical term"
+msgstr "texnik atamani ta’riflash uchun"
+
 msgid "demo date"
 msgstr "demo sana"
 
 msgid "demo learning paths"
 msgstr "demo o‘quv yo‘li"
+
+msgid "discuss an unrelated issue"
+msgstr "aloqasiz masalani muhokama qiladi"
+
+msgid "employed"
+msgstr "ishga olingan"
 
 msgid "exam sections"
 msgstr "imtihon qismi"
@@ -2130,8 +2304,20 @@ msgstr "imtihon qismi"
 msgid "fictional"
 msgstr "to‘qima"
 
+msgid "fully reject Text 1"
+msgstr "1-matnni to‘liq rad etadi"
+
+msgid "have been"
+msgstr "davomli shakl: have been"
+
 msgid "independent tasks"
 msgstr "ta mustaqil vazifa"
+
+msgid "introduce a contrast"
+msgstr "qarama-qarshilikni kiritish uchun"
+
+msgid "is"
+msgstr "birlik shakli: is"
 
 msgid "learner"
 msgstr "o‘quvchi"
@@ -2144,6 +2330,9 @@ msgstr "uzun"
 
 msgid "lessons"
 msgstr "ta dars"
+
+msgid "limited"
+msgstr "cheklangan"
 
 msgid "maximum SAT score"
 msgstr "maksimal SAT bali"
@@ -2187,8 +2376,20 @@ msgstr "o‘ziga xos"
 msgid "places"
 msgstr "o‘rin"
 
+msgid "praised"
+msgstr "maqtalgan"
+
+msgid "provide the same certainty"
+msgstr "xuddi shunday qat’iy xulosa beradi"
+
+msgid "qualify Text 1’s conclusion"
+msgstr "1-matn xulosasini cheklaydi"
+
 msgid "random"
 msgstr "tasodifiy"
+
+msgid "repeat the conclusion"
+msgstr "xulosani takrorlash uchun"
 
 msgid "section progress"
 msgstr "bo‘lim natijasi"
@@ -2208,11 +2409,23 @@ msgstr "maqsad"
 msgid "tests completed"
 msgstr "ta test yakunlangan"
 
+msgid "the lights were bright"
+msgstr "chiroqlar yorqin edi"
+
 msgid "the longest option"
 msgstr "eng uzun variant"
 
+msgid "the sculptures impressed Mina"
+msgstr "haykallar Minada taassurot qoldirdi"
+
+msgid "there were many sculptures"
+msgstr "u yerda ko‘plab haykallar bor edi"
+
 msgid "total score"
 msgstr "umumiy ball"
+
+msgid "trained"
+msgstr "tayyorlangan"
 
 msgid "uncertain"
 msgstr "noaniq"
@@ -2223,8 +2436,14 @@ msgstr "demo SAT sanasigacha"
 msgid "viewed"
 msgstr "ko‘rildi"
 
+msgid "were"
+msgstr "o‘tgan zamon ko‘plik shakli: were"
+
 msgid "years"
 msgstr "yil tajriba"
+
+msgid "‘However’ signals contrast."
+msgstr "«However» qarama-qarshilikni bildiradi."
 
 msgid "‘Meticulous’ means very careful and precise."
 msgstr "«Meticulous» juda ehtiyotkor va aniq degan ma’noni anglatadi."

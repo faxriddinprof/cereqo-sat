@@ -16,6 +16,7 @@ from .models import (
     CourseSection,
     Homework,
     Lesson,
+    Question,
     Student,
     Submission,
 )
@@ -276,6 +277,42 @@ class DemoFlowTests(TestCase):
         dashboard = self.client.get(reverse("learning:dashboard"))
         self.assertContains(dashboard, "Digital SAT Mastery")
         self.assertNotContains(dashboard, "8-Week Path")
+
+    def test_uzbek_catalog_covers_all_dynamic_learning_content(self):
+        prose_specs = [
+            (Course, ("description", "instructor_role")),
+            (CourseSection, ("title", "domain", "description")),
+            (Lesson, ("title", "topic", "summary", "material")),
+            (Homework, ("title", "description")),
+            (Question, ("prompt", "explanation")),
+            (AttendanceSession, ("title", "subject", "notes")),
+            (Student, ("badge",)),
+        ]
+        with translation.override("uz"):
+            for model, fields in prose_specs:
+                for item in model.objects.all():
+                    for field in fields:
+                        source = getattr(item, field)
+                        if source == "Algebra":
+                            continue
+                        self.assertNotEqual(
+                            translation.gettext(source),
+                            source,
+                            f"Missing Uzbek translation: {model.__name__}.{field}={source!r}",
+                        )
+
+            for question in Question.objects.all():
+                for field in ("option_a", "option_b", "option_c", "option_d"):
+                    source = getattr(question, field)
+                    is_formula = "=" in source or "π" in source or "²" in source or (
+                        "(" in source and any(character.isdigit() for character in source)
+                    )
+                    if any(character.isalpha() for character in source) and not is_formula:
+                        self.assertNotEqual(
+                            translation.gettext(source),
+                            source,
+                            f"Missing Uzbek translation: Question.{field}={source!r}",
+                        )
 
     def test_guest_can_only_open_home_courses_and_login(self):
         self.client.logout()

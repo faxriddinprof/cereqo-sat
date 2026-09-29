@@ -49,12 +49,12 @@
           body: JSON.stringify({ question_id: input.dataset.questionId, selected_option: input.value }),
         });
         const data = await response.json();
-        if (!response.ok || !data.ok) throw new Error(data.error || "Could not save");
+        if (!response.ok || !data.ok) throw new Error(data.error || "autosave_failed");
         if (status) status.textContent = `${form.dataset.savedLabel || "Saved at"} ${data.saved_at}`;
         if (count) count.textContent = data.answered;
         if (bar) bar.style.width = `${Math.round((data.answered / data.total) * 100)}%`;
       } catch (error) {
-        if (status) status.textContent = form.dataset.failedLabel || "Save failed — use Save & exit";
+        if (status) status.textContent = form.dataset.failedLabel;
         status?.classList.add("text-danger");
       }
     });

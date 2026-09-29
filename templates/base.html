@@ -17,13 +17,13 @@
   <a class="skip-link" href="#main-content">{% translate "Skip to content" %}</a>
   <div class="app-shell topnav-shell">
     <header class="mobile-header">
-      <a href="{% url 'learning:dashboard' %}" aria-label="Cereqo home"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
+      <a href="{% url 'learning:dashboard' %}" aria-label="{% translate 'Cereqo home' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
       <div class="header-actions">{% if user.is_authenticated and demo_student %}<div class="mobile-points"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</div>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if user.is_authenticated %}{% include 'learning/_profile_menu.html' %}{% else %}<a class="navbar-login-icon" href="{% url 'login' %}" aria-label="{% translate 'Log in' %}"><i class="bi bi-box-arrow-in-right"></i></a>{% endif %}</div>
     </header>
 
     <header class="desktop-topbar main-navbar">
       <a class="topnav-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
-      <nav class="desktop-main-nav" aria-label="Main navigation">{% include 'learning/_nav_links.html' %}</nav>
+      <nav class="desktop-main-nav" aria-label="{% translate 'Main navigation' %}">{% include 'learning/_nav_links.html' %}</nav>
       <div class="topnav-actions">{% if user.is_authenticated and demo_student %}<span class="topnav-xp"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if user.is_authenticated %}{% include 'learning/_profile_menu.html' %}{% else %}<a class="btn btn-primary navbar-login" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>{% translate "Log in" %}</a>{% endif %}</div>
     </header>
 
@@ -35,12 +35,12 @@
         {% if messages %}<div class="message-stack" aria-live="polite">{% for message in messages %}<div class="app-alert app-alert-{{ message.tags }}"><i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i><span>{{ message }}</span></div>{% endfor %}</div>{% endif %}
         {% block content %}{% endblock %}
         {% if not landing_page %}
-        <footer class="page-footer">{% translate "Cereqo demo" %} · {% translate "Original practice content" %} · AdminHMD template by <a href="https://github.com/HasanMahmudDev" target="_blank" rel="noreferrer">Md. Hasan Mahmud</a> (MIT)</footer>
+        <footer class="page-footer">{% translate "Cereqo demo" %} · {% translate "Original practice content" %} · {% translate "AdminHMD template by" %} <a href="https://github.com/HasanMahmudDev" target="_blank" rel="noreferrer">Md. Hasan Mahmud</a> (MIT)</footer>
         {% endif %}
       </main>
     </div>
 
-    <nav class="mobile-bottom-nav {% if not user.is_authenticated %}guest-nav{% endif %}" aria-label="Primary navigation">
+    <nav class="mobile-bottom-nav {% if not user.is_authenticated %}guest-nav{% endif %}" aria-label="{% translate 'Primary navigation' %}">
       <a href="{% url 'learning:dashboard' %}" class="{% if active_nav == 'home' %}active{% endif %}"><i class="bi bi-house-door{% if active_nav == 'home' %}-fill{% endif %}"></i><span>{% translate "Home" %}</span></a>
       <a href="{% url 'learning:learn' %}" class="{% if active_nav == 'learn' %}active{% endif %}"><i class="bi bi-collection-play{% if active_nav == 'learn' %}-fill{% endif %}"></i><span>{% translate "Courses" %}</span></a>
       {% if user.is_authenticated %}
@@ -53,7 +53,7 @@
     </nav>
   </div>
 
-  {% if course_navigation %}<div class="offcanvas offcanvas-start course-offcanvas" tabindex="-1" id="courseOutline" aria-labelledby="courseOutlineLabel"><div class="offcanvas-header"><h2 id="courseOutlineLabel">{% translate "Course plan" %}</h2><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div><div class="offcanvas-body">{% include 'learning/_course_sidebar.html' %}</div></div>{% endif %}
+  {% if course_navigation %}<div class="offcanvas offcanvas-start course-offcanvas" tabindex="-1" id="courseOutline" aria-labelledby="courseOutlineLabel"><div class="offcanvas-header"><h2 id="courseOutlineLabel">{% translate "Course plan" %}</h2><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="{% translate 'Close' %}"></button></div><div class="offcanvas-body">{% include 'learning/_course_sidebar.html' %}</div></div>{% endif %}
   <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static 'cereqo/js/cereqo.js' %}"></script>
   {% block scripts %}{% endblock %}
