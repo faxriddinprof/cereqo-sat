@@ -1,5 +1,7 @@
 from datetime import datetime, time, timedelta
 
+from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
@@ -250,6 +252,24 @@ class Command(BaseCommand):
         Student.objects.filter(name="Alex Morgan").update(is_demo=True)
         Student.objects.exclude(name="Alex Morgan").update(is_demo=False)
 
+        demo_user, _ = get_user_model().objects.get_or_create(
+            username=settings.DEMO_LOGIN_USERNAME,
+            defaults={
+                "email": "demo@cereqo.uz",
+                "first_name": "Alex",
+                "last_name": "Morgan",
+            },
+        )
+        demo_user.email = "demo@cereqo.uz"
+        demo_user.first_name = "Alex"
+        demo_user.last_name = "Morgan"
+        demo_user.set_password(settings.DEMO_LOGIN_PASSWORD)
+        demo_user.save()
+        demo_student = students["Alex Morgan"]
+        if demo_student.user_id != demo_user.pk:
+            demo_student.user = demo_user
+            demo_student.save(update_fields=["user"])
+
         course, _ = Course.objects.update_or_create(
             code="digital-sat-mastery",
             defaults={
@@ -464,7 +484,6 @@ class Command(BaseCommand):
                         demo_homework.questions.exclude(position__in=[1, 2]).delete()
             CourseSection.objects.filter(course=demo_course).exclude(pk__in=demo_section_ids).delete()
 
-        demo_student = students["Alex Morgan"]
         in_progress, created = Submission.objects.get_or_create(student=demo_student, homework=homeworks["transitions"])
         if created:
             first = homeworks["transitions"].questions.first()

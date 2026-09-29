@@ -60,3 +60,16 @@
     });
   });
 })();
+
+(() => {
+  const button = document.querySelector("[data-password-toggle]");
+  if (!button) return;
+  const input = button.closest(".auth-input")?.querySelector("input");
+  if (!input) return;
+  button.addEventListener("click", () => {
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    const icon = button.querySelector("i");
+    if (icon) icon.className = show ? "bi bi-eye-slash" : "bi bi-eye";
+  });
+})();

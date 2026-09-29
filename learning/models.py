@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models, transaction
 from django.utils import timezone
@@ -12,6 +13,13 @@ class DemoConfig(models.Model):
 
 
 class Student(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="student_profile",
+        null=True,
+        blank=True,
+    )
     name = models.CharField(max_length=100, unique=True)
     initials = models.CharField(max_length=3)
     points = models.PositiveIntegerField(default=0)

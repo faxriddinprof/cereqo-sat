@@ -1,5 +1,7 @@
 import json
 
+from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.core.management import call_command
 from django.test import TestCase
 from django.urls import reverse
@@ -15,6 +17,8 @@ class DemoFlowTests(TestCase):
 
     def setUp(self):
         self.student = Student.objects.get(is_demo=True)
+        self.user = get_user_model().objects.get(username=settings.DEMO_LOGIN_USERNAME)
+        self.client.force_login(self.user)
 
     def test_seed_is_idempotent(self):
         before = {
@@ -136,10 +140,10 @@ class DemoFlowTests(TestCase):
         self.client.post(reverse("learning:homework_detail", args=[homework.pk]), answers)
         self.assertEqual(before, list(AttendanceSession.objects.values_list("pk", "status")))
 
-    def test_dashboard_and_leaderboard_use_same_rank(self):
-        dashboard = self.client.get(reverse("learning:dashboard"))
+    def test_profile_and_leaderboard_use_same_student(self):
+        profile = self.client.get(reverse("learning:profile"))
         leaderboard = self.client.get(reverse("learning:leaderboard"))
-        self.assertEqual(dashboard.context["rank"], self.student.rank)
+        self.assertEqual(profile.context["student"], self.student)
         self.assertEqual(leaderboard.context["current_student"].rank, self.student.rank)
 
     def test_completed_late_work_stays_completed(self):
@@ -152,9 +156,51 @@ class DemoFlowTests(TestCase):
         response = self.client.post(reverse("set_language"), {"language": "uz", "next": "/"})
         self.assertRedirects(response, "/")
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "SAT rejangiz tayyor, Alex Morgan.")
+        self.assertContains(dashboard, "SAT maqsadingizga aniq yo‘l.")
         self.assertContains(dashboard, ">UZ<")
 
         self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "Your SAT plan is ready, Alex Morgan.")
+        self.assertContains(dashboard, "A clear path to your SAT goal.")
+
+    def test_guest_can_only_open_home_courses_and_login(self):
+        self.client.logout()
+        self.assertEqual(self.client.get(reverse("learning:dashboard")).status_code, 200)
+        courses = self.client.get(reverse("learning:learn"))
+        self.assertEqual(courses.status_code, 200)
+        self.assertContains(courses, f'href="{reverse("login")}?next=')
+        self.assertEqual(self.client.get(reverse("login")).status_code, 200)
+
+        private_urls = [
+            reverse("learning:course_detail", args=[Course.objects.first().pk]),
+            reverse("learning:homework_list"),
+            reverse("learning:leaderboard"),
+            reverse("learning:attendance"),
+            reverse("learning:profile"),
+        ]
+        for url in private_urls:
+            response = self.client.get(url)
+            self.assertRedirects(response, f"{reverse('login')}?next={url}")
+
+    def test_navigation_expands_after_login(self):
+        authenticated = self.client.get(reverse("learning:dashboard"))
+        self.assertContains(authenticated, reverse("learning:homework_list"))
+        self.assertContains(authenticated, reverse("learning:leaderboard"))
+
+        self.client.logout()
+        guest = self.client.get(reverse("learning:dashboard"))
+        self.assertNotContains(guest, reverse("learning:homework_list"))
+        self.assertNotContains(guest, reverse("learning:leaderboard"))
+        self.assertContains(guest, reverse("login"))
+
+    def test_demo_username_and_password_login(self):
+        self.client.logout()
+        response = self.client.post(
+            reverse("login"),
+            {
+                "username": settings.DEMO_LOGIN_USERNAME,
+                "password": settings.DEMO_LOGIN_PASSWORD,
+            },
+        )
+        self.assertRedirects(response, settings.LOGIN_REDIRECT_URL)
+        self.assertEqual(self.client.get(reverse("learning:profile")).status_code, 200)

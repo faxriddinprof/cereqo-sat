@@ -14,7 +14,24 @@ python manage.py seed_demo
 python manage.py runserver
 ```
 
-Open <http://127.0.0.1:8000/>. The sample learner is Alex Morgan; registration is intentionally not required.
+Open <http://127.0.0.1:8000/>. The homepage and course catalog are public. Course content, tasks, ranking, schedule, and profiles require login.
+
+## Demo login
+
+The seed command creates and refreshes this account automatically:
+
+```text
+Username: demo
+Password: CereqoDemo2026!
+```
+
+You can override the credentials before running `seed_demo`:
+
+```bash
+export CEREQO_DEMO_USERNAME="demo"
+export CEREQO_DEMO_PASSWORD="your-local-demo-password"
+python manage.py seed_demo
+```
 
 Reset all demo progress to the initial checkpoint states with:
 

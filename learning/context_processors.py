@@ -1,6 +1,6 @@
-from .models import Student
+from .student_profiles import student_for_user
 
 
 def demo_shell(request):
-    student = Student.objects.filter(is_demo=True).first()
+    student = student_for_user(request.user)
     return {"demo_student": student}

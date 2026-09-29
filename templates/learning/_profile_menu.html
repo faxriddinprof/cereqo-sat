@@ -1,8 +1,9 @@
 {% load i18n %}
-{% if demo_student %}<div class="dropdown profile-menu">
+{% if user.is_authenticated and demo_student %}<div class="dropdown profile-menu">
   <button class="profile-trigger" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% translate 'Open profile menu' %}"><span class="avatar avatar-sm">{{ demo_student.initials }}</span><span class="profile-trigger-copy"><strong>{{ demo_student.name }}</strong><small>{{ demo_student.points }} XP</small></span><i class="bi bi-chevron-down"></i></button>
   <div class="dropdown-menu dropdown-menu-end profile-dropdown">
     <div class="profile-dropdown-head"><span class="avatar">{{ demo_student.initials }}</span><span><strong>{{ demo_student.name }}</strong><small>{% translate demo_student.badge %}</small></span></div>
     <a class="dropdown-item" href="{% url 'learning:profile' %}"><i class="bi bi-person-circle"></i><span><strong>{% translate "Profile" %}</strong><small>{% translate "Progress, results, and courses" %}</small></span><i class="bi bi-arrow-right"></i></a>
+    <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="dropdown-item profile-logout" type="submit"><i class="bi bi-box-arrow-right"></i><span><strong>{% translate "Log out" %}</strong><small>{{ user.email }}</small></span></button></form>
   </div>
 </div>{% endif %}

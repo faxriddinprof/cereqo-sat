@@ -1,6 +1,8 @@
 {% load i18n %}
 <a href="{% url 'learning:dashboard' %}" class="{% if active_nav == 'home' %}active{% endif %}" {% if active_nav == 'home' %}aria-current="page"{% endif %}><i class="bi bi-grid-1x2-fill"></i><span>{% translate "Home" %}</span></a>
 <a href="{% url 'learning:learn' %}" class="{% if active_nav == 'learn' %}active{% endif %}" {% if active_nav == 'learn' %}aria-current="page"{% endif %}><i class="bi bi-collection-play-fill"></i><span>{% translate "Courses" %}</span></a>
+{% if user.is_authenticated %}
 <a href="{% url 'learning:homework_list' %}" class="{% if active_nav == 'tasks' %}active{% endif %}" {% if active_nav == 'tasks' %}aria-current="page"{% endif %}><i class="bi bi-check2-square"></i><span>{% translate "Tasks" %}</span></a>
 <a href="{% url 'learning:leaderboard' %}" class="{% if active_nav == 'rank' %}active{% endif %}" {% if active_nav == 'rank' %}aria-current="page"{% endif %}><i class="bi bi-trophy-fill"></i><span>{% translate "Leaderboard" %}</span></a>
 <a href="{% url 'learning:attendance' %}" class="{% if active_nav == 'attendance' %}active{% endif %}" {% if active_nav == 'attendance' %}aria-current="page"{% endif %}><i class="bi bi-calendar3"></i><span>{% translate "Schedule" %}</span></a>
+{% endif %}

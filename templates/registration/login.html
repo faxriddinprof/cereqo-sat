@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% load static i18n %}
+{% block title %}{% translate "Log in" %} · Cereqo{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card">
+    <a class="auth-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
+    <p class="eyebrow">{% translate "Welcome to Cereqo" %}</p>
+    <h1>{% translate "Continue your SAT journey." %}</h1>
+    <p>{% translate "Log in to access your courses, tasks, schedule, results, and profile." %}</p>
+    {% if form.errors %}<div class="login-error"><i class="bi bi-exclamation-circle"></i>{% translate "The username or password is incorrect." %}</div>{% endif %}
+    <form class="auth-form" method="post" action="{% url 'login' %}">{% csrf_token %}
+      <label for="id_username">{% translate "Username" %}</label>
+      <div class="auth-input"><i class="bi bi-person"></i><input id="id_username" type="text" name="username" value="{{ form.username.value|default:'' }}" autocomplete="username" required autofocus placeholder="{% translate 'Enter username' %}"></div>
+      <label for="id_password">{% translate "Password" %}</label>
+      <div class="auth-input"><i class="bi bi-lock"></i><input id="id_password" type="password" name="password" autocomplete="current-password" required placeholder="{% translate 'Enter password' %}"><button type="button" data-password-toggle aria-label="{% translate 'Show password' %}"><i class="bi bi-eye"></i></button></div>
+      <input type="hidden" name="next" value="{{ next }}">
+      <button class="btn btn-primary app-btn auth-submit" type="submit">{% translate "Log in" %}<i class="bi bi-arrow-right"></i></button>
+    </form>
+    <div class="demo-credentials"><div><i class="bi bi-key"></i><span><small>{% translate "Demo username" %}</small><strong>{{ demo_username }}</strong></span></div><div><i class="bi bi-shield-lock"></i><span><small>{% translate "Demo password" %}</small><strong>{{ demo_password }}</strong></span></div></div>
+    <a class="auth-back" href="{% url 'learning:dashboard' %}"><i class="bi bi-arrow-left"></i>{% translate "Back to home" %}</a>
+  </div>
+  <div class="auth-visual"><img src="{% static 'cereqo/img/mentors/cereqo-classroom.jpg' %}" alt=""><div><span class="sat-mark">SAT</span><h2>{% translate "One account. Your complete learning path." %}</h2><div><span><i class="bi bi-journal-check"></i>{% translate "Lessons and tests" %}</span><span><i class="bi bi-calendar3"></i>{% translate "Personal schedule" %}</span><span><i class="bi bi-graph-up"></i>{% translate "Progress and ranking" %}</span></div></div></div>
+</section>
+{% endblock %}

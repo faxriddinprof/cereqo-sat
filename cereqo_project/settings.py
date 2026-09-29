@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,3 +59,10 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "/learn/"
+LOGOUT_REDIRECT_URL = "/"
+
+DEMO_LOGIN_USERNAME = os.environ.get("CEREQO_DEMO_USERNAME", "demo")
+DEMO_LOGIN_PASSWORD = os.environ.get("CEREQO_DEMO_PASSWORD", "CereqoDemo2026!")

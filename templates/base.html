@@ -18,32 +18,38 @@
   <div class="app-shell topnav-shell">
     <header class="mobile-header">
       <a href="{% url 'learning:dashboard' %}" aria-label="Cereqo home"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"></a>
-      <div class="header-actions">{% if demo_student %}<div class="mobile-points"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</div>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% include 'learning/_profile_menu.html' %}</div>
+      <div class="header-actions">{% if user.is_authenticated and demo_student %}<div class="mobile-points"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</div>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if user.is_authenticated %}{% include 'learning/_profile_menu.html' %}{% else %}<a class="navbar-login-icon" href="{% url 'login' %}" aria-label="{% translate 'Log in' %}"><i class="bi bi-box-arrow-in-right"></i></a>{% endif %}</div>
     </header>
 
     <header class="desktop-topbar main-navbar">
       <a class="topnav-brand" href="{% url 'learning:dashboard' %}"><img src="{% static 'cereqo/img/cereqo-logo.png' %}" alt="Cereqo"><span>{% translate "Digital SAT platform" %}</span></a>
       <nav class="desktop-main-nav" aria-label="Main navigation">{% include 'learning/_nav_links.html' %}</nav>
-      <div class="topnav-actions">{% if demo_student %}<span class="topnav-xp"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% include 'learning/_profile_menu.html' %}</div>
+      <div class="topnav-actions">{% if user.is_authenticated and demo_student %}<span class="topnav-xp"><i class="bi bi-stars"></i>{{ demo_student.points }} XP</span>{% endif %}{% include 'learning/_toolbar_controls.html' %}{% if user.is_authenticated %}{% include 'learning/_profile_menu.html' %}{% else %}<a class="btn btn-primary navbar-login" href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i>{% translate "Log in" %}</a>{% endif %}</div>
     </header>
 
-    {% if course_navigation %}<aside class="course-sidebar">{% include 'learning/_course_sidebar.html' %}</aside>{% endif %}
+    {% if course_navigation and not landing_page %}<aside class="course-sidebar">{% include 'learning/_course_sidebar.html' %}</aside>{% endif %}
 
-    <div class="app-main {% if course_navigation %}has-course-sidebar{% endif %}">
+    <div class="app-main {% if landing_page %}landing-main{% endif %} {% if course_navigation %}has-course-sidebar{% endif %}">
       {% if course_navigation %}<div class="course-mobile-bar"><span><small>{% translate "Current course" %}</small><strong>{% translate course_navigation.course.title %}</strong></span><button type="button" data-bs-toggle="offcanvas" data-bs-target="#courseOutline" aria-controls="courseOutline"><i class="bi bi-list-nested"></i>{% translate "Course plan" %}</button></div>{% endif %}
-      <main id="main-content" class="page-content" tabindex="-1">
+      <main id="main-content" class="{% if landing_page %}landing-content{% else %}page-content{% endif %}" tabindex="-1">
         {% if messages %}<div class="message-stack" aria-live="polite">{% for message in messages %}<div class="app-alert app-alert-{{ message.tags }}"><i class="bi {% if message.tags == 'success' %}bi-check-circle-fill{% else %}bi-exclamation-circle-fill{% endif %}"></i><span>{{ message }}</span></div>{% endfor %}</div>{% endif %}
         {% block content %}{% endblock %}
+        {% if not landing_page %}
         <footer class="page-footer">{% translate "Cereqo demo" %} · {% translate "Original practice content" %} · AdminHMD template by <a href="https://github.com/HasanMahmudDev" target="_blank" rel="noreferrer">Md. Hasan Mahmud</a> (MIT)</footer>
+        {% endif %}
       </main>
     </div>
 
-    <nav class="mobile-bottom-nav" aria-label="Primary navigation">
+    <nav class="mobile-bottom-nav {% if not user.is_authenticated %}guest-nav{% endif %}" aria-label="Primary navigation">
       <a href="{% url 'learning:dashboard' %}" class="{% if active_nav == 'home' %}active{% endif %}"><i class="bi bi-house-door{% if active_nav == 'home' %}-fill{% endif %}"></i><span>{% translate "Home" %}</span></a>
       <a href="{% url 'learning:learn' %}" class="{% if active_nav == 'learn' %}active{% endif %}"><i class="bi bi-collection-play{% if active_nav == 'learn' %}-fill{% endif %}"></i><span>{% translate "Courses" %}</span></a>
+      {% if user.is_authenticated %}
       <a href="{% url 'learning:homework_list' %}" class="{% if active_nav == 'tasks' %}active{% endif %}"><i class="bi bi-check2-square"></i><span>{% translate "Tasks" %}</span></a>
       <a href="{% url 'learning:leaderboard' %}" class="{% if active_nav == 'rank' %}active{% endif %}"><i class="bi bi-trophy{% if active_nav == 'rank' %}-fill{% endif %}"></i><span>{% translate "Rank" %}</span></a>
       <a href="{% url 'learning:attendance' %}" class="{% if active_nav == 'attendance' %}active{% endif %}"><i class="bi bi-calendar3"></i><span>{% translate "Schedule" %}</span></a>
+      {% else %}
+      <a href="{% url 'login' %}"><i class="bi bi-box-arrow-in-right"></i><span>{% translate "Log in" %}</span></a>
+      {% endif %}
     </nav>
   </div>
 
