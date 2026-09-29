@@ -264,7 +264,6 @@ TRANSLATIONS.update({
 TRANSLATIONS.update({
     "Active course": "Faol kurs",
     "Official SAT domains": "Rasmiy SAT yo‘nalishlari",
-    "Digital SAT Mastery · 8-Week Path": "Digital SAT Mastery · 8 haftalik yo‘l",
     "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints.": "Rasmiy raqamli SAT tuzilmasi, vaqtli mashqlar, tahlil va bo‘lim nazoratlari asosidagi yo‘nalishma-yo‘nalish o‘quv yo‘li.",
     "%(total)s domain sections": "%(total)s ta yo‘nalish bo‘limi",
     "course complete": "kurs yakunlandi",
@@ -495,8 +494,6 @@ TRANSLATIONS.update({
     "Performance": "Natijalar",
     "Recent test results": "So‘nggi test natijalari",
     "Completed tests will appear here.": "Yakunlangan testlar shu yerda ko‘rinadi.",
-    "SAT Math Accelerator · 4-Week Path": "SAT Math Accelerator · 4 haftalik yo‘l",
-    "SAT Reading & Writing Sprint · 4-Week Path": "SAT Reading & Writing Sprint · 4 haftalik yo‘l",
     "A focused math course for linear models, nonlinear functions, data analysis, and geometry.": "Chiziqli modellar, chiziqsiz funksiyalar, ma’lumotlar tahlili va geometriya bo‘yicha intensiv matematika kursi.",
     "A focused literacy course for evidence, vocabulary, grammar, synthesis, and transitions.": "Dalil, lug‘at, grammatika, sintez va bog‘lovchilar bo‘yicha intensiv o‘qish va yozish kursi.",
     "Build speed and accuracy across the highest-value Algebra skills.": "Algebraning eng muhim ko‘nikmalarida tezlik va aniqlikni oshiring.",

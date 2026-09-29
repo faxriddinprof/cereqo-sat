@@ -630,9 +630,6 @@ msgstr "Kichik diagnostik to‘plam"
 msgid "Different strengths. One teaching standard."
 msgstr "Turli kuchli yo‘nalishlar. Yagona ta’lim standarti."
 
-msgid "Digital SAT Mastery · 8-Week Path"
-msgstr "Digital SAT Mastery · 8 haftalik yo‘l"
-
 msgid "Digital SAT blueprint"
 msgstr "Raqamli SAT tuzilmasi"
 
@@ -1515,14 +1512,8 @@ msgstr "Darslarni qo‘shish uchun demo ma’lumotlarini yuklang."
 msgid "SAT Math"
 msgstr "SAT Matematika"
 
-msgid "SAT Math Accelerator · 4-Week Path"
-msgstr "SAT Math Accelerator · 4 haftalik yo‘l"
-
 msgid "SAT Math mentor"
 msgstr "SAT matematika mentori"
-
-msgid "SAT Reading & Writing Sprint · 4-Week Path"
-msgstr "SAT Reading & Writing Sprint · 4 haftalik yo‘l"
 
 msgid "SAT Strategy"
 msgstr "SAT strategiyasi"

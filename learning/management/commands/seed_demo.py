@@ -196,7 +196,7 @@ SECTION_SPECS = [
 DEMO_COURSES = [
     {
         "code": "sat-math-accelerator",
-        "title": "SAT Math Accelerator · 4-Week Path",
+        "title": "SAT Math Accelerator",
         "description": "A focused math course for linear models, nonlinear functions, data analysis, and geometry.",
         "start_offset": 7,
         "target_score": 760,
@@ -208,7 +208,7 @@ DEMO_COURSES = [
     },
     {
         "code": "sat-reading-writing-sprint",
-        "title": "SAT Reading & Writing Sprint · 4-Week Path",
+        "title": "SAT Reading & Writing Sprint",
         "description": "A focused literacy course for evidence, vocabulary, grammar, synthesis, and transitions.",
         "start_offset": 14,
         "target_score": 720,
@@ -332,7 +332,7 @@ class Command(BaseCommand):
         course, _ = Course.objects.update_or_create(
             code="digital-sat-mastery",
             defaults={
-                "title": "Digital SAT Mastery · 8-Week Path",
+                "title": "Digital SAT Mastery",
                 "description": "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints.",
                 "instructor_name": "Daniel Brooks",
                 "instructor_role": "SAT strategy lead",

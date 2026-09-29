@@ -268,12 +268,14 @@ class DemoFlowTests(TestCase):
         response = self.client.post(reverse("set_language"), {"language": "uz", "next": "/"})
         self.assertRedirects(response, "/")
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "Digital SAT Mastery · 8 haftalik yo‘l")
+        self.assertContains(dashboard, "Digital SAT Mastery")
+        self.assertNotContains(dashboard, "8 haftalik yo‘l")
         self.assertContains(dashboard, ">UZ<")
 
         self.client.post(reverse("set_language"), {"language": "en", "next": "/"})
         dashboard = self.client.get(reverse("learning:dashboard"))
-        self.assertContains(dashboard, "Digital SAT Mastery · 8-Week Path")
+        self.assertContains(dashboard, "Digital SAT Mastery")
+        self.assertNotContains(dashboard, "8-Week Path")
 
     def test_guest_can_only_open_home_courses_and_login(self):
         self.client.logout()
