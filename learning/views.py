@@ -15,6 +15,7 @@ from .models import (
     Answer,
     AttendanceSession,
     Course,
+    CourseEnrollment,
     CourseSection,
     DemoConfig,
     Homework,
@@ -79,9 +80,10 @@ def _course_navigation(course, student, active_section_id=None, active_lesson_id
     }
 
 
-def _course_cards():
+def _course_cards(courses=None):
     cards = []
-    for course in Course.objects.prefetch_related("sections__lessons").all():
+    courses = courses if courses is not None else Course.objects.all()
+    for course in courses.prefetch_related("sections__lessons"):
         lessons = Lesson.objects.filter(section__course=course)
         cards.append(
             {
@@ -111,10 +113,23 @@ def dashboard(request):
 def learn(request):
     if not Course.objects.exists():
         return render(request, "learning/empty.html", {"active_nav": "learn"})
+    all_courses = Course.objects.all()
+    my_course_cards = []
+    if request.user.is_authenticated:
+        student = _student(request)
+        enrolled_course_ids = CourseEnrollment.objects.filter(student=student).values_list(
+            "course_id", flat=True
+        )
+        my_course_cards = _course_cards(all_courses.filter(pk__in=enrolled_course_ids))
+        all_courses = all_courses.exclude(pk__in=enrolled_course_ids)
     return render(
         request,
         "learning/course_list.html",
-        {"active_nav": "learn", "course_cards": _course_cards()},
+        {
+            "active_nav": "learn",
+            "my_course_cards": my_course_cards,
+            "course_cards": _course_cards(all_courses),
+        },
     )
 
 

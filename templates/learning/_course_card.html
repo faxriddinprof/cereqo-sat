@@ -1,0 +1,38 @@
+{% load static i18n %}
+<article class="catalog-card minimal-catalog-card{% if is_enrolled %} enrolled-course-card{% endif %}">
+  <div class="catalog-course-cover">
+    <img src="{% static card.course.cover_image %}" alt="{% blocktranslate with teacher=card.course.instructor_name %}{{ teacher }} teaching the course{% endblocktranslate %}">
+    {% if is_enrolled %}<span class="course-state course-state-active"><i class="bi bi-record-circle"></i>{% translate "In progress" %}</span>{% endif %}
+    <div class="catalog-cover-instructor">
+      <strong>{% translate card.course.instructor_name %}</strong>
+      <small>{% translate card.course.instructor_role %}</small>
+    </div>
+  </div>
+
+  <div class="catalog-card-content">
+    <h3>{% translate card.course.title %}</h3>
+    <p>{% translate card.course.description %}</p>
+
+    <div class="catalog-facts">
+      <span><i class="bi bi-layers"></i>{% blocktranslate with total=card.sections %}{{ total }} sections{% endblocktranslate %}</span>
+      <span><i class="bi bi-play-circle"></i>{% blocktranslate with total=card.lessons %}{{ total }} lessons{% endblocktranslate %}</span>
+    </div>
+
+    {% if is_enrolled %}
+      <div class="catalog-progress">
+        <div><span>{% translate "Completed lessons" %}</span><strong>{{ card.completed_lessons }}/{{ card.lessons }}</strong></div>
+        <div class="progress app-progress"><div class="progress-bar" style="width:{{ card.progress }}%"></div></div>
+      </div>
+    {% endif %}
+
+    <div class="catalog-footer">
+      {% if is_enrolled %}
+        <a class="btn btn-primary app-btn" href="{% url 'learning:course_detail' card.course.id %}">{% translate "Continue course" %}<i class="bi bi-arrow-right"></i></a>
+      {% elif user.is_authenticated %}
+        <a class="btn btn-outline-primary app-btn" href="{% url 'learning:course_detail' card.course.id %}">{% translate "Explore course" %}<i class="bi bi-arrow-right"></i></a>
+      {% else %}
+        <a class="btn btn-primary app-btn" href="{% url 'learning:course_detail' card.course.id %}">{% translate "Go to course" %}<i class="bi bi-arrow-right"></i></a>
+      {% endif %}
+    </div>
+  </div>
+</article>

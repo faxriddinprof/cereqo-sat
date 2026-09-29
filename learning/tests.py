@@ -7,7 +7,17 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import translation
 
-from .models import Answer, AttendanceSession, Course, CourseSection, Homework, Lesson, Student, Submission
+from .models import (
+    Answer,
+    AttendanceSession,
+    Course,
+    CourseEnrollment,
+    CourseSection,
+    Homework,
+    Lesson,
+    Student,
+    Submission,
+)
 
 
 class DemoFlowTests(TestCase):
@@ -27,6 +37,7 @@ class DemoFlowTests(TestCase):
             "homework": Homework.objects.count(),
             "attendance": AttendanceSession.objects.count(),
             "courses": Course.objects.count(),
+            "enrollments": CourseEnrollment.objects.count(),
             "sections": CourseSection.objects.count(),
         }
         call_command("seed_demo", verbosity=0)
@@ -35,11 +46,14 @@ class DemoFlowTests(TestCase):
         self.assertEqual(before["homework"], Homework.objects.count())
         self.assertEqual(before["attendance"], AttendanceSession.objects.count())
         self.assertEqual(before["courses"], Course.objects.count())
+        self.assertEqual(before["enrollments"], CourseEnrollment.objects.count())
         self.assertEqual(before["sections"], CourseSection.objects.count())
 
     def test_course_uses_all_official_domains_in_order(self):
         self.assertEqual(Course.objects.count(), 3)
         course = Course.objects.get(is_active=True)
+        self.assertEqual(course.instructor_name, "Daniel Brooks")
+        self.assertTrue(course.cover_image.startswith("cereqo/img/mentors/"))
         self.assertEqual(course.sections.count(), 8)
         self.assertEqual(Lesson.objects.filter(section__course=course).count(), 16)
         self.assertEqual(
@@ -55,6 +69,24 @@ class DemoFlowTests(TestCase):
                 "Geometry and Trigonometry",
             ],
         )
+
+    def test_every_course_has_its_own_instructor_and_cover(self):
+        courses = list(Course.objects.all())
+        self.assertEqual(len({course.instructor_name for course in courses}), len(courses))
+        for course in courses:
+            self.assertTrue(course.instructor_role)
+            self.assertTrue(course.cover_image)
+
+    def test_authenticated_course_catalog_separates_my_courses(self):
+        self.client.post(reverse("set_language"), {"language": "en", "next": "/learn/"})
+        page = self.client.get(reverse("learning:learn"))
+        self.assertEqual(page.status_code, 200)
+        self.assertContains(page, "My courses")
+        self.assertEqual(len(page.context["my_course_cards"]), 1)
+        self.assertEqual(page.context["my_course_cards"][0]["course"].code, "digital-sat-mastery")
+        self.assertEqual(len(page.context["course_cards"]), 2)
+        self.assertNotContains(page, "1400+")
+        self.assertNotContains(page, "course-system-note")
 
     def test_each_section_ends_with_its_checkpoint(self):
         for section in CourseSection.objects.prefetch_related("lessons"):
@@ -168,7 +200,9 @@ class DemoFlowTests(TestCase):
         self.assertEqual(self.client.get(reverse("learning:dashboard")).status_code, 200)
         courses = self.client.get(reverse("learning:learn"))
         self.assertEqual(courses.status_code, 200)
-        self.assertContains(courses, f'href="{reverse("login")}?next=')
+        first_course_url = reverse("learning:course_detail", args=[Course.objects.first().pk])
+        self.assertContains(courses, f'href="{first_course_url}"')
+        self.assertNotContains(courses, "Boshlash uchun tizimga kiring")
         self.assertEqual(self.client.get(reverse("login")).status_code, 200)
 
         private_urls = [

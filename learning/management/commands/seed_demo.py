@@ -10,6 +10,7 @@ from learning.models import (
     Answer,
     AttendanceSession,
     Course,
+    CourseEnrollment,
     CourseSection,
     DemoConfig,
     Homework,
@@ -200,6 +201,9 @@ DEMO_COURSES = [
         "start_offset": 7,
         "target_score": 760,
         "subject": "math",
+        "instructor_name": "Aziz Rahmonov",
+        "instructor_role": "SAT Math mentor",
+        "cover_image": "cereqo/img/mentors/mentor-aziz.jpg",
         "domains": ["Algebra", "Advanced Math", "Problem-Solving and Data Analysis", "Geometry and Trigonometry"],
     },
     {
@@ -209,6 +213,9 @@ DEMO_COURSES = [
         "start_offset": 14,
         "target_score": 720,
         "subject": "rw",
+        "instructor_name": "Madina Karimova",
+        "instructor_role": "Reading & Writing mentor",
+        "cover_image": "cereqo/img/mentors/mentor-madina.jpg",
         "domains": ["Information and Ideas", "Craft and Structure", "Standard English Conventions", "Expression of Ideas"],
     },
 ]
@@ -275,6 +282,9 @@ class Command(BaseCommand):
             defaults={
                 "title": "Digital SAT Mastery · 8-Week Path",
                 "description": "A domain-by-domain path built around the official digital SAT structure, timed practice, review, and section checkpoints.",
+                "instructor_name": "Daniel Brooks",
+                "instructor_role": "SAT strategy lead",
+                "cover_image": "cereqo/img/mentors/cereqo-classroom.jpg",
                 "start_date": today - timedelta(days=35),
                 "end_date": today + timedelta(days=20),
                 "target_score": 1400,
@@ -282,6 +292,7 @@ class Command(BaseCommand):
             },
         )
         Course.objects.exclude(pk=course.pk).update(is_active=False)
+        CourseEnrollment.objects.get_or_create(student=demo_student, course=course)
 
         checkpoint_specs = {item["key"]: item for item in [*LESSONS, *EXTRA_CHECKPOINTS]}
         homeworks = {}
@@ -393,6 +404,9 @@ class Command(BaseCommand):
                 defaults={
                     "title": demo_spec["title"],
                     "description": demo_spec["description"],
+                    "instructor_name": demo_spec["instructor_name"],
+                    "instructor_role": demo_spec["instructor_role"],
+                    "cover_image": demo_spec["cover_image"],
                     "start_date": demo_start,
                     "end_date": demo_start + timedelta(days=27),
                     "target_score": demo_spec["target_score"],

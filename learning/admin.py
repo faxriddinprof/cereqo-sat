@@ -4,6 +4,7 @@ from .models import (
     Answer,
     AttendanceSession,
     Course,
+    CourseEnrollment,
     CourseSection,
     DemoConfig,
     Homework,
@@ -14,5 +15,17 @@ from .models import (
 )
 
 admin.site.register(
-    [Course, CourseSection, DemoConfig, Student, Lesson, Homework, Question, Submission, Answer, AttendanceSession]
+    [
+        Course,
+        CourseEnrollment,
+        CourseSection,
+        DemoConfig,
+        Student,
+        Lesson,
+        Homework,
+        Question,
+        Submission,
+        Answer,
+        AttendanceSession,
+    ]
 )

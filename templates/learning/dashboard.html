@@ -33,11 +33,11 @@
   <div class="landing-section-heading compact-heading"><div><p class="landing-eyebrow">{% translate "Courses" %}</p><h2>{% translate "Choose your SAT path." %}</h2></div><a href="{% url 'learning:learn' %}">{% translate "All courses" %}<i class="bi bi-arrow-right"></i></a></div>
   <div class="landing-course-grid">
     {% for card in course_cards %}<article class="landing-course-card course-tone-{{ forloop.counter }} compact-course-card">
-      <div class="landing-course-top"><span>0{{ forloop.counter }}</span><b>{{ card.course.target_score }}+ {% translate "target" %}</b></div>
-      <div class="landing-course-icon"><i class="bi {% if 'Math' in card.course.title %}bi-calculator{% elif 'Writing' in card.course.title %}bi-body-text{% else %}bi-compass{% endif %}"></i></div>
-      <h3>{% translate card.course.title %}</h3><p>{% translate card.course.description %}</p>
+      <div class="course-card-cover"><img src="{% static card.course.cover_image %}" alt="{% blocktranslate with teacher=card.course.instructor_name %}{{ teacher }} teaching the course{% endblocktranslate %}"><div><strong>{% translate card.course.instructor_name %}</strong><small>{% translate card.course.instructor_role %}</small></div></div>
+      <h3>{% translate card.course.title %}</h3>
+      <p>{% translate card.course.description %}</p>
       <div class="landing-course-facts"><span><strong>{{ card.sections }}</strong>{% translate "sections" %}</span><span><strong>{{ card.lessons }}</strong>{% translate "lessons" %}</span></div>
-      {% if user.is_authenticated %}<a href="{% url 'learning:course_detail' card.course.id %}">{% translate "Open course" %}<i class="bi bi-arrow-up-right"></i></a>{% else %}<a href="{% url 'login' %}?next={% url 'learning:course_detail' card.course.id %}">{% translate "Log in to start" %}<i class="bi bi-lock"></i></a>{% endif %}
+      {% if user.is_authenticated %}<a href="{% url 'learning:course_detail' card.course.id %}">{% translate "Open course" %}<i class="bi bi-arrow-up-right"></i></a>{% else %}<a href="{% url 'learning:course_detail' card.course.id %}">{% translate "Go to course" %}<i class="bi bi-arrow-up-right"></i></a>{% endif %}
     </article>{% endfor %}
   </div>
 </section>

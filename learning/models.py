@@ -42,6 +42,12 @@ class Course(models.Model):
     title = models.CharField(max_length=160)
     code = models.SlugField(max_length=60, unique=True)
     description = models.TextField()
+    instructor_name = models.CharField(max_length=100, default="Cereqo mentor")
+    instructor_role = models.CharField(max_length=100, default="SAT mentor")
+    cover_image = models.CharField(
+        max_length=255,
+        default="cereqo/img/mentors/cereqo-classroom.jpg",
+    )
     start_date = models.DateField()
     end_date = models.DateField()
     target_score = models.PositiveSmallIntegerField(default=1400)
@@ -58,6 +64,27 @@ class Course(models.Model):
         lessons = Lesson.objects.filter(section__course=self)
         total = lessons.count()
         return round(sum(lessons.values_list("progress_percent", flat=True)) / total) if total else 0
+
+
+class CourseEnrollment(models.Model):
+    student = models.ForeignKey(
+        Student, on_delete=models.CASCADE, related_name="course_enrollments"
+    )
+    course = models.ForeignKey(
+        Course, on_delete=models.CASCADE, related_name="enrollments"
+    )
+    enrolled_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["enrolled_at", "id"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["student", "course"], name="unique_student_course_enrollment"
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.student.name} · {self.course.title}"
 
 
 class CourseSection(models.Model):

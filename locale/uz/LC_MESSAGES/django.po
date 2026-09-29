@@ -24,6 +24,9 @@ msgstr "%(streak)s kunlik seriya"
 msgid "%(streak)s days"
 msgstr "%(streak)s kun"
 
+msgid "%(teacher)s teaching the course"
+msgstr "Kurs o‘qituvchisi %(teacher)s dars jarayonida"
+
 msgid "%(total)s domain sections"
 msgstr "%(total)s ta yo‘nalish bo‘limi"
 
@@ -103,10 +106,10 @@ msgid "A focused learning ecosystem for ambitious SAT students."
 msgstr "Katta maqsadli SAT o‘quvchilari uchun yagona ta’lim ekotizimi."
 
 msgid "A focused literacy course for evidence, vocabulary, grammar, synthesis, and transitions."
-msgstr "Dalil, lug‘at, grammatika, sintez va bog‘lovchilar bo‘yicha intensiv o‘qish va yozish kursi."
+msgstr "Dalillar, lug‘at, grammatika, sintez va bog‘lovchilarga qaratilgan o‘qish va yozish kursi."
 
 msgid "A focused math course for linear models, nonlinear functions, data analysis, and geometry."
-msgstr "Chiziqli modellar, chiziqsiz funksiyalar, ma’lumotlar tahlili va geometriya bo‘yicha intensiv matematika kursi."
+msgstr "Chiziqli modellar, chiziqsiz funksiyalar, ma’lumotlar tahlili va geometriyaga qaratilgan matematika kursi."
 
 msgid "A focused session today keeps your progress moving."
 msgstr "Bugungi diqqatli mashg‘ulot natijangizni oldinga siljitadi."
@@ -387,6 +390,9 @@ msgstr "Bo‘lim testini bajaring, izohlarni tahlil qiling va xatolarni keyingi 
 msgid "Completed"
 msgstr "Bajarilgan"
 
+msgid "Completed lessons"
+msgstr "Yakunlangan darslar"
+
 msgid "Completed tests will appear here."
 msgstr "Yakunlangan testlar shu yerda ko‘rinadi."
 
@@ -412,7 +418,7 @@ msgid "Continue in sequence"
 msgstr "Ketma-ket davom eting"
 
 msgid "Continue learning"
-msgstr "Darsni davom ettirish"
+msgstr "O‘qishni davom ettiring"
 
 msgid "Continue the current section, complete its final test, and see the result reflected across your profile and ranking."
 msgstr "Joriy bo‘limni davom ettiring, yakuniy testni bajaring va natijani profilingiz hamda reytingda ko‘ring."
@@ -612,6 +618,9 @@ msgstr "Kursni ko‘rib chiqish"
 msgid "Explore courses"
 msgstr "Kurslarni ko‘rish"
 
+msgid "Explore learning paths"
+msgstr "O‘quv yo‘nalishlarini ko‘ring"
+
 msgid "Explore the courses"
 msgstr "Kurslarni ko‘rish"
 
@@ -704,6 +713,9 @@ msgstr "Geometriya va trigonometriya · Strategiya laboratoriyasi"
 
 msgid "Geometry and Trigonometry · Timed practice"
 msgstr "Geometriya va trigonometriya · Vaqtli mashq"
+
+msgid "Go to course"
+msgstr "Kursga o‘tish"
 
 msgid "Good start—review and grow."
 msgstr "Yaxshi boshlanish — tahlil qilib, davom eting."
@@ -972,6 +984,9 @@ msgstr "Boshqa darslar"
 msgid "Move through ordered sections and lessons instead of guessing what to study next."
 msgstr "Keyin nimani o‘qishni taxmin qilish o‘rniga bo‘lim va darslarni tartib bilan o‘ting."
 
+msgid "My courses"
+msgstr "Mening kurslarim"
+
 msgid "My learning"
 msgstr "Mening ta’limim"
 
@@ -1212,6 +1227,9 @@ msgstr "O‘qish va yozish"
 msgid "Reading & Writing focus"
 msgstr "O‘qish va yozish yo‘nalishi"
 
+msgid "Reading & Writing mentor"
+msgstr "O‘qish va yozish mentori"
+
 msgid "Reading & Writing questions"
 msgstr "O‘qish va yozish savollari"
 
@@ -1296,6 +1314,9 @@ msgstr "SAT Matematika"
 msgid "SAT Math Accelerator · 4-Week Path"
 msgstr "SAT Math Accelerator · 4 haftalik yo‘l"
 
+msgid "SAT Math mentor"
+msgstr "SAT matematika mentori"
+
 msgid "SAT Reading & Writing Sprint · 4-Week Path"
 msgstr "SAT Reading & Writing Sprint · 4 haftalik yo‘l"
 
@@ -1313,6 +1334,9 @@ msgstr "SAT platformasi ko‘rsatkichlari"
 
 msgid "SAT preparation"
 msgstr "SAT tayyorgarligi"
+
+msgid "SAT strategy lead"
+msgstr "SAT strategiyasi rahbari"
 
 msgid "Sat"
 msgstr "Sha"
@@ -1754,6 +1778,12 @@ msgstr "Har bir miqdor yoniga birlikni yozing. Teng nisbatlarni bir xil tartibda
 
 msgid "You"
 msgstr "Siz"
+
+msgid "You are enrolled in every available course."
+msgstr "Siz barcha mavjud kurslarga yozilgansiz."
+
+msgid "You have not joined a course yet."
+msgstr "Siz hali hech bir kursga yozilmagansiz."
 
 msgid "Your SAT plan is ready, %(name)s."
 msgstr "SAT rejangiz tayyor, %(name)s."

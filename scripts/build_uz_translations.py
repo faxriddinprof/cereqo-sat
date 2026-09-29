@@ -418,6 +418,7 @@ TRANSLATIONS.update({
     "Course → section → lesson → final test → result": "Kurs → bo‘lim → dars → yakuniy test → natija",
     "The platform always shows what you are learning, why it matters, and what comes next.": "Platforma nimani o‘rganayotganingizni, uning ahamiyatini va keyingi qadamni doim ko‘rsatadi.",
     "All courses": "Barcha kurslar",
+    "Go to course": "Kursga o‘tish",
     "Course progress": "Kurs natijasi",
     "Course outline": "Kurs tarkibi",
     "lessons": "dars",
@@ -580,6 +581,14 @@ TRANSLATIONS.update({
     "See every lesson turn into a result.": "Har bir darsning natijaga aylanishini ko‘ring.",
     "Choose your SAT path.": "SAT yo‘lingizni tanlang.",
     "All courses": "Barcha kurslar",
+    "My courses": "Mening kurslarim",
+    "Continue learning": "O‘qishni davom ettiring",
+    "Explore learning paths": "O‘quv yo‘nalishlarini ko‘ring",
+    "Completed lessons": "Yakunlangan darslar",
+    "You have not joined a course yet.": "Siz hali hech bir kursga yozilmagansiz.",
+    "You are enrolled in every available course.": "Siz barcha mavjud kurslarga yozilgansiz.",
+    "A focused math course for linear models, nonlinear functions, data analysis, and geometry.": "Chiziqli modellar, chiziqsiz funksiyalar, ma’lumotlar tahlili va geometriyaga qaratilgan matematika kursi.",
+    "A focused literacy course for evidence, vocabulary, grammar, synthesis, and transitions.": "Dalillar, lug‘at, grammatika, sintez va bog‘lovchilarga qaratilgan o‘qish va yozish kursi.",
     "Log in to start": "Boshlash uchun kiring",
     "Learn with clear explanations.": "Tushunarli izohlar bilan o‘rganing.",
     "Demo mentor profiles": "Demo mentor profillari",
@@ -602,6 +611,10 @@ TRANSLATIONS.update({
     "Show password": "Parolni ko‘rsatish",
     "Demo username": "Demo login",
     "Demo password": "Demo parol",
+    "%(teacher)s teaching the course": "Kurs o‘qituvchisi %(teacher)s dars jarayonida",
+    "SAT Math mentor": "SAT matematika mentori",
+    "Reading & Writing mentor": "O‘qish va yozish mentori",
+    "SAT strategy lead": "SAT strategiyasi rahbari",
 })
 
 DOMAIN_UZ = {
