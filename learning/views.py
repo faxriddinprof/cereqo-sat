@@ -378,13 +378,22 @@ def attendance(request):
     ).distinct()
     tasks = []
     tasks_by_date = {}
+    course_tasks_by_date = {}
+    independent_tasks_by_date = {}
     for homework in task_query:
         task = {
             "homework": homework,
             "status": homework.status_for(student),
         }
+        due_date = timezone.localdate(homework.deadline)
         tasks.append(task)
-        tasks_by_date.setdefault(timezone.localdate(homework.deadline), []).append(task)
+        tasks_by_date.setdefault(due_date, []).append(task)
+        target = (
+            course_tasks_by_date
+            if homework.kind == Homework.COURSE
+            else independent_tasks_by_date
+        )
+        target.setdefault(due_date, []).append(task)
     cal = calendar.Calendar(firstweekday=0)
     weeks = []
     for week in cal.monthdatescalendar(year, month):
@@ -397,12 +406,15 @@ def attendance(request):
                     "is_today": day == today,
                     "session": sessions.get(day),
                     "tasks": tasks_by_date.get(day, []),
+                    "course_tasks": course_tasks_by_date.get(day, []),
+                    "independent_tasks": independent_tasks_by_date.get(day, []),
                 }
                 for day in week
             ]
         )
     selected_session = sessions.get(focus_date)
-    selected_tasks = tasks_by_date.get(focus_date, [])
+    selected_course_tasks = course_tasks_by_date.get(focus_date, [])
+    selected_independent_tasks = independent_tasks_by_date.get(focus_date, [])
     status_counts = AttendanceSession.objects.filter(date__range=(month_start, month_end)).aggregate(
         attended=Count("id", filter=Q(status="attended")),
         missed=Count("id", filter=Q(status="missed")),
@@ -428,7 +440,8 @@ def attendance(request):
             "next_month": next_month,
             "focus_date": focus_date,
             "selected_session": selected_session,
-            "selected_tasks": selected_tasks,
+            "selected_course_tasks": selected_course_tasks,
+            "selected_independent_tasks": selected_independent_tasks,
             "status_counts": status_counts,
             "task_counts": task_counts,
             "weekday_labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],

@@ -540,6 +540,9 @@ msgstr "Kurs ketma-ketligi"
 msgid "Course structure"
 msgstr "Kurs tuzilishi"
 
+msgid "Course task"
+msgstr "Kurs vazifasi"
+
 msgid "Course tasks"
 msgstr "Kurs vazifalari"
 
@@ -1245,6 +1248,12 @@ msgstr "Nazoratni ochish"
 msgid "Open course"
 msgstr "Kursni ochish"
 
+msgid "Open course task"
+msgstr "Kurs vazifasini ochish"
+
+msgid "Open independent task"
+msgstr "Mustaqil vazifani ochish"
+
 msgid "Open lesson"
 msgstr "Darsni ochish"
 
@@ -1911,6 +1920,9 @@ msgstr "Bugungi mavzu"
 msgid "Today's plan"
 msgstr "Bugungi reja"
 
+msgid "Total tasks"
+msgstr "Jami vazifalar"
+
 msgid "Train for the test you will actually take"
 msgstr "Aynan topshiradigan testingizga tayyorlaning"
 
@@ -2106,6 +2118,9 @@ msgstr "yakunlangan"
 msgid "course complete"
 msgstr "kurs yakunlandi"
 
+msgid "course tasks"
+msgstr "ta kurs vazifasi"
+
 msgid "day streak"
 msgstr "kunlik seriya"
 
@@ -2123,6 +2138,9 @@ msgstr "imtihon qismi"
 
 msgid "fictional"
 msgstr "to‘qima"
+
+msgid "independent tasks"
+msgstr "ta mustaqil vazifa"
 
 msgid "learner"
 msgstr "o‘quvchi"

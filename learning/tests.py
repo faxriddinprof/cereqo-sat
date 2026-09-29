@@ -6,7 +6,7 @@ from django.core.management import call_command
 from django.db.models import Q
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import translation
+from django.utils import timezone, translation
 
 from .models import (
     Answer,
@@ -181,7 +181,29 @@ class DemoFlowTests(TestCase):
         )
         self.assertGreater(page.context["task_counts"]["independent"], 0)
         self.assertGreater(page.context["task_counts"]["course"], 0)
-        self.assertContains(page, "task-marker")
+        self.assertEqual(
+            page.context["task_counts"]["total"],
+            page.context["task_counts"]["course"] + page.context["task_counts"]["independent"],
+        )
+        self.assertContains(page, "course-task-marker")
+        self.assertContains(page, "independent-task-marker")
+
+        independent = Homework.objects.filter(kind=Homework.INDEPENDENT).first()
+        due_date = timezone.localdate(independent.deadline)
+        focused = self.client.get(
+            reverse("learning:attendance"),
+            {"year": due_date.year, "month": due_date.month, "date": due_date.isoformat()},
+        )
+        self.assertIn(
+            independent,
+            [item["homework"] for item in focused.context["selected_independent_tasks"]],
+        )
+        self.assertTrue(
+            all(
+                item["homework"].kind == Homework.COURSE
+                for item in focused.context["selected_course_tasks"]
+            )
+        )
 
     def test_independent_task_detail_has_no_course_sidebar(self):
         homework = Homework.objects.filter(kind=Homework.INDEPENDENT).first()
