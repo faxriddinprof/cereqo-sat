@@ -1,11 +1,25 @@
 import os
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-cereqo-local-demo-only"
-DEBUG = True
+PUBLIC_TUNNEL = os.environ.get("CEREQO_PUBLIC_TUNNEL", "0") == "1"
+
+SECRET_KEY = os.environ.get("CEREQO_SECRET_KEY", "django-insecure-cereqo-local-demo-only")
+if PUBLIC_TUNNEL and "CEREQO_SECRET_KEY" not in os.environ:
+    raise ImproperlyConfigured("Set CEREQO_SECRET_KEY before starting the public tunnel mode.")
+
+DEBUG = os.environ.get("CEREQO_DEBUG", "0" if PUBLIC_TUNNEL else "1") == "1"
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "[::1]"]
+
+if PUBLIC_TUNNEL:
+    ALLOWED_HOSTS.append(".trycloudflare.com")
+    CSRF_TRUSTED_ORIGINS = ["https://*.trycloudflare.com"]
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",

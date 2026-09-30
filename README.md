@@ -16,6 +16,38 @@ python manage.py runserver
 
 Open <http://127.0.0.1:8000/>. The homepage and course catalog are public. Course content, tasks, ranking, schedule, and profiles require login.
 
+## Share a temporary public preview from your Mac
+
+This mode keeps Django bound to your laptop and publishes it through a temporary
+Cloudflare Quick Tunnel URL. It is intended for demos and testing, not permanent
+production hosting.
+
+Install the tunnel client once:
+
+```bash
+brew install cloudflared
+```
+
+Start Django in the first terminal:
+
+```bash
+cd /path/to/cereqo-sat
+source .venv/bin/activate
+export CEREQO_PUBLIC_TUNNEL=1
+export CEREQO_SECRET_KEY="$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')"
+python manage.py runserver 127.0.0.1:8000 --insecure
+```
+
+Start the tunnel in a second terminal:
+
+```bash
+cloudflared tunnel --url http://127.0.0.1:8000
+```
+
+Share the generated `https://...trycloudflare.com` URL. Keep both terminals open;
+stopping either process closes the preview. Anyone with the URL can see the demo
+login credentials and change the shared demo account's progress.
+
 ## Demo login
 
 The seed command creates and refreshes this account automatically:
